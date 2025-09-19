@@ -5011,8 +5011,8 @@ void GuiMenu::openQuitMenu_static(Window *window, bool quickAccessMenu, bool ani
 		timeout = 0;
 	}
 	shutdownSlider->setValue((float)timeout);
-	s->addWithLabel(_("AUTOMATIC SHUTDOWN AFTER INACTIVITY"), shutdownSlider);
-
+	s->addWithLabel(_("AUTOMATIC SHUTDOWN AFTER INACTIVITY"),
+    shutdownSlider, nullptr, "iconAutoShutdown");
 	s->addSaveFunc([shutdownSlider] {
 		int value = (int)shutdownSlider->getValue();
 		SystemConf::getInstance()->set("ee_auto_shutdown_timeout", std::to_string(value));

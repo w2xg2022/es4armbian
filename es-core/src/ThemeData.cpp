@@ -643,6 +643,7 @@ std::map<std::string, std::map<std::string, ThemeData::ElementPropertyType>> The
 		{ "iconNetwork", PATH },
 		{ "iconScraper", PATH },
 		{ "iconAdvanced", PATH },
+		{ "iconAutoShutdown", PATH },
 		{ "iconQuit", PATH } } },
 	{ "menuSwitch",{
 		{ "pathOn", PATH },
