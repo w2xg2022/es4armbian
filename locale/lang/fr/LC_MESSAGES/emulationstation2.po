@@ -6,7 +6,6 @@ msgstr ""
 "Language-Team: Batocera official\n"
 "PO-Revision-Date: 2025-02-24\n"
 "Last-Translator: James West\n"
-
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -276,7 +275,8 @@ msgid "Screenscraper Game ID"
 msgstr "Screenscraper Game ID"
 
 msgid "ERROR: EVERY SYSTEM IS HIDDEN, RE-DISPLAYING ALL OF THEM NOW"
-msgstr "ERREUR : TOUS LES SYSTÈMES SONT CACHÉS, RÉ-AFFICHAGE DE TOUS DÈS MAINTENANT"
+msgstr ""
+"ERREUR : TOUS LES SYSTÈMES SONT CACHÉS, RÉ-AFFICHAGE DE TOUS DÈS MAINTENANT"
 
 msgid "all games"
 msgstr "tous les jeux"
@@ -903,9 +903,6 @@ msgstr ""
 "VOUS ALLEZ SUPPRIMER LE JEU ACTUEL!\n"
 "ETES-VOUS SÛR(E) ?"
 
-msgid "SEARCH"
-msgstr "RECHERCHER"
-
 msgid "NO UPDATE AVAILABLE"
 msgstr "PAS DE MISE À JOUR DISPONIBLE"
 
@@ -1083,23 +1080,11 @@ msgstr ""
 msgid "SCRAPING IS RUNNING. DO YOU WANT TO STOP IT?"
 msgstr "UN SCRAPE EST EN COURS. VOULEZ-VOUS L'INTERROMPRE ?"
 
-msgid "NO GAMES FIT THAT CRITERIA."
-msgstr "AUCUN JEU NE CORRESPOND."
-
-msgid "INSTALL ON A NEW DISK"
-msgstr "INSTALLATION SUR UN NOUVEAU DISQUE"
-
 msgid "TARGET DEVICE"
 msgstr "PÉRIPHÉRIQUE CIBLE"
 
-msgid "SELECT"
-msgstr "SÉLECTIONNER"
-
 msgid "TARGET ARCHITECTURE"
 msgstr "ARCHITECTURE CIBLE"
-
-msgid "NETWORK REQUIRED"
-msgstr "CONNEXION RÉSEAU NÉCESSAIRE"
 
 msgid "INVALID PARAMETERS"
 msgstr "PARAMÈTRES INVALIDES"
@@ -2032,12 +2017,10 @@ msgid ""
 "\n"
 "TRY TO MOUNT EXTERNAL AND RESTART?"
 msgstr ""
-". Soyez sûr(e) d'avoir tous les paramètres sauvegardés avant de lancer cela.\n"
+". Soyez sûr(e) d'avoir tous les paramètres sauvegardés avant de lancer "
+"cela.\n"
 "\n"
 "ESSAYER DE MONTER LE DISQUE EXTERNE ET REDÉMARRER ?"
-
-msgid "OVERCLOCK"
-msgstr "OVERCLOCK"
 
 msgid "Off"
 msgstr ""
@@ -2049,16 +2032,16 @@ msgid ""
 "OGA OC is HIGHLY experimental, you may encounter random lockups or your "
 "device might not boot anymore. \n"
 msgstr ""
-"OGA OC est HAUTEMENT expérimental, des blocages pourraient survenir "
-"ou votre appareil ne plus booter du tout \n"
+"OGA OC est HAUTEMENT expérimental, des blocages pourraient survenir ou votre "
+"appareil ne plus booter du tout \n"
 
 msgid ""
 "In case you cannot boot anymore, create an empty file called \"no_oc.oga\" "
 "on the boot (EMUELEC) partition.\n"
 "\n"
 msgstr ""
-"Au cas où vous ne pourriez plus booter, créer un fichier vide nommé \"no_oc.oga\" "
-"dans la partition de boot (EMUELEC).\n"
+"Au cas où vous ne pourriez plus booter, créer un fichier vide nommé \"no_oc."
+"oga\" dans la partition de boot (EMUELEC).\n"
 "\n"
 
 msgid ""
@@ -2066,8 +2049,8 @@ msgid ""
 "you agree to the risks!\n"
 "\n"
 msgstr ""
-"Il y a aussi la possibilité de corruption de fichiers dans la carte SD ! N'activer l'OC"
-"que si vous êtes conscient du risque !\n"
+"Il y a aussi la possibilité de corruption de fichiers dans la carte SD ! "
+"N'activer l'OCque si vous êtes conscient du risque !\n"
 "\n"
 
 msgid "CLOUD BACKUP SETTINGS AND GAME SAVES"
@@ -2083,8 +2066,8 @@ msgid ""
 msgstr ""
 "ATTENTION CELA VA REDÉMARRER EMULATIONSTATION !\n"
 "\n"
-"Cela va copier vos sauvegardes de jeux, sauvegardes d'état et configurations Emuelec "
-"dans le service cloud configuré dans rclone.conf\n"
+"Cela va copier vos sauvegardes de jeux, sauvegardes d'état et configurations "
+"Emuelec dans le service cloud configuré dans rclone.conf\n"
 "\n"
 "SAUVEGARDER DANS LE CLOUD ET REDÉMARRER ?"
 
@@ -2102,9 +2085,9 @@ msgid ""
 msgstr ""
 "ATTENTION CELA VA REDÉMARRER EMULATIONSTATION !\n"
 "\n"
-"Cela va restaurer vos sauvegardes de jeux, sauvegardes d'état et configurations Emuelec "
-"depuis le service cloud configuré dans rclone.conf, et écraser les fichiers "
-"existants !\n"
+"Cela va restaurer vos sauvegardes de jeux, sauvegardes d'état et "
+"configurations Emuelec depuis le service cloud configuré dans rclone.conf, "
+"et écraser les fichiers existants !\n"
 "\n"
 "RESTAURER DEPUIS LE CLOUD ET REDÉMARRER ?"
 
@@ -2137,8 +2120,8 @@ msgid ""
 "RESET SCRIPTS AND BINARIES TO DEFAULT AND RESTART?"
 msgstr ""
 "ATTENTION: LE SYSTÈME VA RÉINITIALISER LES SCRIPTS ET BINARIES !\n"
-"MISE À JOUR, TÉLÉCHARGEMENTS, THÈMES, APPAIRAGES BLUETOOTH ET DOSSIERS DES ROMS "
-"NE SERONT PAS AFFECTÉS.\n"
+"MISE À JOUR, TÉLÉCHARGEMENTS, THÈMES, APPAIRAGES BLUETOOTH ET DOSSIERS DES "
+"ROMS NE SERONT PAS AFFECTÉS.\n"
 "\n"
 "RÉINITIALISER SCRIPTS ET BINARIES ET REDÉMARRER ?"
 
@@ -2154,7 +2137,8 @@ msgid ""
 msgstr ""
 "ATTENTION: LA CONFIG RETROARCH VA ÊTRE RÉINITIALISÉE\n"
 "\n"
-"LES CONFIGS DES COEURS NE SERONT PAS AFFECTÉES MAIS AUCUNE SAUVEGARDE NE SERA CRÉÉE !\n"
+"LES CONFIGS DES COEURS NE SERONT PAS AFFECTÉES MAIS AUCUNE SAUVEGARDE NE "
+"SERA CRÉÉE !\n"
 "\n"
 "RÉINITIALISER LA CONFIG RETROARCH ?"
 
@@ -2169,10 +2153,11 @@ msgid ""
 "\n"
 "RESET SYSTEM TO DEFAULT CONFIG AND RESTART?"
 msgstr ""
-"ATTENTION: TOUTES LES CONFIGS VONT ÊTRE RÉINITIALISÉES ET AUCUNE SAUVEGARDE NE SERA CRÉÉE !\n"
+"ATTENTION: TOUTES LES CONFIGS VONT ÊTRE RÉINITIALISÉES ET AUCUNE SAUVEGARDE "
+"NE SERA CRÉÉE !\n"
 "\n"
-"SI VOUS VOULEZ GARDER VOS RÉGLAGES FAITES-EN UNE COPIE ET SAUVEGARDEZ-LA "
-"SUR UN DISQUE EXTERNE AVANT D'ACTIVER CETTE OPTION !\n"
+"SI VOUS VOULEZ GARDER VOS RÉGLAGES FAITES-EN UNE COPIE ET SAUVEGARDEZ-LA SUR "
+"UN DISQUE EXTERNE AVANT D'ACTIVER CETTE OPTION !\n"
 "\n"
 "RÉINITIALISER LE SYSTÈME AVEC LA CONFIG PAR DÉFAUT ET REDÉMARRER ?"
 
@@ -2189,17 +2174,15 @@ msgid ""
 "\n"
 "CONTINUE WITH FORCE UPDATE?"
 msgstr ""
-"ATTENTION: UNE MISE À JOUR FORCÉE TÉLÉCHARGERA N'IMPORTE QUELLE VERSION DISPONIBLE "
-"QUELQUE SOIT LE TYPE DE VERSION SÉLECTIONNÉE DANS LA RUBRIQUE "
+"ATTENTION: UNE MISE À JOUR FORCÉE TÉLÉCHARGERA N'IMPORTE QUELLE VERSION "
+"DISPONIBLE QUELQUE SOIT LE TYPE DE VERSION SÉLECTIONNÉE DANS LA RUBRIQUE "
 "MISE À JOUR ET TÉLÉCHARGEMENTS (bêta ou stable)\n"
 "\n"
 "LE SYSTÈME VA RÉINITIALISER LES SCRIPTS ET BINARIES !\n"
-"LES TÉLÉCHARGEMENTS, THÈMES, APPAIRAGES BLUETOOTH ET DOSSIERS DES JEUX NE SERONT PAS AFFECTÉS.\n"
+"LES TÉLÉCHARGEMENTS, THÈMES, APPAIRAGES BLUETOOTH ET DOSSIERS DES JEUX NE "
+"SERONT PAS AFFECTÉS.\n"
 "\n"
 "CONTINUER LA MISE À JOUR FORCÉE ?"
-
-msgid "ARE YOU SURE YOU WANT TO CONFIGURE THE INPUT?"
-msgstr "ÊTES-VOUS SÛR(E) DE VOULOIR CONFIGURER LA MANETTE ?"
 
 msgid "THE UI MODE IS NOW UNLOCKED"
 msgstr "L’INTERFACE EST MAINTENANT DÉVERROUILLÉE"
@@ -2209,18 +2192,6 @@ msgstr "ENTREZ LE CODE POUR DÉVERROUILLER L’INTERFACE"
 
 msgid "DEVELOPER"
 msgstr "DÉVELOPPEUR"
-
-msgid "VIDEO OPTIONS"
-msgstr "OPTIONS VIDÉO"
-
-msgid "VRAM LIMIT"
-msgstr "LIMITE MÉMOIRE VIDÉO"
-
-msgid "SHOW FRAMERATE"
-msgstr "AFFICHER LE NOMBRE D'IMAGES/SEC"
-
-msgid "VSYNC"
-msgstr "SYNCHRONISATION VERTICALE"
 
 msgid "SMOOTH GAMES (BILINEAR FILTERING)"
 msgstr "LISSER (FILTRAGE BILINÉAIRE)"
@@ -2308,9 +2279,6 @@ msgstr "CONFIGURATION AVANCÉE PAR SYSTÈME"
 
 msgid "SCRAPER IS RUNNING. DO YOU WANT TO STOP IT?"
 msgstr "UN SCRAPE EST EN COURS. VOULEZ-VOUS L’INTERROMPRE ?"
-
-msgid "GAME HASHING IS RUNNING. DO YOU WANT TO STOP IT?"
-msgstr "L'INDEXATION DES JEUX EST EN COURS. VOULEZ-VOUS L'INTERROMPRE ?"
 
 msgid "REALLY UPDATE GAMELISTS?"
 msgstr "VOULEZ-VOUS VRAIMENT METTRE À JOUR LES LISTES DE JEUX ?"
@@ -2728,9 +2696,6 @@ msgstr "OUVRIR"
 msgid "START A NETPLAY GAME"
 msgstr "DÉMARRER UNE PARTIE EN RÉSEAU"
 
-msgid "NETPLAY"
-msgstr "PARTIES EN RÉSEAU"
-
 msgid "START GAME"
 msgstr "DÉMARRER LE JEU"
 
@@ -2754,13 +2719,6 @@ msgstr "SUPPRIMER L'ÉLÉMENT"
 
 msgid "DELETE GAME"
 msgstr "SUPPRIMER LE JEU"
-
-msgid ""
-"THIS WILL DELETE THE ACTUAL GAME FILE(S)!\n"
-"ARE YOU SURE?"
-msgstr ""
-"VOUS ALLEZ SUPPRIMER LE(S) FICHIER(S) DE JEU ACTUEL.\n"
-"ÊTES-VOUS SÛR(E) ?"
 
 msgid "COLLECTIONS"
 msgstr "COLLECTIONS"
@@ -3379,13 +3337,6 @@ msgstr "EXTENSIONS PERSONNALISÉES POUR LES IMAGES"
 msgid "INVALID CONTENT"
 msgstr "CONTENU INVALIDE"
 
-msgid ""
-"A valid account is required. Please register an account on https://"
-"retroachievements.org"
-msgstr ""
-"Un compte valide est nécessaire. Veuillez créer un compte sur https://"
-"retroachievements.org"
-
 msgid "Full"
 msgstr "Complet"
 
@@ -3413,9 +3364,6 @@ msgstr "OPTIONS DU JEU"
 msgid "FAVORITE"
 msgstr "FAVORIS"
 
-msgid "RANDOM"
-msgstr "ALÉATOIRE"
-
 #, c-format
 msgid "Back to %s"
 msgstr "Retourner vers %s"
@@ -3434,10 +3382,6 @@ msgstr[1] "Ce dossier contient %i jeux, incluant :%s"
 
 msgid "SYSTEM INFO"
 msgstr "INFO SYSTÈME"
-
-msgid "ERROR: EVERY SYSTEM IS HIDDEN, RE-DISPLAYING ALL OF THEM NOW"
-msgstr ""
-"ERREUR : TOUS LES SYSTÈMES SONT CACHÉS, RÉ-AFFICHAGE DE TOUS DÈS MAINTENANT"
 
 msgid "QUICK SEARCH"
 msgstr "RECHERCHE RAPIDE"
@@ -3463,23 +3407,8 @@ msgid_plural "%i COLLECTIONS"
 msgstr[0] "%i COLLECTION"
 msgstr[1] "%i COLLECTIONS"
 
-#, c-format
-msgid "%i ITEM"
-msgid_plural "%i ITEMS"
-msgstr[0] "%i ELEMENT"
-msgstr[1] "%i ELEMENTS"
-
-#, c-format
-msgid "%i GAME"
-msgid_plural "%i GAMES"
-msgstr[0] "%i JEU"
-msgstr[1] "%i JEUX"
-
 msgid "NAVIGATION BAR"
 msgstr "VOLET NAVIGATION"
-
-msgid "FILES"
-msgstr "FICHIERS"
 
 msgid ""
 "WARNING: THE EMULATOR/CORE CURRENTLY SET DOES NOT SUPPORT THIS GAME'S FILE "
@@ -3568,116 +3497,20 @@ msgstr "VOULEZ-VOUS CHANGER D'ÉCRAN ?"
 msgid "INVALID CREDENTIALS"
 msgstr ""
 
-msgid "SCRAPING"
-msgstr "SCRAPE"
-
-msgid "SCRAPE FAILED"
-msgstr "ÉCHEC DU SCRAPE"
-
-msgid "SCRAPING FINISHED"
-msgstr "SCRAPE TERMINÉ"
-
-msgid "UPDATE GAMELISTS TO APPLY CHANGES."
-msgstr "METTEZ À JOUR LES LISTES DE JEUX POUR APPLIQUER LES MODIFICATIONS."
-
 msgid "Loading system config..."
 msgstr "Chargement de la configuration système..."
 
 msgid "SAVING METADATA. PLEASE WAIT..."
 msgstr "ENREGISTREMENT DES MÉTADONNÉES. VEUILLEZ PATIENTER..."
 
-msgid "THE EMULATOR EXITED UNEXPECTEDLY"
-msgstr "L’ÉMULATEUR A QUITTÉ DE MANIÈRE INATTENDUE"
-
-msgid "BAD COMMAND LINE ARGUMENTS"
-msgstr "MAUVAIS ARGUMENTS DE LA LIGNE DE COMMANDE"
-
-msgid "INVALID CONFIGURATION"
-msgstr "CONFIGURATION INVALIDE"
-
-msgid "UNKNOWN EMULATOR"
-msgstr "ÉMULATEUR INCONNU"
-
-msgid "EMULATOR IS MISSING"
-msgstr "L’ÉMULATEUR EST MANQUANT"
-
-msgid "CORE IS MISSING"
-msgstr "LE CŒUR EST MANQUANT"
-
-msgid "UKNOWN ERROR"
-msgstr "ERREUR INCONNUE"
-
 msgid "Interlaced"
 msgstr "Entrelacé"
-
-msgid "all games"
-msgstr "tous les jeux"
-
-msgid "last played"
-msgstr "dernier joué"
-
-msgid "favorites"
-msgstr "favoris"
-
-msgid "2 players"
-msgstr "2 joueurs"
-
-msgid "4 players"
-msgstr "4 joueurs"
-
-msgid "never played"
-msgstr "jamais joué"
-
-msgid "retroachievements"
-msgstr "succès rétro"
-
-msgid "arcade"
-msgstr "arcade"
-
-msgid "vertical arcade"
-msgstr "arcade vertical"
-
-msgid "lightgun games"
-msgstr "jeux au pistolet"
-
-msgid "wheel games"
-msgstr "jeux au volant"
 
 msgid "trackball games"
 msgstr "jeux au trackball"
 
 msgid "spinner games"
 msgstr "jeux au spinner"
-
-msgid "collections"
-msgstr "collections"
-
-#, c-format
-msgid "Added '%s' to '%s'"
-msgstr "'%s' ajouté à '%s'"
-
-#, c-format
-msgid "Removed '%s' from '%s'"
-msgstr "%s' supprimé de '%s'"
-
-msgid "This collection is empty."
-msgstr "Cette collection est vide."
-
-#. TRANSLATION: number of developpers / various developpers
-msgid "None"
-msgstr "Aucun"
-
-msgid "Various"
-msgstr "Divers"
-
-msgid "SEARCHING RETROACHIEVEMENTS"
-msgstr "RECHERCHE DES SUCCÈS RÉTRO"
-
-msgid "SEARCHING NETPLAY GAMES"
-msgstr "RECHERCHE DES PARTIES EN RÉSEAU"
-
-msgid "INDEXING COMPLETED"
-msgstr "INDEXATION TERMINÉE"
 
 msgid "FILENAME, ASCENDING"
 msgstr "NOM DU JEU, CROISSANT"

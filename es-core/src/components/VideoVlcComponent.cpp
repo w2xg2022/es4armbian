@@ -769,7 +769,7 @@ void VideoVlcComponent::startVideo()
 		mMedia = libvlc_media_new_path(mVLC, path.c_str());
 		if (mMedia)
 		{			
-			// use : vlc –long-help
+			// use : vlc ï¿½long-help
 			// WIN32 ? libvlc_media_add_option(mMedia, ":avcodec-hw=dxva2");
 			// RPI/OMX ? libvlc_media_add_option(mMedia, ":codec=mediacodec,iomx,all"); .
 

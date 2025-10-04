@@ -246,6 +246,9 @@ void GuiFileBrowser::navigateTo(const std::string path)
 			if ((mTypes & FileTypes::FILES) == FileTypes::FILES)
 					icon = DOCUMENT_ICON;
 
+			if ((mTypes & FileTypes::FILES) == FileTypes::FILES)
+					icon = DOCUMENT_ICON;
+
 			if (icon.empty())
 				continue;
 

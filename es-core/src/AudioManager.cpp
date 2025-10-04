@@ -21,7 +21,6 @@
 #ifdef _ENABLEEMUELEC
 #include "utils/Platform.h"
 #endif
-
 #ifdef WIN32
 #include <time.h>
 #else
