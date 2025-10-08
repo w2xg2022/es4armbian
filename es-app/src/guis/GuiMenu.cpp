@@ -5075,7 +5075,7 @@ void GuiMenu::openSoundSettings()
 
 		// volume
 		auto volume = std::make_shared<SliderComponent>(mWindow, 0.f, 100.f, 1.f, "%");
-#ifndef _ENABLEEMUELEC
+#ifdef _ENABLEEMUELEC
 		std::string cfgAudioVolume = SystemConf::getInstance()->get("audio.volume");
 		if (!cfgAudioVolume.empty()) {
 			VolumeControl::getInstance()->setVolume((int)atoi(cfgAudioVolume.c_str()));
@@ -5090,7 +5090,7 @@ void GuiMenu::openSoundSettings()
 #if !WIN32
 			SystemConf::getInstance()->set("audio.volume", std::to_string((int)round(volume->getValue())));
 #endif
-#ifndef _ENABLEEMUELEC
+#ifdef _ENABLEEMUELEC
 			SystemConf::getInstance()->saveSystemConf();
 #endif
 		});
