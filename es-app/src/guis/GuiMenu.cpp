@@ -671,7 +671,7 @@ void GuiMenu::openEmuELECSettings()
 	});
 
 	// Splash Settings
-	s->addGroup(_("SPLASH SETTINGS"));
+	//s->addGroup(_("SPLASH SETTINGS"));
 	s->addEntry(_("CONFIGURE SPLASH OPTIONS"), true, [this] {
 		auto s = new GuiSettings(mWindow, _("SPLASH SETTINGS"));
 
@@ -5492,13 +5492,13 @@ void GuiMenu::openQuitMenu_static(Window *window, bool quickAccessMenu, bool ani
 			_("YES"), [] { Utils::Platform::quitES(Utils::Platform::QuitMode::SHUTDOWN); },
 			_("NO"), nullptr));
 	}, "iconShutdown");
-
+#ifndef _ENABLEEMUELEC
 	s->addWithDescription(_("FAST SHUTDOWN SYSTEM"),_("Shutdown without saving metadata."), nullptr, [window] {
 		window->pushGui(new GuiMsgBox(window, _("REALLY SHUTDOWN WITHOUT SAVING METADATA?"), 
 			_("YES"), [] { Utils::Platform::quitES(Utils::Platform::QuitMode::FAST_SHUTDOWN); },
 			_("NO"), nullptr));
 	}, "iconFastShutdown");
-
+#endif
 
 #ifdef WIN32
 	if (Settings::getInstance()->getBool("ShowExit"))
