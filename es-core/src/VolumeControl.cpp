@@ -8,6 +8,11 @@
 #include <mmdeviceapi.h>
 #endif
 
+#ifdef _ENABLEEMUELEC
+#include "utils/StringUtil.h"
+#include "SystemConf.h"
+#endif
+
 #ifdef _ENABLE_PULSE_
 #include <thread>
 #include <condition_variable>
@@ -311,6 +316,9 @@ void VolumeControl::init()
 						{
 							//wohoo. good to go...
 							LOG(LogDebug) << "VolumeControl::init() - Mixer initialized";
+#ifdef _ENABLEEMUELEC
+							applyInitialVolumeFromConfig();
+#endif
 						}
 						else
 						{
@@ -334,6 +342,10 @@ void VolumeControl::init()
 									{
 										//wohoo. good to go...
 										LOG(LogDebug) << "VolumeControl::init() - Mixer initialized";
+#ifdef _ENABLEEMUELEC
+										applyInitialVolumeFromConfig();
+#endif
+
 										break;
 									}
 									else
@@ -572,6 +584,24 @@ int VolumeControl::getVolume() const
 
 	return volume;
 }
+
+#ifdef _ENABLEEMUELEC
+void VolumeControl::applyInitialVolumeFromConfig()
+{
+	std::string volumeStr = SystemConf::getInstance()->get("audio.volume");
+	int volume = 80;
+
+	if (!volumeStr.empty())
+	{
+		int v = Utils::String::toInteger(volumeStr);
+		if (v >= 0 && v <= 100)
+			volume = v;
+	}
+
+	setVolume(volume);
+}
+#endif
+
 
 void VolumeControl::setVolume(int volume)
 {

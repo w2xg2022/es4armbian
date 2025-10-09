@@ -43,6 +43,10 @@
 #include "HttpReq.h"
 #include <thread>
 
+#ifdef _ENABLEEMUELEC
+#include <alsa/asoundlib.h>
+#endif
+
 #ifdef WIN32
 #include <Windows.h>
 #include <direct.h>
@@ -443,6 +447,22 @@ void launchStartupGame()
 
 int main(int argc, char* argv[])
 {	
+
+#ifdef _ENABLEEMUELEC
+// Hacky way of waking up system ALSA before initializing sound.
+// withouth this Music mixer was not available at boot.
+snd_pcm_t* pcm_handle = nullptr;
+int err = snd_pcm_open(&pcm_handle, "default", SND_PCM_STREAM_PLAYBACK, 0);
+
+	if (err < 0) {
+		LOG(LogWarning) << "ALSA Wake: Failed to open PCM device: " << snd_strerror(err);
+	} else {
+		LOG(LogInfo) << "ALSA Wake: PCM device opened successfully.";
+		snd_pcm_close(pcm_handle);
+		LOG(LogInfo) << "ALSA Wake: PCM device closed.";
+	 }
+#endif
+	
 	Utils::MathExpr::performUnitTests();
 
 	// signal(SIGABRT, signalHandler);

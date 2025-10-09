@@ -35,6 +35,10 @@ class VolumeControl
 	MIXERCONTROL mixerControl;
 	IAudioEndpointVolume * endpointVolume;
 #endif
+
+#ifdef _ENABLEEMUELEC
+void applyInitialVolumeFromConfig();
+#endif
 	
 	int internalVolume;
 
