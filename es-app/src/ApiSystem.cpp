@@ -79,6 +79,7 @@
 ApiSystem::ApiSystem() { }
 
 ApiSystem* ApiSystem::instance = nullptr;
+ApiSystem::LED_TYPE ApiSystem::mSystemLedType = ApiSystem::LED_TYPE_NONE;
 
 ApiSystem *ApiSystem::getInstance() 
 {
@@ -1425,47 +1426,49 @@ static std::string LED_MAX_BRIGHTNESS_VALUE;
 
 bool ApiSystem::getLED(int& red, int& green, int& blue)
 {	
-	#if WIN32
+#if WIN32
 	return false;
-	#endif
+#endif
 
-	if (LED_COLOUR_NAME == "notfound")
-		return false;
+	if (mSystemLedType != LED_TYPE_NONE)
+		return true;
 
-	if (LED_COLOUR_NAME.empty())
+	auto entries = Utils::FileSystem::getDirContent("/sys/class/leds");
+	bool found_addressable = false;
+
+	for (const auto& entry : entries)
 	{
-		auto directories = Utils::FileSystem::getDirContent("/sys/class/leds");
-
-        for (const auto& directory : directories)
-        {
-            if (directory.find("multicolor") != std::string::npos)
-            {
-				std::string ledColourPath = directory + "/multi_intensity";
-				
-				if (Utils::FileSystem::exists(ledColourPath))
-				{
-					LED_COLOUR_NAME = ledColourPath;
-
-					LOG(LogInfo) << "ApiSystem::getLED > LED path resolved to " << directory;
-					break;
-				}
+		if (entry.find("multicolor") != std::string::npos || entry.find(":rgb:joystick_rings") != std::string::npos)
+		{
+			std::string ledColourPath = entry + "/multi_intensity";				
+			if (Utils::FileSystem::exists(ledColourPath))
+			{
+				LED_COLOUR_NAME = ledColourPath;
+				mSystemLedType = LED_TYPE_UNIFIED;
+				LOG(LogInfo) << "ApiSystem::getLED > Found UNIFIED LED at " << entry;
+				break;
 			}
+		}
+		if (entry.find("l:b1") != std::string::npos)
+		{
+			found_addressable = true;
 		}
 	}
 
-	if (LED_COLOUR_NAME.empty())
-	{
-		LOG(LogInfo) << "ApiSystem::getLED > LED path is not resolved";
+	if (mSystemLedType == LED_TYPE_NONE && found_addressable) {
+		mSystemLedType = LED_TYPE_ADDRESSABLE;
+		LOG(LogInfo) << "ApiSystem::getLED > Found ADDRESSABLE LED type";
+	}
 
+	if (mSystemLedType == LED_TYPE_NONE) {
 		LED_COLOUR_NAME = "notfound";
 		return false;
 	}
 
-    if (Utils::FileSystem::exists(LED_COLOUR_NAME)) {
+    if (mSystemLedType == LED_TYPE_UNIFIED && Utils::FileSystem::exists(LED_COLOUR_NAME)) {
         std::string colourValue = Utils::FileSystem::readAllText(LED_COLOUR_NAME);
         std::stringstream ss(colourValue);
         std::string token;
-
         // Extract red value
         std::getline(ss, token, ' ');
         red = std::stoi(token);
@@ -1483,31 +1486,37 @@ bool ApiSystem::getLED(int& red, int& green, int& blue)
 
         return true;
     }
+	else if (mSystemLedType == LED_TYPE_ADDRESSABLE) {
+		getLEDColours(red, green, blue);
+        executeScript("batocera-led-handheld block_color_changes");
+		return true;
+	}
 
 	return false;
 }
 
 void ApiSystem::getLEDColours(int& red, int& green, int& blue)
 {
-	if (Utils::FileSystem::exists(LED_COLOUR_NAME)) {
-        std::string colourValue = Utils::FileSystem::readAllText(LED_COLOUR_NAME);
-        std::stringstream ss(colourValue);
-        std::string token;
+	std::string colourValue = SystemConf::getInstance()->get("led.colour");
+	if (colourValue.empty())
+		colourValue = "255 0 165";
 
-        // Extract red value
-        std::getline(ss, token, ' ');
-        red = std::stoi(token);
+    std::stringstream ss(colourValue);
+    std::string token;
 
-        // Extract green value
-        std::getline(ss, token, ' ');
-        green = std::stoi(token);
+	// Extract red value
+    std::getline(ss, token, ' ');
+    red = std::stoi(token);
 
-        // Extract blue value
-        std::getline(ss, token);
-        blue = std::stoi(token);
+	// Extract green value
+    std::getline(ss, token, ' ');
+    green = std::stoi(token);
 
-		LOG(LogInfo) << "ApiSystem::getLEDColours > LED colours are: " << red << " " << green << " " << blue;
-    }
+	// Extract blue value
+    std::getline(ss, token);
+    blue = std::stoi(token);
+
+	LOG(LogInfo) << "ApiSystem::getLEDColours > LED colours are: " << red << " " << green << " " << blue;
 }
 
 void ApiSystem::setLEDColours(int red, int green, int blue)
@@ -1516,8 +1525,8 @@ void ApiSystem::setLEDColours(int red, int green, int blue)
     return;
 #endif 
 
-    if (LED_COLOUR_NAME.empty() || LED_COLOUR_NAME == "notfound")
-        return;
+	if (mSystemLedType == LED_TYPE_NONE)
+		return;
 
     // Ensure RGB values are within valid range
 	if (red < 0) red = 0;
@@ -1527,17 +1536,37 @@ void ApiSystem::setLEDColours(int red, int green, int blue)
     if (blue < 0) blue = 0;
     if (blue > 255) blue = 255;
 
-    std::string content = std::to_string(red) + " " + std::to_string(green) + " " + std::to_string(blue);
+	if (mSystemLedType == LED_TYPE_UNIFIED)
+	{
+		if (LED_COLOUR_NAME.empty() || LED_COLOUR_NAME == "notfound") return;
+		std::string content = std::to_string(red) + " " + std::to_string(green) + " " + std::to_string(blue);
+		Utils::FileSystem::writeAllText(LED_COLOUR_NAME, content);
+	}
+	else if (mSystemLedType == LED_TYPE_ADDRESSABLE)
+	{
+		static std::vector<std::string> r_files, g_files, b_files;
+		if (r_files.empty()) {
+			auto all_files = Utils::FileSystem::getDirContent("/sys/class/leds");
+			for(const auto& file : all_files) {
+				if (file.find(":r") != std::string::npos) r_files.push_back(file + "/brightness");
+				if (file.find(":g") != std::string::npos) g_files.push_back(file + "/brightness");
+				if (file.find(":b") != std::string::npos) b_files.push_back(file + "/brightness");
+			}
+		}
 
-    // Write LED color values to file
-    Utils::FileSystem::writeAllText(LED_COLOUR_NAME, content);
+		for(const auto& file : r_files) Utils::FileSystem::writeAllText(file, std::to_string(red));
+		for(const auto& file : g_files) Utils::FileSystem::writeAllText(file, std::to_string(green));
+		for(const auto& file : b_files) Utils::FileSystem::writeAllText(file, std::to_string(blue));
+	}
 }
 
 bool ApiSystem::getLEDBrightness(int& value)
 {   
-    #if WIN32
+#if WIN32
     return false;
-    #endif
+#endif
+    if (mSystemLedType != LED_TYPE_UNIFIED)
+        return false;
 
     if (LED_BRIGHTNESS_VALUE == "notfound")
         return false;
@@ -1548,7 +1577,7 @@ bool ApiSystem::getLEDBrightness(int& value)
 
         for (const auto& directory : directories)
         {
-            if (directory.find("multicolor") != std::string::npos)
+            if (directory.find("multicolor") != std::string::npos || directory.find(":rgb:joystick_rings") != std::string::npos)
             {
                 std::string ledBrightnessPath = directory + "/brightness";
                 std::string ledMaxBrightnessPath = directory + "/max_brightness";
@@ -1586,10 +1615,13 @@ bool ApiSystem::getLEDBrightness(int& value)
     return true;
 }
 
-void ApiSystem::setLEDBrightness(int value) {
+void ApiSystem::setLEDBrightness(int value) 
+{
 #if WIN32
     return;
 #endif
+    if (mSystemLedType != LED_TYPE_UNIFIED)
+		return;
 
     if (LED_BRIGHTNESS_VALUE.empty() || LED_BRIGHTNESS_VALUE == "notfound")
         return;
@@ -1605,6 +1637,44 @@ void ApiSystem::setLEDBrightness(int value) {
 	int brightnessValue = static_cast<int>(percent * max + 0.5f);
     std::string content = std::to_string(brightnessValue) + "\n";
     Utils::FileSystem::writeAllText(LED_BRIGHTNESS_VALUE, content);
+}
+
+bool ApiSystem::isLEDEnabled()
+{
+#if WIN32
+	return false;
+#else
+	// Check batocera.conf for "led.enabled" setting, default to "1" (true) if not found
+	return SystemConf::getInstance()->get("led.enabled") != "0";
+#endif
+}
+
+void ApiSystem::setLEDEnabled(bool enabled)
+{
+#if WIN32
+    return;
+#else
+	SystemConf::getInstance()->set("led.enabled", enabled ? "1" : "0");
+
+	if (!enabled)
+	{
+		setLEDColours(0, 0, 0);
+	}
+	else
+	{
+		std::string lastColorStr = SystemConf::getInstance()->get("led.colour");
+		if (lastColorStr.empty())
+			lastColorStr = "255 0 165";
+
+		std::stringstream ss(lastColorStr);
+		int r, g, b;
+		ss >> r >> g >> b;
+
+		setLEDColours(r, g, b);
+	}
+
+	SystemConf::getInstance()->saveSystemConf();
+#endif
 }
 
 std::vector<std::string> ApiSystem::getWifiNetworks(bool scan)
