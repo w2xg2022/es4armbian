@@ -26,12 +26,45 @@
 #include "SaveStateRepository.h"
 #include "guis/GuiSaveState.h"
 #include "SystemConf.h"
-
 #ifdef _ENABLEEMUELEC
+#include "guis/GuiFileBrowser.h"
+#include "utils/FileSystemUtil.h"
+#include "utils/StringUtil.h"
+#include <vector>
 #include <regex>
 #include "utils/Platform.h"
-#endif
 
+namespace
+{
+	std::string getSplashRoot()
+	{
+		if (Utils::FileSystem::isDirectory("/storage/roms"))
+			return "/storage/roms/splash";
+
+		if (Utils::FileSystem::isDirectory("/roms"))
+			return "/roms/splash";
+
+		return "/storage/splash";
+	}
+
+	void removeExistingSplashMedia(const std::string& directory, const std::string& romStem, const std::string& keepPath)
+	{
+		static const std::vector<std::string> sExtensions = {
+			".png", ".jpg", ".jpeg", ".bmp", ".gif", ".mp4", ".mpg", ".mpeg", ".avi", ".mkv", ".mov", ".webm"
+		};
+
+		for (const auto& ext : sExtensions)
+		{
+			const std::string candidate = Utils::FileSystem::combine(directory, romStem + ext);
+			if (Utils::FileSystem::getGenericPath(candidate) == Utils::FileSystem::getGenericPath(keepPath))
+				continue;
+
+			if (Utils::FileSystem::exists(candidate))
+				Utils::FileSystem::removeFile(candidate);
+		}
+	}
+}
+#endif
 GuiGameOptions::GuiGameOptions(Window* window, FileData* game) : GuiComponent(window),
 	mMenu(window, game->getName()), mReloadAll(false)
 {
@@ -146,9 +179,85 @@ GuiGameOptions::GuiGameOptions(Window* window, FileData* game) : GuiComponent(wi
 	if (game->getType() == GAME)
 	{
 		mMenu.addGroup(_("GAME"));
+		
+#ifdef _ENABLEEMUELEC
+		mMenu.addEntry(_("SET GAME SPECIFIC SPLASH MEDIA"), false, [this, game]
+		{
+			const std::string gamePath = game->getPath();
+			std::string startDirectory = Utils::FileSystem::getParent(gamePath);
 
- 
-		if (SaveStateRepository::isEnabled(game))
+			if (!Utils::FileSystem::isDirectory(startDirectory))
+				startDirectory = Utils::FileSystem::isDirectory("/storage/roms") ? "/storage/roms" : "/";
+
+			auto onFileSelected = [this, game](const std::string& selectedPath)
+			{
+				if (selectedPath.empty())
+					return;
+
+				const bool isImage = Utils::FileSystem::isImage(selectedPath);
+				const bool isVideo = Utils::FileSystem::isVideo(selectedPath);
+
+				if (!isImage && !isVideo)
+				{
+					mWindow->pushGui(new GuiMsgBox(mWindow, _("THE SELECTED FILE TYPE IS NOT SUPPORTED."), _("OK")));
+					return;
+				}
+
+				const std::string systemName = game->getSystem()->getName();
+				const std::string splashRoot = getSplashRoot();
+				const std::string systemSplashDir = Utils::FileSystem::combine(splashRoot, systemName);
+
+				if (!Utils::FileSystem::exists(splashRoot) && !Utils::FileSystem::createDirectory(splashRoot))
+				{
+					mWindow->pushGui(new GuiMsgBox(mWindow, _("FAILED TO CREATE SPLASH DIRECTORY."), _("OK")));
+					return;
+				}
+
+				if (!Utils::FileSystem::exists(systemSplashDir) && !Utils::FileSystem::createDirectory(systemSplashDir))
+				{
+					mWindow->pushGui(new GuiMsgBox(mWindow, _("FAILED TO CREATE SYSTEM SPLASH DIRECTORY."), _("OK")));
+					return;
+				}
+
+				std::string extension = Utils::String::toLower(Utils::FileSystem::getExtension(selectedPath));
+				if (extension.empty())
+					extension = isVideo ? ".mp4" : ".png";
+
+				const std::string romStem = Utils::FileSystem::getStem(game->getPath());
+				const std::string destinationPath = Utils::FileSystem::combine(systemSplashDir, romStem + extension);
+
+				if (Utils::FileSystem::getGenericPath(selectedPath) == Utils::FileSystem::getGenericPath(destinationPath))
+				{
+					mWindow->pushGui(new GuiMsgBox(mWindow, _("THE SELECTED FILE IS ALREADY USED."), _("OK")));
+					return;
+				}
+
+				removeExistingSplashMedia(systemSplashDir, romStem, destinationPath);
+
+				if (Utils::FileSystem::exists(destinationPath) && !Utils::FileSystem::removeFile(destinationPath))
+				{
+					mWindow->pushGui(new GuiMsgBox(mWindow, _("UNABLE TO REMOVE EXISTING FILE."), _("OK")));
+					return;
+				}
+
+				if (!Utils::FileSystem::copyFile(selectedPath, destinationPath))
+				{
+					mWindow->pushGui(new GuiMsgBox(mWindow, _("FAILED TO SAVE THE SELECTED FILE."), _("OK")));
+					return;
+				}
+
+				std::string successMessage = _("CUSTOM LOADING MEDIA SAVED.");
+				successMessage += "\n" + destinationPath;
+				mWindow->pushGui(new GuiMsgBox(mWindow, successMessage, _("OK")));
+			};
+
+			mWindow->pushGui(new GuiFileBrowser(mWindow, startDirectory, "",
+				(GuiFileBrowser::FileTypes)(GuiFileBrowser::IMAGES | GuiFileBrowser::VIDEO), onFileSelected,
+				_("SELECT MEDIA FILE")));
+		});
+		
+#endif
+                if (SaveStateRepository::isEnabled(game))
 		{
 			mMenu.addEntry(_("SAVE STATES"), false, [window, game, this]
 			{
