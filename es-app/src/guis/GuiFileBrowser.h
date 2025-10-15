@@ -47,24 +47,23 @@ private:
 #ifdef _ENABLEEMUELEC
         void generateVideoPreview(const std::string& path);
         void clearVideoPreview();
-#endif
-        MenuComponent mMenu;
-        std::string mCurrentPath;
-        std::string mSelectedFile;
-       FileTypes   mTypes;
-#ifdef _ENABLEEMUELEC
        std::shared_ptr<ImageComponent> mPreview;
        std::shared_ptr<BusyComponent> mLoading;
        std::shared_ptr<ImageComponent> mLoadingBg;
        std::vector<std::string> mVideoFrames;
        std::vector<std::shared_ptr<TextureResource>> mFrameTextures;
-        int mCurrentFrame;
-        int mFrameTime;
-        std::string mTempPreviewDir;
+       int mCurrentFrame;
+       int mFrameTime;
+       std::string mTempPreviewDir;
        bool mGeneratingPreview;
        int mExpectedFrames;
        int mLastFrameCount;
        int mNoFrameTime;
 #endif
+        MenuComponent mMenu;
+        std::string mCurrentPath;
+        std::string mSelectedFile;
+       FileTypes   mTypes;
+
         std::function<void(const std::string&)> mOkCallback;
 };

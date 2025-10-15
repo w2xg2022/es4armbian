@@ -29,8 +29,9 @@
 #define IMAGE_ICON		_U("\uF03E ")
 #define VIDEO_ICON		_U("\uF03D ")
 #define DOCUMENT_ICON	_U("\uF02D ")
+#ifdef _ENABLEEMUELEC
 #define AUDIO_ICON _U("\uF028 ")
-
+#endif
 
 
 GuiFileBrowser::GuiFileBrowser(Window* window, const std::string startPath, const std::string selectedFile, FileTypes types, const std::function<void(const std::string&)>& okCallback, const std::string& title)
@@ -224,8 +225,6 @@ void GuiFileBrowser::navigateTo(const std::string path)
 			std::string ext = Utils::FileSystem::getExtension(file.path);
 
 			std::string icon;
-			
-			
 
 			if ((mTypes & FileTypes::IMAGES) == FileTypes::IMAGES)
 				if (ext == ".jpg" || ext == ".png" || ext == ".gif" || ext == ".svg")
@@ -238,10 +237,11 @@ void GuiFileBrowser::navigateTo(const std::string path)
 			if ((mTypes & FileTypes::VIDEO) == FileTypes::VIDEO)
 				if (ext == ".mp4" || ext == ".avi" || ext == ".mkv" || ext == ".webm")
 					icon = VIDEO_ICON;
-				
+#ifdef _ENABLEEMUELEC				
 			if ((mTypes & FileTypes::AUDIO) == FileTypes::AUDIO)
 				if (ext == ".ogg" || ext == ".mp3" || ext == ".wav")
 					icon = AUDIO_ICON;
+#endif
 
 			if ((mTypes & FileTypes::FILES) == FileTypes::FILES)
 					icon = DOCUMENT_ICON;

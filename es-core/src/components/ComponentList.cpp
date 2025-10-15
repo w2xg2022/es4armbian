@@ -7,37 +7,27 @@
 #include "components/SliderComponent.h"
 #include "components/OptionListComponent.h"
 #include "InputManager.h"
+#ifdef _ENABLEEMUELEC
+//I am sure this  part should be moved to another file, it is not supposed to bee here
 #include "Sound.h"
-#include <fstream>
-#include <string>
+#include "SystemConf.h"
 
 static std::string getMenuNavSoundPath() {
-    std::ifstream conf("/storage/.config/emuelec/configs/emuelec.conf");
-    if (!conf.is_open())
+	
+	auto scrollSoundfile = SystemConf::getInstance()->get("ee_menuscrollsound");
+	
+    if (scrollSoundfile.empty()) {
         return "/storage/.emulationstation/resources/mscroll.ogg"; // Fallback
-
-    std::string line;
-    const std::string key = "ee_menuscrollsound=";
-    while (std::getline(conf, line)) {
-        if (line.find(key) == 0) {
-            std::string value = line.substr(key.length());
-            // Whitespace entfernen
-            size_t start = value.find_first_not_of(" \t\r\n");
-            size_t end = value.find_last_not_of(" \t\r\n");
-            if (start != std::string::npos && end != std::string::npos)
-                value = value.substr(start, end - start + 1);
-            return value.empty() ? "/storage/.emulationstation/resources/mscroll.ogg" : value;
-        }
-    }
-    return "/storage/.emulationstation/resources/mscroll.ogg";
+	} else {
+		return scrollSoundfile;	
+	}
 }
 
+// static variable for scroll sound
+static std::shared_ptr<Sound> scrollSound = nullptr;
+#endif
 
 #define TOTAL_HORIZONTAL_PADDING_PX 20
-
-// static variable for scroll sound
-
-static std::shared_ptr<Sound> scrollSound = nullptr;
 
 ComponentList::ComponentList(Window* window) : IList<ComponentListRow, std::string>(window, LIST_SCROLL_STYLE_SLOW, LIST_NEVER_LOOP), mScrollbar(window)
 {
@@ -270,9 +260,10 @@ void ComponentList::onCursorChanged(const CursorState& state)
 	if (mCursorChangedCallback)
 		mCursorChangedCallback(state);
 
- updateHelpPrompts();
+	updateHelpPrompts();
 
-    if (mOldCursor != mCursor) 
+#ifdef _ENABLEEMUELEC
+if (mOldCursor != mCursor) 
 {
     if (!scrollSound)
     scrollSound = Sound::get(getMenuNavSoundPath());
@@ -281,11 +272,18 @@ void ComponentList::onCursorChanged(const CursorState& state)
     if (scrollSound)
         scrollSound->play();
 }
+#endif
+	// tts
+	if (state == CURSOR_STOPPED && mOldCursor != mCursor)
+		saySelectedLine();
 
-    if (state == CURSOR_STOPPED && mOldCursor != mCursor)
-        saySelectedLine();
+#ifdef _ENABLEEMUELEC
+   mOldCursor = mCursor; 
+#endif
 
-    mOldCursor = mCursor; 
+
+
+
 }
 
 void ComponentList::saySelectedLine()
@@ -764,3 +762,4 @@ bool ComponentList::onMouseWheel(int delta)
 
 	return true;
 }
+

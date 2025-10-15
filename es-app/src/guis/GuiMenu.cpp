@@ -5186,7 +5186,9 @@ void GuiMenu::openSoundSettings()
     });
 
 	s->addGroup(_("SOUNDS"));
+#ifdef _ENABLEEMUELEC
 	s->addFileBrowser(_("CUSTOM MENU SCROLL SOUND"), "ee_menuscrollsound", GuiFileBrowser::AUDIO); 
+#endif
 	s->addSwitch(_("ENABLE NAVIGATION SOUNDS"), "EnableSounds", true, []
 	{
 		if (Settings::getInstance()->getBool("EnableSounds") && PowerSaver::getMode() == PowerSaver::INSTANT)
