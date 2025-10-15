@@ -5091,6 +5091,11 @@ void GuiMenu::openUISettings()
 void GuiMenu::openSoundSettings()
 {
 	auto s = new GuiSettings(mWindow, _("SOUND SETTINGS").c_str());
+	
+#ifdef _ENABLEEMUELEC
+	s->setUpdateType(ComponentListFlags::UPDATE_ALWAYS);
+#endif
+
 
 	if (VolumeControl::getInstance()->isAvailable())
 	{
