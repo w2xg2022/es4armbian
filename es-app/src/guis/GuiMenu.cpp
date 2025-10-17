@@ -5221,6 +5221,9 @@ void GuiMenu::openSoundSettings()
 // Provides a complete list of ISO 3166-1 alpha-2 country codes.
 std::vector<std::pair<std::string, std::string>> getCountryCodes()
 {
+#ifdef _ENABLEEMUELEC
+return {};
+#endif
     return {
         { "AF", "Afghanistan" }, { "AX", "Åland Islands" }, { "AL", "Albania" }, { "DZ", "Algeria" }, { "AS", "American Samoa" },
         { "AD", "Andorra" }, { "AO", "Angola" }, { "AI", "Anguilla" }, { "AQ", "Antarctica" }, { "AG", "Antigua and Barbuda" },
