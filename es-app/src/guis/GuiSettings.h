@@ -39,24 +39,28 @@ public:
 		mMenu.addRow(row); 
 	}
 
+#ifdef _ENABLEEMUELEC
 	// Old call remains compatible
-	inline void addWithLabel(const std::string& label,
-    const std::shared_ptr<GuiComponent>& comp,
-    bool setCursorHere = false)
-{
-    addWithLabel(label, comp, nullptr, "", setCursorHere);
-}
+	inline void addWithLabel(const std::string& label, const std::shared_ptr<GuiComponent>& comp, bool setCursorHere = false)
+	{
+		addWithLabel(label, comp, nullptr, "", setCursorHere); 
+	}
 
 	// New overload with icon and optional callback
 	inline void addWithLabel(const std::string& label,
-    const std::shared_ptr<GuiComponent>& comp,
-    const std::function<void()>& callback,
-    const std::string& iconName,
-    bool setCursorHere = false)
-{
-    mMenu.addWithLabel(label, comp, callback, iconName, setCursorHere);
-}
-
+	    const std::shared_ptr<GuiComponent>& comp,
+	    const std::function<void()>& callback,
+	    const std::string& iconName,
+	    bool setCursorHere = false)
+	{
+	    mMenu.addWithLabel(label, comp, callback, iconName, setCursorHere);
+	}	
+#else
+	inline void addWithLabel(const std::string& label, const std::shared_ptr<GuiComponent>& comp, bool setCursorHere = false) 
+	{ 
+		mMenu.addWithLabel(label, comp, nullptr, "", setCursorHere); 
+	}
+#endif
 
 	inline void addWithDescription(const std::string& label, const std::string& description, const std::shared_ptr<GuiComponent>& comp, bool setCursorHere = false) 
 	{ 

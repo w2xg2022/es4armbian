@@ -168,6 +168,7 @@ bool Window::init(bool initRenderer, bool initInputManager)
 	// update our help because font sizes probably changed
 	if (peekGui())
 		peekGui()->updateHelpPrompts();
+
 	return true;
 }
 

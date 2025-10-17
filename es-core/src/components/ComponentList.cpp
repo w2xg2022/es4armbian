@@ -8,7 +8,7 @@
 #include "components/OptionListComponent.h"
 #include "InputManager.h"
 #ifdef _ENABLEEMUELEC
-//I am sure this  part should be moved to another file, it is not supposed to bee here
+//I am sure this  part should be moved to another file, it is not supposed to be here
 #include "Sound.h"
 #include "SystemConf.h"
 
@@ -195,19 +195,15 @@ bool ComponentList::input(InputConfig* config, Input input)
 
 #ifdef _ENABLEEMUELEC
 	}else if(config->isMappedTo("lefttrigger", input))
-	{
-		return listInput(input.value != 0 ? -6 : 0);
-	}else if(config->isMappedTo("righttrigger", input)){
-		return listInput(input.value != 0 ? 6 : 0);
-	}
 #else
 	}else if(config->isMappedTo("pageup", input))
+#endif
 	{
 		return listInput(input.value != 0 ? -6 : 0);
 	}else if(config->isMappedTo("pagedown", input)){
 		return listInput(input.value != 0 ? 6 : 0);
 	}
-#endif
+
 	return false;
 }
 

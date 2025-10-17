@@ -643,7 +643,9 @@ std::map<std::string, std::map<std::string, ThemeData::ElementPropertyType>> The
 		{ "iconNetwork", PATH },
 		{ "iconScraper", PATH },
 		{ "iconAdvanced", PATH },
+#ifdef _ENABLEEMUELEC
 		{ "iconAutoShutdown", PATH },
+#endif
 		{ "iconQuit", PATH } } },
 	{ "menuSwitch",{
 		{ "pathOn", PATH },

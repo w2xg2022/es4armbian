@@ -70,11 +70,11 @@ private:
         void openUpdatesSettings();
         
 #ifdef _ENABLEEMUELEC
-	void openEmuELECSettings(); /* < emuelec */
-    static void openDangerZone(Window* mWindow, std::string configName);
-    static void createGamepadConfig(Window* window, GuiSettings* systemConfiguration);
-    static void openExternalMounts(Window* mWindow, std::string configName);
-		static void addFrameBufferOptions(Window* mWindow, GuiSettings* guiSettings, std::string configName, std::string header, std::string platform);
+        void openEmuELECSettings(); /* < emuelec */
+        static void openDangerZone(Window* mWindow, std::string configName);
+        static void createGamepadConfig(Window* window, GuiSettings* systemConfiguration);
+        static void openExternalMounts(Window* mWindow, std::string configName);
+        static void addFrameBufferOptions(Window* mWindow, GuiSettings* guiSettings, std::string configName, std::string header, std::string platform);
 #endif
 
         void openSystemSettings();
@@ -104,21 +104,21 @@ private:
         static std::shared_ptr<OptionListComponent<std::string>> createRatioOptionList(Window *window, std::string configname);
         static std::shared_ptr<OptionListComponent<std::string>> createVideoResolutionModeOptionList(Window *window, std::string configname, std::string configoptname = "videomode", const std::string output = "");
 #ifdef _ENABLEEMUELEC
-	static std::shared_ptr<OptionListComponent<std::string>> createSplashLoadingOptionList(Window *window);
+        static std::shared_ptr<OptionListComponent<std::string>> createSplashLoadingOptionList(Window *window);
 	static std::shared_ptr<OptionListComponent<std::string>> createSplashExitOptionList(Window *window);
 
-  static std::shared_ptr<OptionListComponent<std::string>> createNativeVideoResolutionModeOptionList(Window *window, std::string configname);
+        static std::shared_ptr<OptionListComponent<std::string>> createNativeVideoResolutionModeOptionList(Window *window, std::string configname);
 
-  static std::shared_ptr<OptionListComponent<std::string>> createJoyBtnOptionList(Window *window, std::string prefixName, std::string title, int selectId = -1);
-  static std::shared_ptr<OptionListComponent<std::string>> createJoyBtnRemapOptionList(Window *window, std::string prefixName, std::string remapName, int btnIndex = -1);
+        static std::shared_ptr<OptionListComponent<std::string>> createJoyBtnOptionList(Window *window, std::string prefixName, std::string title, int selectId = -1);
+        static std::shared_ptr<OptionListComponent<std::string>> createJoyBtnRemapOptionList(Window *window, std::string prefixName, std::string remapName, int btnIndex = -1);
 
-  static void createBtnJoyCfgName(Window *window, GuiSettings *systemConfiguration, std::string prefixName);
-  static void createBtnJoyCfgRemap(Window *window, GuiSettings *systemConfiguration, std::string prefixName, std::string remapName, int btnIndex = -1);
+        static void createBtnJoyCfgName(Window *window, GuiSettings *systemConfiguration, std::string prefixName);
+        static void createBtnJoyCfgRemap(Window *window, GuiSettings *systemConfiguration, std::string prefixName, std::string remapName, int btnIndex = -1);
   
-  static void deleteBtnJoyCfg(Window *window, GuiSettings *systemConfiguration, std::string prefixName);
-  static void editJoyBtnRemapOptionList(Window *window, GuiSettings *systemConfiguration, std::string prefixName);
-  static void removeJoyBtnEntry(int index);
-  static void addJoyBtnEntry(std::string name, std::string val);
+        static void deleteBtnJoyCfg(Window *window, GuiSettings *systemConfiguration, std::string prefixName);
+        static void editJoyBtnRemapOptionList(Window *window, GuiSettings *systemConfiguration, std::string prefixName);
+        static void removeJoyBtnEntry(int index);
+        static void addJoyBtnEntry(std::string name, std::string val);
 #endif
 	static void popSpecificConfigurationGui(Window* mWindow, std::string title, std::string configName, SystemData *systemData, FileData* fileData, bool selectCoreLine = false);
 
@@ -141,9 +141,9 @@ public:
 	virtual bool hitTest(int x, int y, Transform4x4f& parentTransform, std::vector<GuiComponent*>* pResult = nullptr) override;
 	virtual bool onMouseClick(int button, bool pressed, int x, int y);
 #ifdef _ENABLEEMUELEC
-  static std::shared_ptr<OptionListComponent<std::string>> btn_choice;
-  static std::shared_ptr<OptionListComponent<std::string>> del_choice;
-  static std::shared_ptr<OptionListComponent<std::string>> edit_choice;
+        static std::shared_ptr<OptionListComponent<std::string>> btn_choice;
+        static std::shared_ptr<OptionListComponent<std::string>> del_choice;
+        static std::shared_ptr<OptionListComponent<std::string>> edit_choice;
 #endif
 };
 

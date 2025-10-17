@@ -41,7 +41,9 @@ const std::map<PlatformId, std::string> gamesdb_new_platformid_map{
 	{ BBC_MICRO, "5013"},
 	{ COLECOVISION, "31" },	
 	{ COMMODORE_64, "40" },
+#ifdef _ENABLEEMUELEC
 	{ COMMODORE_VIC20, "4945" },
+#endif
 	{ COMMODORE_PET, "5008" },
 	{ COMMODORE_PLUS4, "5007" },
 	{ INTELLIVISION, "32" },

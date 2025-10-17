@@ -267,7 +267,7 @@ std::pair<std::string, int> ApiSystem::updateSystem(const std::function<void(con
 	
 	char line[1024] = "";
 #ifdef _ENABLEEMUELEC
-    FILE *flog = fopen(Utils::FileSystem::combine(Paths::getLogPath(), "emuelec-upgrade.log").c_str(), "w");
+	FILE *flog = fopen(Utils::FileSystem::combine(Paths::getLogPath(), "emuelec-upgrade.log").c_str(), "w");
 #else
 	FILE *flog = fopen(Utils::FileSystem::combine(Paths::getLogPath(), "batocera-upgrade.log").c_str(), "w");
 #endif
@@ -438,12 +438,14 @@ void ApiSystem::launchExternalWindow_before(Window *window)
 #else
 	window->deinit();
 #endif
+
 	LOG(LogDebug) << "ApiSystem::launchExternalWindow_before OK";
 }
 
 void ApiSystem::launchExternalWindow_after(Window *window) 
 {
 	LOG(LogDebug) << "ApiSystem::launchExternalWindow_after";
+
 #ifdef _ENABLEEMUELEC
 	window->init(false);
 #else
@@ -496,7 +498,11 @@ bool ApiSystem::launchFileManager(Window *window)
 {
 	LOG(LogDebug) << "ApiSystem::launchFileManager";
 
+#ifdef _ENABLEEMUELEC
 	std::string command = "/usr/bin/emuelec-utils filemanager";
+#else
+	std::string command = "filemanagerlauncher";
+#endif
 
 	ApiSystem::launchExternalWindow_before(window);
 
@@ -1819,9 +1825,9 @@ bool ApiSystem::isScriptingSupported(ScriptId script)
 		break;
 	case ApiSystem::UPGRADE:
 #ifdef _ENABLEEMUELEC
-        executables.push_back("emuelec-upgrade");
+		executables.push_back("emuelec-upgrade");
 #else
-        executables.push_back("batocera-upgrade");
+		executables.push_back("batocera-upgrade");
 #endif
 		break;
 	case ApiSystem::SUSPEND:

@@ -731,7 +731,7 @@ namespace Renderer
 #else
 		// Regular GL_ALPHA textures are black + alpha in shaders
 		// Create a GL_LUMINANCE_ALPHA texture instead so its white + alpha
-
+		
 		if (type == GL_LUMINANCE_ALPHA)
 		{
 			uint8_t* la_data = new uint8_t[_width * _height * 2];

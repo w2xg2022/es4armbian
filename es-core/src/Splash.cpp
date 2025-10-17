@@ -96,6 +96,7 @@ Splash::Splash(Window* window, const std::string image, bool fullScreenBackGroun
 		mText.setColor(0xFFFFFFD0);
 	else
 		mText.setColor(0xFFFFFFFF);
+
 #ifdef _ENABLEEMUELEC
 		mText.setColor(0x514687D0);
 #endif
@@ -129,12 +130,11 @@ Splash::Splash(Window* window, const std::string image, bool fullScreenBackGroun
 		mText.applyTheme(theme, "splash", "label", ThemeFlags::ALL ^ (ThemeFlags::TEXT));
 	else if (fullScreenBackGround)
 	{
-		
 #ifdef _ENABLEEMUELEC
 		mText.setGlowColor(0x00000010);
 		mText.setGlowSize(1);	
-#else	
-		mText.setGlowColor(0x00000020);	
+#else
+		mText.setGlowColor(0x00000020);
 		mText.setGlowSize(2);
 #endif
 		mText.setGlowOffset(1, 1);

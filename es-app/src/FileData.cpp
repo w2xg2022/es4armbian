@@ -742,6 +742,7 @@ bool FileData::launchGame(Window* window, LaunchGameOptions options)
 
 	bool hideWindow = Settings::getInstance()->getBool("HideWindow");
 #ifdef _ENABLEEMUELEC
+	// attempts to fix screen tearing issue, we always need hideWindow to false
 	hideWindow = false;
 #endif
 	window->deinit(hideWindow);
@@ -825,9 +826,11 @@ bool FileData::launchGame(Window* window, LaunchGameOptions options)
 		AudioManager::getInstance()->changePlaylist(system->getTheme(), true);
 	else
 		AudioManager::getInstance()->playRandomMusic();
+
 #ifndef _ENABLEEMUELEC // EmuELEC has its own error checking
 	if (exitCode >= 200 && exitCode <= 300)
 		window->pushGui(new GuiMsgBox(window, _("AN ERROR OCCURRED") + ":\r\n" + getMessageFromExitCode(exitCode), _("OK"), nullptr, GuiMsgBoxIcon::ICON_ERROR));
+
 #endif
 	return exitCode == 0;
 }

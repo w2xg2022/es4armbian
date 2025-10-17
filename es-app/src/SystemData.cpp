@@ -1697,7 +1697,6 @@ bool SystemData::isCheevosSupported()
 #endif
 				"o2em", "uzebox" };
 
-
 			if (cheevosSystems.find(getName()) != cheevosSystems.cend())
 				mIsCheevosSupported = 1;
 

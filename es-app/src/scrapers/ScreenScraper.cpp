@@ -49,8 +49,10 @@ const std::map<PlatformId, unsigned short> screenscraper_platformid_map{
 	{ BBC_MICRO, 37 },
 	{ COLECOVISION, 48 },
 	{ COMMODORE_64, 66 },
+#ifdef _ENABLEEMUELEC
 	{ COMMODORE_VIC20, 73 },
 	{ COMMODORE_PLUS4, 99 },
+#endif
 	{ INTELLIVISION, 115 },
 	{ MAC_OS, 146 },
 	{ XBOX, 32 },

@@ -1106,7 +1106,9 @@ void CollectionSystemManager::populateCustomCollection(CollectionSystemData* sys
 			std::vector<FileData*> games = folder->getFilesRecursive(GAME);
 			for (auto game : games)
 			{
+#ifdef _ENABLEEMUELEC
                 if (game->getSystemName() != "mplayer") { //emuelec
+#endif
 				if (sysData->filteredIndex->isSystemSelected(game->getSystemName()))
 					sysData->filteredIndex->addToIndex(game);
 
@@ -1120,8 +1122,10 @@ void CollectionSystemManager::populateCustomCollection(CollectionSystemData* sys
 				}
 			}
 		}
-    }
 
+#ifdef _ENABLEEMUELEC
+    }
+#endif
 		updateCollectionFolderMetadata(newSys);
 		return;
 	}

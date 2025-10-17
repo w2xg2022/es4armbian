@@ -257,7 +257,8 @@ GuiGameOptions::GuiGameOptions(Window* window, FileData* game) : GuiComponent(wi
 		});
 		
 #endif
-                if (SaveStateRepository::isEnabled(game))
+
+		if (SaveStateRepository::isEnabled(game))
 		{
 			mMenu.addEntry(_("SAVE STATES"), false, [window, game, this]
 			{
@@ -270,8 +271,8 @@ GuiGameOptions::GuiGameOptions(Window* window, FileData* game) : GuiComponent(wi
 #ifdef _ENABLEEMUELEC
 					guiSaveStateLoad(mWindow, game);
 #endif
-				this->close();
 
+				this->close();
 			});
 		}
 		else

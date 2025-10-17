@@ -558,6 +558,7 @@ void GuiGamelistOptions::jumpToLetter()
 #else
 		mListSort->selectFirstItem();
 		mSystem->setSortId(0);
+		
 #endif
 
 		FolderData* root = mSystem->getRootFolder();

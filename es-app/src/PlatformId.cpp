@@ -28,8 +28,10 @@ namespace PlatformIds
 		{ "bbc",					BBC_MICRO},
 		{ "colecovision",			COLECOVISION },
 		{ "c64",					COMMODORE_64 },
+#ifdef _ENABLEEMUELEC
 		{ "vic20",				COMMODORE_VIC20 },
 		{ "c16",				COMMODORE_PLUS4 },
+#endif
 		{ "intellivision",			INTELLIVISION },
 		{ "macintosh",				MAC_OS },
 		{ "xbox",					XBOX },

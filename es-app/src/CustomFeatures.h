@@ -93,10 +93,10 @@ public:
 		videofilters = 524288,
 
 #ifdef _ENABLEEMUELEC
-    vertical = 1048576,
+		vertical = 1048576,
 		nativevideo = 2097152,
 		hlebios = 4194304,
-    joybtnremap = 8388608,
+		joybtnremap = 8388608,
 		cloudsave = 16777216,
 		gptokeyb = 33554432,
 		midi = 67108864,

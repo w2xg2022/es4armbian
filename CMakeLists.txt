@@ -207,6 +207,7 @@ if(NOT WIN32)
 	
 	if(ENABLE_TTS)
 	  MESSAGE("tts enabled")
+	#in EmuELEC espeak is called espeak-ng
 	  find_library(LIBESPEAK_LIBRARIES NAMES espeak espeak-ng REQUIRED)
 	  if("${LIBESPEAK_LIBRARIES}" STREQUAL "LIBESPEAK_LIBRARIES-NOTFOUND")
 		MESSAGE(FATAL_ERROR "espeak not found")
@@ -495,11 +496,11 @@ if(NOT WIN32)
 	endif()
 endif()
 
-#find_program (PYTHON3_EXECUTABLE python3)
-#if(PYTHON3_EXECUTABLE)
-#  add_custom_target (checkgamesdb ALL COMMENT "Checking guns and wheels games db.")
-#  add_custom_command (TARGET checkgamesdb COMMAND "${PYTHON3_EXECUTABLE}" "resources/#checkWheelGunGamesResources.py")
-#endif()
+find_program (PYTHON3_EXECUTABLE python3)
+if(PYTHON3_EXECUTABLE)
+  add_custom_target (checkgamesdb ALL COMMENT "Checking guns and wheels games db.")
+  add_custom_command (TARGET checkgamesdb COMMAND "${PYTHON3_EXECUTABLE}" "resources/checkWheelGunGamesResources.py")
+endif()
 
 #-------------------------------------------------------------------------------
 # set up build directories

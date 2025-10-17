@@ -450,7 +450,7 @@ int main(int argc, char* argv[])
 
 #ifdef _ENABLEEMUELEC
 // Hacky way of waking up system ALSA before initializing sound.
-// withouth this Music mixer was not available at boot.
+// withouth this mixer was not available at boot.
 snd_pcm_t* pcm_handle = nullptr;
 int err = snd_pcm_open(&pcm_handle, "default", SND_PCM_STREAM_PLAYBACK, 0);
 
@@ -934,3 +934,4 @@ int err = snd_pcm_open(&pcm_handle, "default", SND_PCM_STREAM_PLAYBACK, 0);
 
 	return 0;
 }
+

@@ -116,6 +116,7 @@ void Settings::setDefaults()
 	mWasChanged = false;
 	mBoolMap.clear();
 	mIntMap.clear();
+
 	mBoolMap["BackgroundJoystickInput"] = false;
 	mBoolMap["ParseGamelistOnly"] = false;
 	mBoolMap["ShowHiddenFiles"] = false;
@@ -213,10 +214,11 @@ void Settings::setDefaults()
 #elif defined(_RPI_)
 	// Rpi 0, 1
 	mIntMap["MaxVRAM"] = 128;
+
 #elif defined(_ENABLEEMUELEC)
 	// EmuELEC
 	mIntMap["MaxVRAM"] = 180;
-#else 
+#else
 	// Other boards
 	mIntMap["MaxVRAM"] = 100;
 #endif
@@ -273,7 +275,6 @@ void Settings::setDefaults()
 #endif
 	mStringMap["SlideshowScreenSaverVideoFilter"] = ".mp4,.avi";
 	mBoolMap["SlideshowScreenSaverVideoRecurse"] = false;
-
 
 	// This setting only applies to raspberry pi but set it for all platforms so
 	// we don't get a warning if we encounter it on a different platform
@@ -465,10 +466,12 @@ bool Settings::saveFile()
 		if (def == mDefaultStringMap.cend() && iter->second.empty())
 			continue;
 #ifndef _ENABLEEMUELEC
+
 		// Value is know and has default value, don't save it
 		if (def != mDefaultStringMap.cend() && def->second == iter->second)
 			continue;
 #endif
+
 		pugi::xml_node node = config.append_child("string");
 		node.append_attribute("name").set_value(iter->first.c_str());
 		node.append_attribute("value").set_value(iter->second.c_str());

@@ -34,6 +34,7 @@
 #ifdef _ENABLEEMUELEC
 	#include "utils/StringUtil.h"
 #endif
+
 #include "SystemConf.h"
 #include "ApiSystem.h"
 #include "InputManager.h"
@@ -1841,6 +1842,7 @@ void GuiMenu::openDeveloperSettings()
 		});
 	}
 #endif
+
 #ifndef _ENABLEEMUELEC
 	// WEB ACCESS
 	auto hostName = Utils::String::toLower(ApiSystem::getInstance()->getHostsName());
@@ -2578,7 +2580,7 @@ void GuiMenu::openSystemSettings()
 #endif
 #endif
 		});
-        
+
        s->addSaveFunc([this, brightnessComponent] {
             SystemConf::getInstance()->set("brightness.level", std::to_string((int)Math::round(brightnessComponent->getValue())));
        });
@@ -2823,7 +2825,6 @@ void GuiMenu::openSystemSettings()
 			s->addSwitch(_("CHECK BIOS FILES BEFORE RUNNING A GAME"), "CheckBiosesAtLaunch", true);
 #endif
 		}
-
 	}
 #endif
 	std::shared_ptr<OptionListComponent<std::string>> overclock_choice;
@@ -3783,6 +3784,7 @@ void GuiMenu::openGamesSettings()
 		s->addWithDescription(_("GAME ASPECT RATIO"), _("Force the game to render in this aspect ratio."), ratio_choice);
 		s->addSaveFunc([ratio_choice] { SystemConf::getInstance()->set("global.ratio", ratio_choice->getSelected()); });
 	}
+
 #ifndef _ENABLEEMUELEC
 	// video resolution mode
 	if (ApiSystem::getInstance()->isScriptingSupported(ApiSystem::RESOLUTION) && !hasGlobalFeature("videomode"))
@@ -3986,6 +3988,7 @@ void GuiMenu::openGamesSettings()
 #endif
 		}
 	}
+	
 #endif	
 	// latency reduction
 	if (!hasGlobalFeature("runahead"))
@@ -5197,6 +5200,7 @@ void GuiMenu::openSoundSettings()
     });
 
 	s->addGroup(_("SOUNDS"));
+
 #ifdef _ENABLEEMUELEC
 	s->addFileBrowser(_("CUSTOM MENU SCROLL SOUND"), "ee_menuscrollsound", GuiFileBrowser::AUDIO); 
 #endif
@@ -5625,6 +5629,7 @@ void GuiMenu::openQuitMenu_static(Window *window, bool quickAccessMenu, bool ani
 			_("YES"), [] { Utils::Platform::quitES(Utils::Platform::QuitMode::SHUTDOWN); },
 			_("NO"), nullptr));
 	}, "iconShutdown");
+
 #ifndef _ENABLEEMUELEC
 	s->addWithDescription(_("FAST SHUTDOWN SYSTEM"),_("Shutdown without saving metadata."), nullptr, [window] {
 		window->pushGui(new GuiMsgBox(window, _("REALLY SHUTDOWN WITHOUT SAVING METADATA?"), 
@@ -6296,9 +6301,7 @@ void GuiMenu::popSpecificConfigurationGui(Window* mWindow, std::string title, st
 			GuiMenu::deleteBtnJoyCfg(mWindow, systemConfiguration, prefixName);
 		}();
 	}
-#endif
 
-#ifdef _ENABLEEMUELEC
  // PR - HLE BIOS.
 
 	if (systemData->isFeatureSupported(currentEmulator, currentCore, EmulatorFeatures::hlebios))
@@ -6561,6 +6564,7 @@ void GuiMenu::popSpecificConfigurationGui(Window* mWindow, std::string title, st
 #endif		
 		}
 	}	
+
 #endif
 	if (systemData->isFeatureSupported(currentEmulator, currentCore, EmulatorFeatures::latency_reduction))	
 		systemConfiguration->addEntry(_("LATENCY REDUCTION"), true, [mWindow, configName] { openLatencyReductionConfiguration(mWindow, configName); });
@@ -6711,6 +6715,7 @@ void GuiMenu::popSpecificConfigurationGui(Window* mWindow, std::string title, st
 		int n_all_gambate_gc_colors_modes = 126;
 		for (int i = 0; i < n_all_gambate_gc_colors_modes; i++)
 			colorizations_choices->add(all_gambate_gc_colors_modes[i], all_gambate_gc_colors_modes[i], currentColorization == std::string(all_gambate_gc_colors_modes[i]));
+		
 #ifdef _ENABLEEMUELEC
         if (CustomFeatures::FeaturesLoaded || (!CustomFeatures::FeaturesLoaded && (systemData->getName() == "gb" || systemData->getName() == "gbc" || systemData->getName() == "gb2players" || systemData->getName() == "gbc2players" || systemData->getName() == "gbh" || systemData->getName() == "gbch"))) // only for gb, gbc and gb2players gbh gbch
 #else
@@ -6721,6 +6726,7 @@ void GuiMenu::popSpecificConfigurationGui(Window* mWindow, std::string title, st
 			systemConfiguration->addSaveFunc([colorizations_choices, configName] { SystemConf::getInstance()->set(configName + "-renderer.colorization", colorizations_choices->getSelected()); });
 		}		
 	}
+
 #ifndef _ENABLEEMUELEC
 	// ps2 full boot
 	if (systemData->isFeatureSupported(currentEmulator, currentCore, EmulatorFeatures::fullboot))
@@ -6783,6 +6789,7 @@ void GuiMenu::popSpecificConfigurationGui(Window* mWindow, std::string title, st
 			systemConfiguration->addSaveFunc([internalresolution, configName] { SystemConf::getInstance()->set(configName + ".internalresolution", internalresolution->getSelected()); });
 		}
 	}
+
 #endif
 	// Load per-game / per-emulator / per-system custom features
 	addFeatures(customFeatures, mWindow, systemConfiguration, configName, systemData->getName(), currentEmulator.empty() ? systemData->getEmulator(true) : currentEmulator, currentCore.empty() ? systemData->getCore(true) : currentCore, _("SETTINGS"), true);
@@ -6896,7 +6903,6 @@ void GuiMenu::popSpecificConfigurationGui(Window* mWindow, std::string title, st
 #endif
 
 	mWindow->pushGui(systemConfiguration);
-
 }
 
 std::shared_ptr<OptionListComponent<std::string>> GuiMenu::createRatioOptionList(Window *window, std::string configname)

@@ -33,6 +33,8 @@ void MetaDataList::initMetadata()
 		{ Name,             "name",        MD_STRING,              "",                 false,      _("Name"),                 _("this game's name"),			true },
 #ifdef _ENABLEEMUELEC
 		{ SortName,         "sortname",    MD_STRING,              "",                 false,      _("sortname"),             _("this game's sort name"),	true },
+#else
+	//	{ SortName,         "sortname",    MD_STRING,              "",                 false,      _("sortname"),             _("enter game sort name"),	true },
 #endif
 		{ Desc,             "desc",        MD_MULTILINE_STRING,    "",                 false,      _("Description"),          _("this game's description"),		true },
 

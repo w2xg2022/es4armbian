@@ -611,6 +611,7 @@ GameScreenSaverBase::~GameScreenSaverBase()
 #include <rapidjson/document.h>
 #include <rapidjson/error/en.h>
 #include <rapidjson/filereadstream.h>
+#ifdef _ENABLEMUELEC
 
 void GameScreenSaverBase::setGame(FileData* game)
 {   
@@ -783,6 +784,191 @@ else if (decos != "none")
 	mLabelSystem->setFont(ph, sz * 0.66);
 	mLabelSystem->setText(game->getSystem()->getFullName());
 }
+#else
+
+void GameScreenSaverBase::setGame(FileData* game)
+{	
+	if (mLabelGame != nullptr)
+	{
+		delete mLabelGame;
+		mLabelGame = nullptr;
+	}
+
+	if (mLabelSystem != nullptr)
+	{
+		delete mLabelSystem;
+		mLabelSystem = nullptr;
+	}
+
+	if (mMarquee != nullptr)
+	{
+		delete mMarquee;
+		mMarquee = nullptr;
+	}
+
+	if (mDecoration != nullptr)
+	{
+		delete mDecoration;
+		mDecoration = nullptr;
+	}
+
+	if (game == nullptr)
+		return;
+
+	mViewport = Renderer::Rect(0, 0, Renderer::getScreenWidth(), Renderer::getScreenHeight());
+
+	std::string decos = Settings::getInstance()->getString("ScreenSaverDecorations");
+
+#ifdef _RPI_
+	if (!Settings::getInstance()->getBool("ScreenSaverOmxPlayer"))
+#endif
+	if (decos != "none")
+	{
+		auto sets = GuiMenu::getDecorationsSets(game->getSystem());
+		int setId = Randomizer::random(sets.size()); // (int)(((float)rand() / float(RAND_MAX)) * (float)sets.size());
+
+		if (decos == "systems")
+		{
+			std::string bezel = SystemConf::getInstance()->get("global.bezel");
+
+			bool found = false;
+
+			if (bezel != "default" && Utils::String::startsWith(bezel, "default"))
+			{
+				for (int i = 0; i < sets.size(); i++)
+				{
+					if (sets[i].name == bezel && Utils::FileSystem::exists(sets[i].path + "/systems") && !sets[i].imageUrl.empty())
+					{
+						found = true;
+						setId = i;
+						break;
+					}
+				}
+			}
+
+			if (!found)
+			{
+				for (int i = 0; i < sets.size(); i++)
+				{
+					if (sets[i].name == "default")
+					{
+						found = true;
+						setId = i;
+						break;
+					}
+				}
+			}
+
+			if (!found)
+			{
+				for (int i = 0; i < sets.size(); i++)
+				{
+					if (sets[i].name == "default_unglazed")
+					{
+						found = true;
+						setId = i;
+						break;
+					}
+				}
+			}
+		}
+
+		if (setId >= 0 && setId < sets.size() && Utils::FileSystem::exists(sets[setId].imageUrl))
+		{
+			std::string infoFile = Utils::String::replace(sets[setId].imageUrl, ".png", ".info");
+			if (Utils::FileSystem::exists(infoFile))
+			{
+				FILE* fp = fopen(infoFile.c_str(), "r"); // non-Windows use "r"
+				if (fp)
+				{
+					char readBuffer[65536];
+					rapidjson::FileReadStream is(fp, readBuffer, sizeof(readBuffer));
+					rapidjson::Document doc;
+					doc.ParseStream(is);
+
+					if (!doc.HasParseError())
+					{
+						if (doc.HasMember("top") && doc.HasMember("left") && doc.HasMember("bottom") && doc.HasMember("right") && doc.HasMember("width") && doc.HasMember("height"))
+						{
+							auto width = doc["width"].GetInt();
+							auto height = doc["height"].GetInt();
+							if (width > 0 && height > 0)
+							{
+								Vector2i sz = ImageIO::adjustPictureSize(Vector2i(width, height), Vector2i(Renderer::getScreenWidth(), Renderer::getScreenHeight()));
+
+								float px = (float) sz.x() / (float)width;
+								float py = (float) sz.y() / (float)height;
+
+								float dx = (Renderer::getScreenWidth() - sz.x()) / 2.0;
+								float dy = (Renderer::getScreenHeight() - sz.y()) / 2.0;
+
+								auto top = doc["top"].GetInt();
+								auto left = doc["left"].GetInt();
+								auto bottom = doc["bottom"].GetInt();
+								auto right = doc["right"].GetInt();
+
+								mViewport = Renderer::Rect(dx + left * px, dy + top * py, (width - right - left) * px, (height - bottom - top) * py);
+							}
+						}
+					}
+
+					fclose(fp);
+				}
+			}
+
+			if (!Renderer::isVerticalScreen())
+			{
+				mDecoration = new ImageComponent(mWindow, true);
+				mDecoration->setImage(sets[setId].imageUrl);
+				mDecoration->setOrigin(0.5f, 0.5f);
+				mDecoration->setPosition(Renderer::getScreenWidth() / 2.0f, (float)Renderer::getScreenHeight() / 2.0f);
+				mDecoration->setMaxSize((float)Renderer::getScreenWidth() * Renderer::getScreenProportion(), (float)Renderer::getScreenHeight());
+			}
+		}
+	}
+
+	if (!Settings::getInstance()->getBool("SlideshowScreenSaverGameName"))
+		return;
+
+	if (Settings::getInstance()->getBool("ScreenSaverMarquee") && Utils::FileSystem::exists(game->getMarqueePath()))
+	{
+		mMarquee = new ImageComponent(mWindow, true);
+		mMarquee->setImage(game->getMarqueePath());
+		mMarquee->setOrigin(0.5f, 0.5f);
+		mMarquee->setPosition(mViewport.x + mViewport.w * 0.50f, mViewport.y + mViewport.h * 0.16f);
+		mMarquee->setMaxSize((float)mViewport.w * 0.40f, (float)mViewport.h * 0.22f);
+	}
+	
+	auto ph = ThemeData::getMenuTheme()->Text.font->getPath();
+	auto sz = mViewport.h / 16.f;
+	auto font = Font::get(sz, ph);
+
+	int h = mViewport.h / 4.0f;
+	int fh = font->getLetterHeight();
+
+	mLabelGame = new TextComponent(mWindow);
+	mLabelGame->setPosition(mViewport.x, mViewport.y + mViewport.h - h - fh / 2);
+	mLabelGame->setSize(mViewport.w, h - fh / 2);
+	mLabelGame->setHorizontalAlignment(ALIGN_CENTER);
+	mLabelGame->setVerticalAlignment(ALIGN_CENTER);
+	mLabelGame->setColor(0xFFFFFFFF);
+	mLabelGame->setGlowColor(0x00000040);
+	mLabelGame->setGlowSize(3);
+	mLabelGame->setFont(font);
+	mLabelGame->setText(game->getName());
+
+	mLabelSystem = new TextComponent(mWindow);
+	mLabelSystem->setPosition(mViewport.x, mViewport.y + mViewport.h - h + fh / 2);
+	mLabelSystem->setSize(mViewport.w, h + fh / 2);
+	mLabelSystem->setHorizontalAlignment(ALIGN_CENTER);
+	mLabelSystem->setVerticalAlignment(ALIGN_CENTER);
+	mLabelSystem->setColor(0xD0D0D0FF);
+	mLabelSystem->setGlowColor(0x00000060);
+	mLabelSystem->setGlowSize(2);
+	mLabelSystem->setFont(ph, sz * 0.66);
+	mLabelSystem->setText(game->getSystem()->getFullName());
+}
+#endif
 
 void GameScreenSaverBase::render(const Transform4x4f& transform)
 {
