@@ -349,7 +349,7 @@ std::shared_ptr<OptionListComponent<std::string>> GuiMenu::createSplashLoadingOp
 {
 	auto emuelec_splash_loading_mode = std::make_shared< OptionListComponent<std::string> >(window, _("LOADING SPLASH OPTION"), false);
 	std::vector<std::string> splashmode;
-	splashmode.push_back(_("SHOW STANDARD SPLASH")); // 0
+	splashmode.push_back(_("SHOW DEFAULT SPLASH")); // 0
 	splashmode.push_back(_("SHOW CUSTOM SPLASH")); // 1
 	splashmode.push_back(_("SHOW RANDOM SPLASH")); // 2
 	splashmode.push_back(_("USE SCRAPPED MEDIA")); // 3
@@ -372,7 +372,7 @@ std::shared_ptr<OptionListComponent<std::string>> GuiMenu::createSplashExitOptio
 {
 	auto emuelec_splash_exit_mode = std::make_shared< OptionListComponent<std::string> >(window, _("EXIT SPLASH OPTION"), false);
 	std::vector<std::string> splashmode;
-	splashmode.push_back(_("SHOW STANDARD SPLASH")); // 0
+	splashmode.push_back(_("SHOW DEFAULT SPLASH")); // 0
 	splashmode.push_back(_("PLAY CUSTOM SPLASH")); // 1
 
 	std::string str_index = SystemConf::getInstance()->get("ee_splashexit");
@@ -672,78 +672,8 @@ void GuiMenu::openEmuELECSettings()
 	// Splash Settings
 	//s->addGroup(_("SPLASH SETTINGS"));
 	s->addEntry(_("CONFIGURE SPLASH OPTIONS"), true, [this] {
-		auto s = new GuiSettings(mWindow, _("SPLASH SETTINGS"));
-
-	auto splashLoadingOptionList = createSplashLoadingOptionList(mWindow);
-	s->addWithLabel(_("SPLASH LOADING OPTION"), splashLoadingOptionList);
-
-	auto splashLoadingPlatformRoms = std::make_shared<SwitchComponent>(mWindow);
-	splashLoadingPlatformRoms->setState(SystemConf::getInstance()->get("ee_splash_loading_platform_roms") != "0");
-	s->addWithLabel(_("SPLASH LOAD PLATFORMS AND ROMS"), splashLoadingPlatformRoms);
-
-	// File picker for custom splash image
-	s->addFileBrowser(_("SET CUSTOM SPLASH LOADING MEDIA"), "ee_customsplash", (GuiFileBrowser::FileTypes) (GuiFileBrowser::FileTypes::IMAGES | GuiFileBrowser::FileTypes::VIDEO));
-
-	auto splashLoadingTime = std::make_shared<SliderComponent>(mWindow, 0.f, 100.f, 1.f, "seconds");
-
-	auto splashDuration = SystemConf::getInstance()->get("ee_splash_loading_duration");
-	float fDuration = 0.f;
-	if (!splashDuration.empty())
-		fDuration = (float) atof(splashDuration.c_str());
-	splashLoadingTime->setValue(fDuration);
-
-	splashLoadingTime->setOnValueChanged([](const float &newVal) {
-		auto val = std::to_string((int)Math::round(newVal));
-		SystemConf::getInstance()->set("ee_splash_loading_duration", val);
+		createConfigureSplash(mWindow);
 	});
-	s->addWithLabel(_("SPLASH LOADING DURATION"), splashLoadingTime);
-
-	auto splashExitOptionList = createSplashExitOptionList(mWindow);
-	s->addWithLabel(_("SPLASH EXIT OPTION"), splashExitOptionList);
-
-	// File picker for custom splash image/video
-	s->addFileBrowser(_("SET CUSTOM SPLASH EXIT MEDIA"), "ee_customexitsplash", (GuiFileBrowser::FileTypes) (GuiFileBrowser::FileTypes::IMAGES | GuiFileBrowser::FileTypes::VIDEO));
-
-	auto splashExitTime = std::make_shared<SliderComponent>(mWindow, 0.f, 100.f, 1.f, "seconds");
-
-	splashDuration = SystemConf::getInstance()->get("ee_splash_exit_duration");
-	fDuration = 0.f;
-	if (!splashDuration.empty())
-		fDuration = (float) atof(splashDuration.c_str());
-	splashExitTime->setValue(fDuration);
-
-	splashExitTime->setOnValueChanged([](const float &newVal) {
-		auto val = std::to_string((int)Math::round(newVal));
-		SystemConf::getInstance()->set("ee_splash_exit_duration", val);
-	});
-	s->addWithLabel(_("SPLASH EXIT DURATION"), splashExitTime);
-
-	s->addSaveFunc([=] {
-		if (splashLoadingOptionList->getSelected() == "2") {
-			mWindow->displayNotificationMessage(_U("\uF011  ") + _("PUT RANDOM MEDIA IN '/storage/roms/splash/random'."));
-		}
-		SystemConf::getInstance()->set("ee_splashloading", splashLoadingOptionList->getSelected());
-		SystemConf::getInstance()->set("ee_splashexit", splashExitOptionList->getSelected());
-
-		if (splashLoadingTime->getValue() == 0.f || splashExitTime->getValue() == 0.f) {
-			mWindow->displayNotificationMessage(_U("\uF011  ") + _("SETTING DURATION 0 WILL MAKE VIDEOS DEFAULT TO PLAY 3 SECONDS."));
-		}
-		if (splashLoadingTime->getValue() != 0.f || splashExitTime->getValue() != 0.f) {
-			mWindow->displayNotificationMessage(_U("\uF011  ") + _("SETTING DURATIONS GREATER THAN 0 WILL ADD TO LOADING/EXIT SPLASH TIMES."));
-		}
-
-		SystemConf::getInstance()->set("ee_splash_loading_duration", std::to_string((int)round(splashLoadingTime->getValue())));
-		SystemConf::getInstance()->set("ee_splash_exit_duration", std::to_string((int)round(splashExitTime->getValue())));
-
-		SystemConf::getInstance()->set("ee_splash_loading_platform_roms", splashLoadingPlatformRoms->getState() ? "1" : "0");
-
-		SystemConf::getInstance()->saveSystemConf();
-	});
-
-	mWindow->pushGui(s);
-});
-
-
 
 	s->addInputTextRow(_("DEFAULT YOUTUBE SEARCH WORD"), "youtube.searchword", false);
 
@@ -793,6 +723,102 @@ if (UIModeController::getInstance()->isUIModeFull())
 
     mWindow->pushGui(s);
 }
+
+#ifdef _ENABLEEMUELEC
+void GuiMenu::createConfigureSplash(Window* mWindow, int menuIndex)
+{
+	auto s = new GuiSettings(mWindow, _("SPLASH SETTINGS"));
+
+	auto splashLoadingOptionList = createSplashLoadingOptionList(mWindow);
+	s->addWithLabel(_("SPLASH LOADING OPTION"), splashLoadingOptionList);
+	splashLoadingOptionList->setSelectedChangedCallback([=](std::string name) {
+		SystemConf::getInstance()->set("ee_splashloading", name);
+		delete s;
+		createConfigureSplash(mWindow);
+	});
+
+	if (SystemConf::getInstance()->get("ee_splashloading") == "1") {
+		// File picker for custom splash image
+		s->addFileBrowser(_("SET CUSTOM SPLASH LOADING MEDIA FILE"), "ee_customsplash", (GuiFileBrowser::FileTypes) (GuiFileBrowser::FileTypes::IMAGES | GuiFileBrowser::FileTypes::VIDEO));
+	}
+
+	if (SystemConf::getInstance()->get("ee_splashloading") == "2") {
+		// File picker for random splash media
+		s->addFileBrowser(_("SET RANDOM SPLASH LOADING MEDIA FOLDER"), "ee_randomsplashpath", (GuiFileBrowser::FileTypes) (GuiFileBrowser::FileTypes::DIRECTORY));
+	}
+
+	auto splashLoadingPlatformRoms = std::make_shared<SwitchComponent>(mWindow);
+	splashLoadingPlatformRoms->setState(SystemConf::getInstance()->get("ee_splash_loading_platform_roms") != "0");
+	s->addWithLabel(_("SPLASH LOAD PLATFORMS AND ROMS"), splashLoadingPlatformRoms);
+	
+	auto splashLoadingTime = std::make_shared<SliderComponent>(mWindow, 0.f, 100.f, 1.f, "seconds");
+
+	auto splashDuration = SystemConf::getInstance()->get("ee_splash_loading_duration");
+	float fDuration = 0.f;
+	if (!splashDuration.empty())
+		fDuration = (float) atof(splashDuration.c_str());
+	splashLoadingTime->setValue(fDuration);
+
+	splashLoadingTime->setOnValueChanged([](const float &newVal) {
+		auto val = std::to_string((int)Math::round(newVal));
+		SystemConf::getInstance()->set("ee_splash_loading_duration", val);
+	});
+	s->addWithLabel(_("SPLASH LOADING DURATION"), splashLoadingTime);
+
+	auto splashExitOptionList = createSplashExitOptionList(mWindow);
+	s->addWithLabel(_("SPLASH EXIT OPTION"), splashExitOptionList);
+	splashExitOptionList->setSelectedChangedCallback([=](std::string name) {
+		SystemConf::getInstance()->set("ee_splashexit", name);
+		int index = s->getMenu().getList()->getCursorIndex();
+		delete s;
+		createConfigureSplash(mWindow, index);
+	});
+
+	if (SystemConf::getInstance()->get("ee_splashexit") == "1") {
+		// File picker for custom splash image/video
+		s->addFileBrowser(_("SET CUSTOM SPLASH EXIT MEDIA FILE"), "ee_customexitsplash", (GuiFileBrowser::FileTypes) (GuiFileBrowser::FileTypes::IMAGES | GuiFileBrowser::FileTypes::VIDEO));
+	}
+
+	auto splashExitTime = std::make_shared<SliderComponent>(mWindow, 0.f, 100.f, 1.f, "seconds");
+
+	splashDuration = SystemConf::getInstance()->get("ee_splash_exit_duration");
+	fDuration = 0.f;
+	if (!splashDuration.empty())
+		fDuration = (float) atof(splashDuration.c_str());
+	splashExitTime->setValue(fDuration);
+
+	splashExitTime->setOnValueChanged([](const float &newVal) {
+		auto val = std::to_string((int)Math::round(newVal));
+		SystemConf::getInstance()->set("ee_splash_exit_duration", val);
+	});
+	s->addWithLabel(_("SPLASH EXIT DURATION"), splashExitTime);
+
+	s->addSaveFunc([=] {
+		if (splashLoadingOptionList->getSelected() == "2") {
+			mWindow->displayNotificationMessage(_U("\uF011  ") + _("PUT RANDOM MEDIA IN '/storage/roms/splash/random'."));
+		}
+		SystemConf::getInstance()->set("ee_splashloading", splashLoadingOptionList->getSelected());
+		SystemConf::getInstance()->set("ee_splashexit", splashExitOptionList->getSelected());
+
+		if (splashLoadingTime->getValue() == 0.f || splashExitTime->getValue() == 0.f) {
+			mWindow->displayNotificationMessage(_U("\uF011  ") + _("SETTING DURATION 0 WILL MAKE VIDEOS DEFAULT TO PLAY 3 SECONDS."));
+		}
+		if (splashLoadingTime->getValue() != 0.f || splashExitTime->getValue() != 0.f) {
+			mWindow->displayNotificationMessage(_U("\uF011  ") + _("SETTING DURATIONS GREATER THAN 0 WILL ADD TO LOADING/EXIT SPLASH TIMES."));
+		}
+
+		SystemConf::getInstance()->set("ee_splash_loading_duration", std::to_string((int)round(splashLoadingTime->getValue())));
+		SystemConf::getInstance()->set("ee_splash_exit_duration", std::to_string((int)round(splashExitTime->getValue())));
+
+		SystemConf::getInstance()->set("ee_splash_loading_platform_roms", splashLoadingPlatformRoms->getState() ? "1" : "0");
+
+		SystemConf::getInstance()->saveSystemConf();
+	});
+
+	s->getMenu().getList()->setCursorIndex(menuIndex);
+	mWindow->pushGui(s);	
+}
+#endif
 
 void GuiMenu::createGamepadConfig(Window* window, GuiSettings* systemConfiguration)
 {

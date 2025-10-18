@@ -72,6 +72,7 @@ private:
 #ifdef _ENABLEEMUELEC
         void openEmuELECSettings(); /* < emuelec */
         static void openDangerZone(Window* mWindow, std::string configName);
+        static void createConfigureSplash(Window* mWindow, int menuIndex = 0);
         static void createGamepadConfig(Window* window, GuiSettings* systemConfiguration);
         static void openExternalMounts(Window* mWindow, std::string configName);
         static void addFrameBufferOptions(Window* mWindow, GuiSettings* guiSettings, std::string configName, std::string header, std::string platform);
