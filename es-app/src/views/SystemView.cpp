@@ -415,13 +415,22 @@ bool SystemView::input(InputConfig* config, Input input)
 					mCarousel.moveSelectionBy(1);
 					return true;
 				}
+#ifdef _ENABLEEMUELEC
+				if ((Settings::getInstance()->getBool("QuickSystemSelect") && config->isMappedLike("down", input)) || config->isMappedTo("righttrigger", input))
+#else
 				if ((Settings::getInstance()->getBool("QuickSystemSelect") && config->isMappedLike("down", input)) || config->isMappedTo("pagedown", input))
+#endif
 				{
 					int cursor = moveCursorFast(true);
 					mCarousel.moveSelectionBy(cursor - mCursor);
 					return true;
 				}
+#ifdef _ENABLEEMUELEC
+				if ((Settings::getInstance()->getBool("QuickSystemSelect") && config->isMappedLike("up", input)) || config->isMappedTo("lefttrigger", input))
+#else
 				if ((Settings::getInstance()->getBool("QuickSystemSelect") && config->isMappedLike("up", input)) || config->isMappedTo("pageup", input))
+#endif
+				
 				{
 					int cursor = moveCursorFast(false);
 					mCarousel.moveSelectionBy(cursor - mCursor);
@@ -440,13 +449,21 @@ bool SystemView::input(InputConfig* config, Input input)
 					mCarousel.moveSelectionBy(1);
 					return true;
 				}
+#ifdef _ENABLEEMUELEC
+				if ((Settings::getInstance()->getBool("QuickSystemSelect") && config->isMappedLike("right", input)) || config->isMappedTo("righttrigger", input))
+#else
 				if ((Settings::getInstance()->getBool("QuickSystemSelect") && config->isMappedLike("right", input)) || config->isMappedTo("pagedown", input))
+#endif
 				{
 					int cursor = moveCursorFast(true);
 					mCarousel.moveSelectionBy(cursor - mCursor);
 					return true;
 				}
+#ifdef _ENABLEEMUELEC
+				if ((Settings::getInstance()->getBool("QuickSystemSelect") && config->isMappedLike("left", input)) || config->isMappedTo("lefttrigger", input))
+#else
 				if ((Settings::getInstance()->getBool("QuickSystemSelect") && config->isMappedLike("left", input)) || config->isMappedTo("pageup", input))
+#endif
 				{
 					int cursor = moveCursorFast(false);
 					mCarousel.moveSelectionBy(cursor - mCursor);
@@ -460,8 +477,13 @@ bool SystemView::input(InputConfig* config, Input input)
 				config->isMappedLike("right", input) ||
 				config->isMappedLike("up", input) ||
 				config->isMappedLike("down", input) ||
+#ifdef _ENABLEEMUELEC
+				config->isMappedLike("righttrigger", input) ||
+				config->isMappedLike("lefttrigger", input) ||
+#else
 				config->isMappedLike("pagedown", input) ||
 				config->isMappedLike("pageup", input) ||
+#endif
 				config->isMappedLike("l2", input) ||
 				config->isMappedLike("r2", input))
 				mCarousel.moveSelectionBy(0);

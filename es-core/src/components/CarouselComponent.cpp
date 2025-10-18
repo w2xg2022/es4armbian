@@ -106,13 +106,22 @@ bool CarouselComponent::input(InputConfig* config, Input input)
 				listInput(1);
 				return true;
 			}
+#ifdef _ENABLEEMUELEC
+			if (config->isMappedTo("righttrigger", input))
+#else
 			if (config->isMappedTo("pagedown", input))
+#endif
 			{
 				int cursor = moveCursorFast(true);
 				listInput(cursor - mCursor);				
 				return true;
 			}
+#ifdef _ENABLEEMUELEC
+			if (config->isMappedTo("lefttrigger", input))
+#else
 			if (config->isMappedTo("pageup", input))
+#endif
+
 			{
 				int cursor = moveCursorFast(false);
 				listInput(cursor - mCursor);
@@ -133,13 +142,21 @@ bool CarouselComponent::input(InputConfig* config, Input input)
 				listInput(1);
 				return true;
 			}
+#ifdef _ENABLEEMUELEC
+			if (config->isMappedTo("righttrigger", input))
+#else
 			if (config->isMappedTo("pagedown", input))
+#endif
 			{
 				int cursor = moveCursorFast(true);
 				listInput(cursor - mCursor);
 				return true;
 			}
+#ifdef _ENABLEEMUELEC
+			if (config->isMappedTo("lefttrigger", input))
+#else
 			if (config->isMappedTo("pageup", input))
+#endif
 			{
 				int cursor = moveCursorFast(false);
 				listInput(cursor - mCursor);
@@ -155,8 +172,13 @@ bool CarouselComponent::input(InputConfig* config, Input input)
 			config->isMappedLike("right", input) ||
 			config->isMappedLike("up", input) ||
 			config->isMappedLike("down", input) ||
-			config->isMappedLike("pagedown", input) ||
+#ifdef _ENABLEEMUELEC
+			config->isMappedLike("righttrigger", input) ||
 			config->isMappedLike("pageup", input) ||
+#else
+			config->isMappedLike("lefttrigger", input) ||
+			config->isMappedLike("pageup", input) ||
+#endif
 			config->isMappedLike("l2", input) ||
 			config->isMappedLike("r2", input))
 			listInput(0);

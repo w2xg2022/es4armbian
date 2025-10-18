@@ -200,7 +200,11 @@ bool ComponentList::input(InputConfig* config, Input input)
 #endif
 	{
 		return listInput(input.value != 0 ? -6 : 0);
+#ifdef _ENABLEEMUELEC
+	}else if(config->isMappedTo("righttrigger", input)){
+#else
 	}else if(config->isMappedTo("pagedown", input)){
+#endif
 		return listInput(input.value != 0 ? 6 : 0);
 	}
 
