@@ -352,7 +352,7 @@ std::shared_ptr<OptionListComponent<std::string>> GuiMenu::createSplashLoadingOp
 	splashmode.push_back(_("SHOW DEFAULT SPLASH")); // 0
 	splashmode.push_back(_("SHOW CUSTOM SPLASH")); // 1
 	splashmode.push_back(_("SHOW RANDOM SPLASH")); // 2
-	splashmode.push_back(_("USE SCRAPPED MEDIA")); // 3
+	splashmode.push_back(_("USE SCRAPED MEDIA")); // 3
 
 	std::string str_index = SystemConf::getInstance()->get("ee_splashloading");
 	int index = 0;
