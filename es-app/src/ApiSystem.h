@@ -169,11 +169,7 @@ public:
     virtual bool launchKodi(Window *window);
     bool launchFileManager(Window *window);
 
-#if !WIN32
-	bool enableWifi(std::string ssid, std::string key, std::string country);
-#else
-	bool enableWifi(std::string ssid, std::string key);
-#endif
+    bool enableWifi(std::string ssid, std::string key);
     bool disableWifi();
 
 	virtual std::string getIpAddress();

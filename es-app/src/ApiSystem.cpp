@@ -515,12 +515,6 @@ bool ApiSystem::launchFileManager(Window *window)
 	return exitCode == 0;
 }
 
-#if !WIN32
-bool ApiSystem::enableWifi(std::string ssid, std::string key, std::string country) 
-{
-	return executeScript("batocera-wifi enable \"" + ssid + "\" \"" + key + "\" \"" + country + "\"");
-}
-#else
 bool ApiSystem::enableWifi(std::string ssid, std::string key) 
 {
 #ifdef _ENABLEEMUELEC
@@ -529,7 +523,6 @@ bool ApiSystem::enableWifi(std::string ssid, std::string key)
 	return executeScript("batocera-wifi enable \"" + ssid + "\" \"" + key + "\"");
 #endif
 }
-#endif
 
 bool ApiSystem::disableWifi() 
 {
