@@ -722,7 +722,9 @@ if (UIModeController::getInstance()->isUIModeFull())
 void GuiMenu::createConfigureSplash(Window* mWindow, int menuIndex)
 {
 	auto s = new GuiSettings(mWindow, _("SPLASH SETTINGS"));
-
+	
+	s->setUpdateType(ComponentListFlags::UPDATE_ALWAYS);
+	
 	auto splashLoadingOptionList = createSplashLoadingOptionList(mWindow);
 	s->addWithLabel(_("SPLASH LOADING OPTION"), splashLoadingOptionList);
 	splashLoadingOptionList->setSelectedChangedCallback([=](std::string name) {
@@ -739,6 +741,29 @@ void GuiMenu::createConfigureSplash(Window* mWindow, int menuIndex)
 	if (SystemConf::getInstance()->get("ee_splashloading") == "2") {
 		// File picker for random splash media
 		s->addFileBrowser(_("SET RANDOM SPLASH LOADING MEDIA FOLDER"), "ee_randomsplashpath", (GuiFileBrowser::FileTypes) (GuiFileBrowser::FileTypes::DIRECTORY));
+	}
+
+	if (SystemConf::getInstance()->get("ee_splashloading") == "3") {
+		// options for gamelist.xml xml path scrape media
+		auto emuelec_scrapepath_def = std::make_shared< OptionListComponent<std::string> >(mWindow, "SCRAPE XML PATH", false);
+		std::vector<std::string> devices;
+		devices.push_back("auto");
+		devices.push_back("video");
+		devices.push_back("image");
+		devices.push_back("marquee");
+		devices.push_back("fanart");
+		devices.push_back("thumbnail");
+		devices.push_back("random");
+		for (auto it = devices.cbegin(); it != devices.cend(); it++)
+		emuelec_scrapepath_def->add(*it, *it, SystemConf::getInstance()->get("ee_scrapedsplashpath") == *it);
+		s->addWithLabel(_("SCRAPE XML PATH"), emuelec_scrapepath_def);
+		s->addSaveFunc([emuelec_scrapepath_def] {
+			if (emuelec_scrapepath_def->changed()) {
+				std::string selectedScrapePath = emuelec_scrapepath_def->getSelected();
+				SystemConf::getInstance()->set("ee_scrapedsplashpath", selectedScrapePath);
+				SystemConf::getInstance()->saveSystemConf();
+			}
+		});
 	}
 
 	auto splashLoadingPlatformRoms = std::make_shared<SwitchComponent>(mWindow);
