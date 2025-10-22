@@ -1113,7 +1113,7 @@ void GuiMenu::addFrameBufferOptions(Window* mWindow, GuiSettings* guiSettings, s
 		lbl = lbl.replace(lbl.find(" "),1,"x");
 		emuelec_frame_buffer->add(lbl, *it, ee_framebuffer == *it);
 	}
-	guiSettings->addWithLabel(header+_("FRAME BUFFER"), emuelec_frame_buffer);
+	guiSettings->addWithLabel(header+_("INTERNAL RESOLUTION DIMENSIONS"), emuelec_frame_buffer);
 
 	auto fbSave = [mWindow, configName, emuelec_frame_buffer, fbWidth, fbHeight] (std::string selectedFB) {
 		if (selectedFB == "auto")
@@ -1142,7 +1142,7 @@ void GuiMenu::addFrameBufferOptions(Window* mWindow, GuiSettings* guiSettings, s
 			fbSave(emuelec_frame_buffer->getSelected());
 	});
 
-	guiSettings->addEntry(header+_("ADJUST FRAME BORDERS"), true, [mWindow, configName, ee_framebuffer, fbWidth, fbHeight] {
+	guiSettings->addEntry(header+_("ADJUST INTERNAL RESOLUTION BORDERS"), true, [mWindow, configName, ee_framebuffer, fbWidth, fbHeight] {
 		sScreenBorders ee_borders;
 		ee_borders.left = 0.0f;
 		ee_borders.right = 0.0f;
@@ -1160,7 +1160,7 @@ void GuiMenu::addFrameBufferOptions(Window* mWindow, GuiSettings* guiSettings, s
 			}
 		}
 
-		GuiSettings* bordersConfig = new GuiSettings(mWindow, _("FRAME BORDERS"));
+		GuiSettings* bordersConfig = new GuiSettings(mWindow, _("RESOLUTION BORDERS"));
 		if (ee_framebuffer.empty())
 			return;
 
@@ -1263,9 +1263,13 @@ void GuiMenu::openDangerZone(Window* mWindow, std::string configName)
 
          });
 #endif
-		dangerZone->addGroup("FRAME BUFFER OPTIONS");
-		addFrameBufferOptions(mWindow, dangerZone, "ee_es", "ES ", "");
-		addFrameBufferOptions(mWindow, dangerZone, "", "EMU ", "");
+
+		dangerZone->addEntry(_("INTERNAL VIDEO OPTIONS"), true, [=] {
+			GuiSettings* videoOptions = new GuiSettings(mWindow, _("INTERNAL VIDEO OPTIONS").c_str());
+			addFrameBufferOptions(mWindow, videoOptions, "ee_es", "ES ", "");
+			addFrameBufferOptions(mWindow, videoOptions, "", "EMU ", "");
+			mWindow->pushGui(videoOptions);
+		});
 
 		dangerZone->addGroup("CLOUD SAVES");
     dangerZone->addEntry(_("CLOUD BACKUP SETTINGS AND GAME SAVES"), true, [mWindow] {
@@ -6794,7 +6798,11 @@ void GuiMenu::popSpecificConfigurationGui(Window* mWindow, std::string title, st
 #endif
 
 #ifdef _ENABLEEMUELEC
-	addFrameBufferOptions(mWindow, systemConfiguration, configName, "EMU", systemData->getName());
+	systemConfiguration->addEntry(_("INTERNAL VIDEO OPTIONS"), true, [=] {
+		GuiSettings* videoOptions = new GuiSettings(mWindow, _("INTERNAL VIDEO OPTIONS").c_str());
+		addFrameBufferOptions(mWindow, videoOptions, configName, "EMU ", systemData->getName());
+		mWindow->pushGui(videoOptions);
+	});
 #endif
 
 #ifdef _ENABLEEMUELEC
