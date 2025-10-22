@@ -525,6 +525,8 @@ void GuiMenu::openEmuELECSettings()
 		Audiodevices.push_back("0,1");
 		Audiodevices.push_back("1,0");
 		Audiodevices.push_back("1,1");
+		Audiodevices.push_back("0,2");
+		Audiodevices.push_back("1,2");
 		
 		auto AudiodevicesS = SystemConf::getInstance()->get("ee_audio_device");
 		if (AudiodevicesS.empty())
@@ -1111,7 +1113,7 @@ void GuiMenu::addFrameBufferOptions(Window* mWindow, GuiSettings* guiSettings, s
 		lbl = lbl.replace(lbl.find(" "),1,"x");
 		emuelec_frame_buffer->add(lbl, *it, ee_framebuffer == *it);
 	}
-	guiSettings->addWithLabel(header+_(" FRAME BUFFER"), emuelec_frame_buffer);
+	guiSettings->addWithLabel(header+_("FRAME BUFFER"), emuelec_frame_buffer);
 
 	auto fbSave = [mWindow, configName, emuelec_frame_buffer, fbWidth, fbHeight] (std::string selectedFB) {
 		if (selectedFB == "auto")
@@ -1140,7 +1142,7 @@ void GuiMenu::addFrameBufferOptions(Window* mWindow, GuiSettings* guiSettings, s
 			fbSave(emuelec_frame_buffer->getSelected());
 	});
 
-	guiSettings->addEntry(_("ADJUST FRAME BORDERS"), true, [mWindow, configName, ee_framebuffer, fbWidth, fbHeight] {
+	guiSettings->addEntry(header+_("ADJUST FRAME BORDERS"), true, [mWindow, configName, ee_framebuffer, fbWidth, fbHeight] {
 		sScreenBorders ee_borders;
 		ee_borders.left = 0.0f;
 		ee_borders.right = 0.0f;
@@ -1185,7 +1187,7 @@ void GuiMenu::addFrameBufferOptions(Window* mWindow, GuiSettings* guiSettings, s
 		fb_borders[1]->setOnValueChanged([fb_borders] (float val) {
 			fb_borders[3]->setValue(val);
 		});
-
+		bordersConfig->setUpdateType(ComponentListFlags::UPDATE_ALWAYS);
 		bordersConfig->addWithLabel(_("LEFT BORDER"), fb_borders[0]);
 		bordersConfig->addWithLabel(_("TOP BORDER"), fb_borders[1]);
 		bordersConfig->addWithLabel(_("RIGHT BORDER"), fb_borders[2]);
@@ -1261,9 +1263,11 @@ void GuiMenu::openDangerZone(Window* mWindow, std::string configName)
 
          });
 #endif
-		addFrameBufferOptions(mWindow, dangerZone, "ee_es", "ES", "");
-		addFrameBufferOptions(mWindow, dangerZone, "", "EMU", "");
+		dangerZone->addGroup("FRAME BUFFER OPTIONS");
+		addFrameBufferOptions(mWindow, dangerZone, "ee_es", "ES ", "");
+		addFrameBufferOptions(mWindow, dangerZone, "", "EMU ", "");
 
+		dangerZone->addGroup("CLOUD SAVES");
     dangerZone->addEntry(_("CLOUD BACKUP SETTINGS AND GAME SAVES"), true, [mWindow] {
     mWindow->pushGui(new GuiMsgBox(mWindow, _("WARNING THIS WILL RESTART EMULATIONSTATION!\n\nThis will backup your game saves, savestates and emuelec configs to the cloud service configured on rclone.conf\n\nBACKUP TO CLOUD AND RESTART?"), _("YES"),
 				[] { 
@@ -1278,14 +1282,6 @@ void GuiMenu::openDangerZone(Window* mWindow, std::string configName)
 				}, _("NO"), nullptr));
      });
 
-    dangerZone->addEntry(_("LOCAL BACKUP EMUELEC CONFIGS"), true, [mWindow] { 
-    mWindow->pushGui(new GuiMsgBox(mWindow, _("WARNING THIS WILL RESTART EMULATIONSTATION!\n\nAFTER THE SCRIPT IS DONE REMEMBER TO COPY THE FILE /storage/roms/backup/ee_backup_config.tar.gz TO SOME PLACE!\n\nBACKUP CURRENT CONFIG AND RESTART?"), _("YES"),
-				[] { 
-				Utils::Platform::ProcessStartInfo("systemd-run /usr/bin/emuelec-utils ee_backup backup").run();
-				}, _("NO"), nullptr));
-     });
-
-#ifdef _ENABLEEMUELEC
 		dangerZone->addEntry(_("ADD EMUSTATION ARGUMENTS"), true, [mWindow] {
 			std::string argsFilename = "/emuelec/configs/ES_ARGS";
 			auto updateVal = [argsFilename](const std::string& newVal)
@@ -1321,7 +1317,14 @@ void GuiMenu::openDangerZone(Window* mWindow, std::string configName)
 			else
 				mWindow->pushGui(new GuiTextEditPopup(mWindow, _("ADD RETROARCH ARGUMENTS"), fileText, updateVal, false));
 		 });
-#endif
+
+	dangerZone->addGroup("CONFIG RELATED");
+    dangerZone->addEntry(_("LOCAL BACKUP EMUELEC CONFIGS"), true, [mWindow] { 
+    mWindow->pushGui(new GuiMsgBox(mWindow, _("WARNING THIS WILL RESTART EMULATIONSTATION!\n\nAFTER THE SCRIPT IS DONE REMEMBER TO COPY THE FILE /storage/roms/backup/ee_backup_config.tar.gz TO SOME PLACE!\n\nBACKUP CURRENT CONFIG AND RESTART?"), _("YES"),
+				[] { 
+				Utils::Platform::ProcessStartInfo("systemd-run /usr/bin/emuelec-utils ee_backup backup").run();
+				}, _("NO"), nullptr));
+     });
 
     dangerZone->addEntry(_("RESET EMUELEC SCRIPTS AND BINARIES TO DEFAULT"), true, [mWindow] { 
     mWindow->pushGui(new GuiMsgBox(mWindow, _("WARNING: SYSTEM WILL RESET SCRIPTS AND BINARIES !\nUPDATE, DOWNLOADS, THEMES, BLUETOOTH PAIRINGS AND ROMS FOLDER WILL NOT BE AFFECTED.\n\nRESET SCRIPTS AND BINARIES TO DEFAULT AND RESTART?"), _("YES"),
