@@ -705,7 +705,11 @@ std::string FileData::getMessageFromExitCode(int exitCode)
 	#if WIN32
 			std::string messageFile = Utils::FileSystem::combine(Utils::FileSystem::getTempPath(), "launch_error.log");
 	#else
+	#ifdef _ENABLEEMUELEC
+			std::string messageFile = "/emuelec/logs/es_launch_error.log";
+	#else
 			std::string messageFile = "/tmp/launch_error.log";
+	#endif		
 	#endif
 			if (Utils::FileSystem::exists(messageFile))
 			{
