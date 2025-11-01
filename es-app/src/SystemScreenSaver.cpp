@@ -611,7 +611,7 @@ GameScreenSaverBase::~GameScreenSaverBase()
 #include <rapidjson/document.h>
 #include <rapidjson/error/en.h>
 #include <rapidjson/filereadstream.h>
-#ifdef _ENABLEMUELEC
+#ifdef _ENABLEEMUELEC
 
 void GameScreenSaverBase::setGame(FileData* game)
 {   
