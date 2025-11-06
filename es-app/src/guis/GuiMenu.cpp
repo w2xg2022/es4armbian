@@ -31,10 +31,6 @@
 #include <algorithm>
 #include "utils/Platform.h"
 
-#ifdef _ENABLEEMUELEC
-	#include "utils/StringUtil.h"
-#endif
-
 #include "SystemConf.h"
 #include "ApiSystem.h"
 #include "InputManager.h"
@@ -5551,7 +5547,7 @@ void GuiMenu::openQuitMenu_static(Window *window, bool quickAccessMenu, bool ani
 			}, _("NO"), nullptr));
 		}, "iconAdvanced");
 	}
-
+	s->setUpdateType(ComponentListFlags::UPDATE_ALWAYS);
 	// AUTO SHUTDOWN TIMEOUT
 	auto shutdownSlider = std::make_shared<SliderComponent>(window, 0.0f, 1440.0f, 10.0f, "min");
 
@@ -5562,14 +5558,21 @@ void GuiMenu::openQuitMenu_static(Window *window, bool quickAccessMenu, bool ani
 		timeout = 0;
 	}
 	shutdownSlider->setValue((float)timeout);
-	s->addWithLabel(_("AUTOMATIC SHUTDOWN AFTER INACTIVITY"),
+	s->addWithLabel(_("AUTOMATIC SYSTEM SHUTDOWN AFTER INACTIVITY"),
     shutdownSlider, nullptr, "iconAutoShutdown");
 	s->addSaveFunc([shutdownSlider] {
 		int value = (int)shutdownSlider->getValue();
+		if (value > 0) {
+			system("killall ee_asd > /dev/null 2>&1"); // avoid double instance
+			system(("ee_asd -t " + std::to_string((int)value)).c_str());
+		} else {
+			system("killall ee_asd  > /dev/null 2>&1");
+		}
 		SystemConf::getInstance()->set("ee_auto_shutdown_timeout", std::to_string(value));
 		SystemConf::getInstance()->saveSystemConf();
 	});
 
+	s->addSwitch(_("Persistent Autoshutdown"), "ee_auto_shutdown_persistent", false);
 #endif
 
 	if (quickAccessMenu)
