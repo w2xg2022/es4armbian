@@ -5584,8 +5584,7 @@ if (SystemConf::getInstance()->getBool("extra_quit_menu.enabled", true)) {
 		timeout = 0;
 	}
 	shutdownSlider->setValue((float)timeout);
-	s->addWithLabel(_("AUTOMATIC SYSTEM SHUTDOWN AFTER INACTIVITY"),
-    shutdownSlider, nullptr, "iconAutoShutdown");
+	s->addWithDescription(_("SHUTDOWN AFTER INACTIVITY"), _("Shuts down the system if no controller activity occurs within the timer."), shutdownSlider, nullptr, "iconAutoShutdown");
 	s->addSaveFunc([shutdownSlider] {
 		int value = (int)shutdownSlider->getValue();
 		if (value > 0) {
