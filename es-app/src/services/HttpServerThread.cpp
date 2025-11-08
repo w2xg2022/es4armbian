@@ -758,6 +758,194 @@ void HttpServerThread::run()
 		}
 	});
 
+
+#ifdef _ENABLEEMUELEC
+
+// Config File APIs
+// GET /config - List files/folders in config directory or subdirectory
+mHttpServer->Get("/config", [](const httplib::Request& req, httplib::Response& res)
+{
+	if (!isAllowed(req, res))
+		return;
+
+	std::string configPath = "/storage/.config";
+
+	if (!Utils::FileSystem::exists(configPath))
+	{
+		res.set_content("404 config directory not found", "text/html");
+		res.status = 404;
+		return;
+	}
+
+	// List root directory contents
+	auto dirContent = Utils::FileSystem::getDirContent(configPath, false);
+	
+	std::string json = "[";
+	bool first = true;
+	
+	for (auto item : dirContent)
+	{
+		std::string filename = Utils::FileSystem::getFileName(item);
+		bool isDir = Utils::FileSystem::isDirectory(item);
+		
+		if (!first) json += ",";
+		first = false;
+		
+		json += "{\"name\":\"" + filename + "\",";
+		json += "\"path\":\"" + filename + "\",";
+		json += "\"isDirectory\":" + std::string(isDir ? "true" : "false") + "}";
+	}
+	
+	json += "]";
+	
+	res.set_content(json, "application/json");
+});
+
+mHttpServer->Get(R"(/config/(.+))", [](const httplib::Request& req, httplib::Response& res)
+{
+	if (!isAllowed(req, res))
+		return;
+
+	std::string subpath = req.matches[1];
+	
+	// Sanitize path to prevent directory traversal
+	if (subpath.find("..") != std::string::npos)
+	{
+		res.set_content("400 bad request - invalid path", "text/html");
+		res.status = 400;
+		return;
+	}
+
+	std::string configPath = "/storage/.config/" + subpath;
+
+	if (!Utils::FileSystem::exists(configPath))
+	{
+		res.set_content("404 path not found", "text/html");
+		res.status = 404;
+		return;
+	}
+
+	// If it's a file, return its content
+	if (!Utils::FileSystem::isDirectory(configPath))
+	{
+		std::string content = Utils::FileSystem::readAllText(configPath);
+		res.set_content(content, "text/plain");
+		return;
+	}
+
+	// If it's a directory, list its contents
+	auto dirContent = Utils::FileSystem::getDirContent(configPath, false);
+	
+	std::string json = "[";
+	bool first = true;
+	
+	for (auto item : dirContent)
+	{
+		std::string filename = Utils::FileSystem::getFileName(item);
+		bool isDir = Utils::FileSystem::isDirectory(item);
+		
+		if (!first) json += ",";
+		first = false;
+		
+		std::string relativePath = subpath + "/" + filename;
+		
+		json += "{\"name\":\"" + filename + "\",";
+		json += "\"path\":\"" + relativePath + "\",";
+		json += "\"isDirectory\":" + std::string(isDir ? "true" : "false") + "}";
+	}
+	
+	json += "]";
+	
+	res.set_content(json, "application/json");
+});
+
+// POST /config/{path} - Write a config file
+mHttpServer->Post(R"(/config/(.+))", [](const httplib::Request& req, httplib::Response& res)
+{
+	if (!isAllowed(req, res))
+		return;
+
+	if (req.body.empty())
+	{
+		res.set_content("400 bad request - body is missing", "text/html");
+		res.status = 400;
+		return;
+	}
+
+	std::string filepath = req.matches[1];
+	
+	// Sanitize path to prevent directory traversal
+	if (filepath.find("..") != std::string::npos)
+	{
+		res.set_content("400 bad request - invalid path", "text/html");
+		res.status = 400;
+		return;
+	}
+
+	std::string configPath = "/storage/.config/" + filepath;
+	
+	// Create parent directories if they don't exist
+	std::string parentDir = Utils::FileSystem::getParent(configPath);
+	if (!Utils::FileSystem::exists(parentDir))
+	{
+		Utils::FileSystem::createDirectory(parentDir);
+	}
+	
+	// Create backup before writing
+	if (Utils::FileSystem::exists(configPath))
+	{
+		std::string backupPath = configPath + ".backup";
+		Utils::FileSystem::copyFile(configPath, backupPath);
+	}
+
+	Utils::FileSystem::writeAllText(configPath, req.body);
+	res.set_content("OK", "text/plain");
+});
+
+// DELETE /config/{path} - Delete a config file
+mHttpServer->Delete(R"(/config/(.+))", [](const httplib::Request& req, httplib::Response& res)
+{
+	if (!isAllowed(req, res))
+		return;
+
+	std::string filepath = req.matches[1];
+	
+	// Sanitize path to prevent directory traversal
+	if (filepath.find("..") != std::string::npos)
+	{
+		res.set_content("400 bad request - invalid path", "text/html");
+		res.status = 400;
+		return;
+	}
+
+	std::string configPath = "/storage/.config/" + filepath;
+	
+	if (!Utils::FileSystem::exists(configPath))
+	{
+		res.set_content("404 file not found", "text/html");
+		res.status = 404;
+		return;
+	}
+
+	// Create backup before deleting
+	std::string backupPath = configPath + ".deleted";
+	Utils::FileSystem::copyFile(configPath, backupPath);
+
+	if (Utils::FileSystem::removeFile(configPath))
+	{
+		res.set_content("OK", "text/plain");
+	}
+	else
+	{
+		res.set_content("500 failed to delete file", "text/html");
+		res.status = 500;
+	}
+});
+
+#endif
+
+
+
 	mHttpServer->Get(R"(/(/?.*))", [](const httplib::Request& req, httplib::Response& res)  // (.*)
 	{
 		if (!isAllowed(req, res))
@@ -775,7 +963,7 @@ void HttpServerThread::run()
 			return;
 		}
 	});
-
+	
 	try
 	{
 		std::string ip = "127.0.0.1";

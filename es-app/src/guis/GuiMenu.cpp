@@ -1902,7 +1902,6 @@ void GuiMenu::openDeveloperSettings()
 	}
 #endif
 
-#ifndef _ENABLEEMUELEC
 	// WEB ACCESS
 	auto hostName = Utils::String::toLower(ApiSystem::getInstance()->getHostsName());
 
@@ -1917,7 +1916,6 @@ void GuiMenu::openDeveloperSettings()
 		  s->setVariable("exitreboot", true);
 	  }
 	});
-#endif
 
 	// log level
 	auto logLevel = std::make_shared< OptionListComponent<std::string> >(mWindow, _("LOG LEVEL"), false);
