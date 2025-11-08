@@ -5546,7 +5546,33 @@ void GuiMenu::openQuitMenu_static(Window *window, bool quickAccessMenu, bool ani
 				Utils::Platform::quitES(Utils::Platform::QuitMode::QUIT);
 			}, _("NO"), nullptr));
 		}, "iconAdvanced");
+		
+		// these are special entries for specific devices, they are hidden by default behind a setting in emuelec.conf extra_quit_menu.enable
+if (SystemConf::getInstance()->getBool("extra_quit_menu.enabled", true)) {
+		s->addEntry(_("REBOOT TO USB"), false, [window] {
+			window->pushGui(new GuiMsgBox(window, _("REALLY REBOOT TO USB?"), _("YES"),
+				[] {
+				Scripting::fireEvent("quit", "usb");
+				Utils::Platform::ProcessStartInfo("devmem 0xff6345d0 8 1").run();
+				Utils::Platform::ProcessStartInfo("sync").run();
+				Utils::Platform::ProcessStartInfo("systemctl reboot").run();
+				Utils::Platform::quitES(Utils::Platform::QuitMode::QUIT);
+			}, _("NO"), nullptr));
+		}, "iconAdvanced");
+
+		s->addEntry(_("Reboot to CoreELEC"), false, [window] {
+			window->pushGui(new GuiMsgBox(window, _("REBOOT TO COREELEC?"), _("YES"),
+				[] {
+				Scripting::fireEvent("quit", "coreelec");
+				Utils::Platform::ProcessStartInfo("devmem 0xff6345d0 8 2").run();
+				Utils::Platform::ProcessStartInfo("sync").run();
+				Utils::Platform::ProcessStartInfo("systemctl reboot").run();
+				Utils::Platform::quitES(Utils::Platform::QuitMode::QUIT);
+			}, _("NO"), nullptr));
+		}, "iconAdvanced");
 	}
+}
+
 	s->setUpdateType(ComponentListFlags::UPDATE_ALWAYS);
 	// AUTO SHUTDOWN TIMEOUT
 	auto shutdownSlider = std::make_shared<SliderComponent>(window, 0.0f, 1440.0f, 10.0f, "min");
