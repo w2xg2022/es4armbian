@@ -25,6 +25,10 @@
 #include "guis/GuiUpdate.h"
 #include "ContentInstaller.h"
 
+#ifdef _ENABLEEMUELEC
+#include "scrapers/Scraper.h"
+#endif
+
 /* 
 
 Misc APIS
@@ -122,6 +126,47 @@ std::string HttpServerThread::getMimeType(const std::string &path)
 	
 	return "text/plain";
 }
+
+#ifdef _ENABLEEMUELEC
+
+static bool isTextFile(const std::string& filename) 
+{
+	// List of common text file extensions
+	static std::vector<std::string> textExtensions = {
+		".conf", ".cfg", ".txt", ".ini", ".xml", ".json", 
+		".sh", ".py", ".js", ".css", ".html", ".htm",
+		".log", ".yaml", ".yml", ".properties", ".start", ".service",
+		".rules", ".list", ".d", ".rc", ".config", ".toml"
+	};
+	
+	std::string lower = Utils::String::toLower(filename);
+	
+	// Check if file has an extension
+	bool hasExtension = lower.find('.') != std::string::npos;
+	
+	// If it has a text extension, it's a text file
+	if (hasExtension) {
+		for (auto& ext : textExtensions) {
+			if (Utils::String::endsWith(lower, ext))
+				return true;
+		}
+		// Has extension but not in our text list - probably binary
+		return false;
+	}
+	
+	// No extension - check if it's executable using stat
+	struct stat st;
+	if (stat(filename.c_str(), &st) == 0) {
+		// If executable bit is set (user, group, or other), likely a binary
+		if (st.st_mode & (S_IXUSR | S_IXGRP | S_IXOTH)) {
+			return false; // Executable with no extension = binary
+		}
+	}
+	
+	// No extension and not executable - assume it's a text config file
+	return true;
+}
+#endif
 
 static bool isAllowed(const httplib::Request& req, httplib::Response& res)
 {
@@ -763,6 +808,7 @@ void HttpServerThread::run()
 
 // Config File APIs
 // GET /config - List files/folders in config directory or subdirectory
+// GET /config - List files/folders in config directory
 mHttpServer->Get("/config", [](const httplib::Request& req, httplib::Response& res)
 {
 	if (!isAllowed(req, res))
@@ -787,6 +833,10 @@ mHttpServer->Get("/config", [](const httplib::Request& req, httplib::Response& r
 	{
 		std::string filename = Utils::FileSystem::getFileName(item);
 		bool isDir = Utils::FileSystem::isDirectory(item);
+		
+		// Skip binary files
+		if (!isDir && !isTextFile(filename))
+			continue;
 		
 		if (!first) json += ",";
 		first = false;
@@ -825,9 +875,16 @@ mHttpServer->Get(R"(/config/(.+))", [](const httplib::Request& req, httplib::Res
 		return;
 	}
 
-	// If it's a file, return its content
+	// If it's a file, check if it's a text file before reading
 	if (!Utils::FileSystem::isDirectory(configPath))
 	{
+		if (!isTextFile(configPath))
+		{
+			res.set_content("400 binary files not supported", "text/html");
+			res.status = 400;
+			return;
+		}
+		
 		std::string content = Utils::FileSystem::readAllText(configPath);
 		res.set_content(content, "text/plain");
 		return;
@@ -843,6 +900,10 @@ mHttpServer->Get(R"(/config/(.+))", [](const httplib::Request& req, httplib::Res
 	{
 		std::string filename = Utils::FileSystem::getFileName(item);
 		bool isDir = Utils::FileSystem::isDirectory(item);
+		
+		// Skip binary files
+		if (!isDir && !isTextFile(filename))
+			continue;
 		
 		if (!first) json += ",";
 		first = false;
@@ -940,6 +1001,650 @@ mHttpServer->Delete(R"(/config/(.+))", [](const httplib::Request& req, httplib::
 		res.set_content("500 failed to delete file", "text/html");
 		res.status = 500;
 	}
+});
+
+
+// System Management APIs
+// POST /addsystem - Add or update a system
+mHttpServer->Post("/addsystem", [this](const httplib::Request& req, httplib::Response& res)
+{
+	if (!isAllowed(req, res))
+		return;
+
+	if (req.body.empty())
+	{
+		res.set_content("400 bad request - body is missing", "text/html");
+		res.status = 400;
+		return;
+	}
+
+	// The body should contain a complete <system>...</system> XML block
+	std::string systemXml = req.body;
+	
+	// Path to es_systems.cfg
+	std::string systemsPath = "/storage/.emulationstation/es_systems.cfg";
+	
+	if (!Utils::FileSystem::exists(systemsPath))
+	{
+		res.set_content("404 es_systems.cfg not found", "text/html");
+		res.status = 404;
+		return;
+	}
+
+	// Create backup
+	std::string backupPath = systemsPath + ".backup";
+	Utils::FileSystem::copyFile(systemsPath, backupPath);
+
+	// Read current systems file
+	std::string content = Utils::FileSystem::readAllText(systemsPath);
+	
+	// Parse to extract system name from incoming XML
+	size_t nameStart = systemXml.find("<name>");
+	size_t nameEnd = systemXml.find("</name>");
+	
+	if (nameStart == std::string::npos || nameEnd == std::string::npos)
+	{
+		res.set_content("400 invalid system XML - missing <name>", "text/html");
+		res.status = 400;
+		return;
+	}
+	
+	std::string systemName = systemXml.substr(nameStart + 6, nameEnd - nameStart - 6);
+	
+	// Check if system already exists
+	std::string searchTag = "<name>" + systemName + "</name>";
+	size_t existingPos = content.find(searchTag);
+	
+	if (existingPos != std::string::npos)
+	{
+		// Find the complete <system>...</system> block
+		size_t systemStart = content.rfind("<system>", existingPos);
+		size_t systemEnd = content.find("</system>", existingPos);
+		
+		if (systemStart != std::string::npos && systemEnd != std::string::npos)
+		{
+			// Replace existing system
+			content.replace(systemStart, systemEnd - systemStart + 9, systemXml);
+		}
+	}
+	else
+	{
+		// Add new system before </systemList>
+		size_t insertPos = content.find("</systemList>");
+		if (insertPos != std::string::npos)
+		{
+			content.insert(insertPos, "  " + systemXml + "\n");
+		}
+		else
+		{
+			res.set_content("400 malformed es_systems.cfg", "text/html");
+			res.status = 400;
+			return;
+		}
+	}
+	
+	// Write back
+	Utils::FileSystem::writeAllText(systemsPath, content);
+	
+	// Reload systems
+	Window* w = mWindow;
+	mWindow->postToUiThread([w]() { GuiMenu::updateGameLists(w, false); });
+	
+	res.set_content("OK - System added/updated", "text/plain");
+});
+
+// POST /removesystem/{systemName} - Remove a system
+mHttpServer->Post(R"(/removesystem/(.+))", [this](const httplib::Request& req, httplib::Response& res)
+{
+	if (!isAllowed(req, res))
+		return;
+
+	std::string systemName = req.matches[1];
+	
+	// Path to es_systems.cfg
+	std::string systemsPath = "/storage/.emulationstation/es_systems.cfg";
+	
+	if (!Utils::FileSystem::exists(systemsPath))
+	{
+		res.set_content("404 es_systems.cfg not found", "text/html");
+		res.status = 404;
+		return;
+	}
+
+	// Create backup
+	std::string backupPath = systemsPath + ".backup";
+	Utils::FileSystem::copyFile(systemsPath, backupPath);
+
+	// Read current systems file
+	std::string content = Utils::FileSystem::readAllText(systemsPath);
+	
+	// Find the system
+	std::string searchTag = "<name>" + systemName + "</name>";
+	size_t namePos = content.find(searchTag);
+	
+	if (namePos == std::string::npos)
+	{
+		res.set_content("404 system not found", "text/html");
+		res.status = 404;
+		return;
+	}
+	
+	// Find the complete <system>...</system> block
+	size_t systemStart = content.rfind("<system>", namePos);
+	size_t systemEnd = content.find("</system>", namePos);
+	
+	if (systemStart == std::string::npos || systemEnd == std::string::npos)
+	{
+		res.set_content("400 malformed system entry", "text/html");
+		res.status = 400;
+		return;
+	}
+	
+	// Remove the system block
+	content.erase(systemStart, systemEnd - systemStart + 9);
+	
+	// Write back
+	Utils::FileSystem::writeAllText(systemsPath, content);
+	
+	// Reload systems
+	Window* w = mWindow;
+	mWindow->postToUiThread([w]() { GuiMenu::updateGameLists(w, false); });
+	
+	res.set_content("OK - System removed", "text/plain");
+});
+
+// POST /system/{systemName}/addemulator - Add or update an emulator/core
+mHttpServer->Post(R"(/system/(.+)/addemulator)", [this](const httplib::Request& req, httplib::Response& res)
+{
+	if (!isAllowed(req, res))
+		return;
+
+	if (req.body.empty())
+	{
+		res.set_content("400 bad request - body is missing", "text/html");
+		res.status = 400;
+		return;
+	}
+
+	std::string systemName = req.matches[1];
+	std::string emulatorXml = req.body;
+	
+	// Path to es_systems.cfg
+	std::string systemsPath = "/storage/.emulationstation/es_systems.cfg";
+	
+	if (!Utils::FileSystem::exists(systemsPath))
+	{
+		res.set_content("404 es_systems.cfg not found", "text/html");
+		res.status = 404;
+		return;
+	}
+
+	// Create backup
+	std::string backupPath = systemsPath + ".backup";
+	Utils::FileSystem::copyFile(systemsPath, backupPath);
+
+	// Read current systems file
+	std::string content = Utils::FileSystem::readAllText(systemsPath);
+	
+	// Find the system
+	std::string searchTag = "<name>" + systemName + "</name>";
+	size_t namePos = content.find(searchTag);
+	
+	if (namePos == std::string::npos)
+	{
+		res.set_content("404 system not found", "text/html");
+		res.status = 404;
+		return;
+	}
+	
+	// Find the system block
+	size_t systemStart = content.rfind("<system>", namePos);
+	size_t systemEnd = content.find("</system>", namePos);
+	
+	if (systemStart == std::string::npos || systemEnd == std::string::npos)
+	{
+		res.set_content("400 malformed system entry", "text/html");
+		res.status = 400;
+		return;
+	}
+	
+	// Extract emulator name from incoming XML
+	size_t emulNameStart = emulatorXml.find("name=\"");
+	if (emulNameStart == std::string::npos)
+	{
+		res.set_content("400 invalid emulator XML - missing name attribute", "text/html");
+		res.status = 400;
+		return;
+	}
+	
+	emulNameStart += 6;
+	size_t emulNameEnd = emulatorXml.find("\"", emulNameStart);
+	std::string emulatorName = emulatorXml.substr(emulNameStart, emulNameEnd - emulNameStart);
+	
+	// Find <emulators> section
+	size_t emulatorsStart = content.find("<emulators>", systemStart);
+	size_t emulatorsEnd = content.find("</emulators>", systemStart);
+	
+	if (emulatorsStart == std::string::npos || emulatorsEnd == std::string::npos || 
+	    emulatorsStart > systemEnd || emulatorsEnd > systemEnd)
+	{
+		// No emulators section, create one
+		size_t insertPos = systemEnd;
+		std::string emulatorsBlock = "\n    <emulators>\n      " + emulatorXml + "\n    </emulators>\n  ";
+		content.insert(insertPos, emulatorsBlock);
+	}
+	else
+	{
+		// Check if emulator already exists
+		std::string searchEmul = "name=\"" + emulatorName + "\"";
+		size_t existingEmul = content.find(searchEmul, emulatorsStart);
+		
+		if (existingEmul != std::string::npos && existingEmul < emulatorsEnd)
+		{
+			// Replace existing emulator
+			size_t emulStart = content.rfind("<emulator", existingEmul);
+			size_t emulEnd = content.find("</emulator>", existingEmul);
+			
+			if (emulStart != std::string::npos && emulEnd != std::string::npos)
+			{
+				content.replace(emulStart, emulEnd - emulStart + 11, emulatorXml);
+			}
+		}
+		else
+		{
+			// Add new emulator before </emulators>
+			content.insert(emulatorsEnd, "      " + emulatorXml + "\n");
+		}
+	}
+	
+	// Write back
+	Utils::FileSystem::writeAllText(systemsPath, content);
+	
+	// Reload systems
+	Window* w = mWindow;
+	mWindow->postToUiThread([w]() { GuiMenu::updateGameLists(w, false); });
+	
+	res.set_content("OK - Emulator added/updated", "text/plain");
+});
+
+// POST /system/{systemName}/removeemulator/{emulatorName} - Remove an emulator
+mHttpServer->Post(R"(/system/(.+)/removeemulator/(.+))", [this](const httplib::Request& req, httplib::Response& res)
+{
+	if (!isAllowed(req, res))
+		return;
+
+	std::string systemName = req.matches[1];
+	std::string emulatorName = req.matches[2];
+	
+	// Path to es_systems.cfg
+	std::string systemsPath = "/storage/.emulationstation/es_systems.cfg";
+	
+	if (!Utils::FileSystem::exists(systemsPath))
+	{
+		res.set_content("404 es_systems.cfg not found", "text/html");
+		res.status = 404;
+		return;
+	}
+
+	// Create backup
+	std::string backupPath = systemsPath + ".backup";
+	Utils::FileSystem::copyFile(systemsPath, backupPath);
+
+	// Read current systems file
+	std::string content = Utils::FileSystem::readAllText(systemsPath);
+	
+	// Find the system
+	std::string searchTag = "<name>" + systemName + "</name>";
+	size_t namePos = content.find(searchTag);
+	
+	if (namePos == std::string::npos)
+	{
+		res.set_content("404 system not found", "text/html");
+		res.status = 404;
+		return;
+	}
+	
+	// Find the system block
+	size_t systemStart = content.rfind("<system>", namePos);
+	size_t systemEnd = content.find("</system>", namePos);
+	
+	// Find the emulator
+	std::string searchEmul = "name=\"" + emulatorName + "\"";
+	size_t emulPos = content.find(searchEmul, systemStart);
+	
+	if (emulPos == std::string::npos || emulPos > systemEnd)
+	{
+		res.set_content("404 emulator not found", "text/html");
+		res.status = 404;
+		return;
+	}
+	
+	// Find the complete <emulator>...</emulator> block
+	size_t emulStart = content.rfind("<emulator", emulPos);
+	size_t emulEnd = content.find("</emulator>", emulPos);
+	
+	if (emulStart == std::string::npos || emulEnd == std::string::npos)
+	{
+		res.set_content("400 malformed emulator entry", "text/html");
+		res.status = 400;
+		return;
+	}
+	
+	// Remove the emulator block
+	content.erase(emulStart, emulEnd - emulStart + 11);
+	
+	// Write back
+	Utils::FileSystem::writeAllText(systemsPath, content);
+	
+	// Reload systems
+	Window* w = mWindow;
+	mWindow->postToUiThread([w]() { GuiMenu::updateGameLists(w, false); });
+	
+	res.set_content("OK - Emulator removed", "text/plain");
+});
+
+
+// Scraping APIs
+// POST /scrape/{systemName} - Scrape all games in a system OR a single game if body contains path
+mHttpServer->Post(R"(/scrape/(.+))", [this](const httplib::Request& req, httplib::Response& res)
+{
+	if (!isAllowed(req, res))
+		return;
+
+	std::string systemName = req.matches[1];
+	
+	SystemData* system = SystemData::getSystem(systemName);
+	if (system == nullptr)
+	{
+		res.set_content("404 system not found", "text/html");
+		res.status = 404;
+		return;
+	}
+
+	// Check if scraper is already running
+	if (ThreadedScraper::isRunning())
+	{
+		res.set_content("409 scraper already running", "text/html");
+		res.status = 409;
+		return;
+	}
+
+	Window* w = mWindow;
+	
+	// If body is provided, scrape single game by path
+	if (!req.body.empty())
+	{
+		std::string gamePath = req.body;
+		
+		mWindow->postToUiThread([w, system, gamePath]()
+		{
+			// Find game by path
+			FileData* foundGame = nullptr;
+			auto games = system->getRootFolder()->getFilesRecursive(GAME);
+			
+			for (auto game : games)
+			{
+				if (game->getPath() == gamePath || game->getFullPath() == gamePath)
+				{
+					foundGame = game;
+					break;
+				}
+			}
+			
+			if (foundGame != nullptr)
+			{
+				// Create scraper search queue with single game
+				std::queue<ScraperSearchParams> searches;
+				ScraperSearchParams search;
+				search.game = foundGame;
+				search.system = foundGame->getSystem();
+				searches.push(search);
+				
+				// Start the threaded scraper
+				ThreadedScraper::start(w, searches);
+			}
+		});
+		
+		res.set_content("OK - Game scraping started", "text/plain");
+	}
+	else
+	{
+		// No body = scrape entire system
+		mWindow->postToUiThread([w, system]()
+		{
+			// Get all games in the system
+			auto games = system->getRootFolder()->getFilesRecursive(GAME);
+			
+			if (games.size() > 0)
+			{
+				// Create scraper search queue
+				std::queue<ScraperSearchParams> searches;
+				for (auto game : games)
+				{
+					ScraperSearchParams search;
+					search.game = game;
+					search.system = game->getSystem();
+					searches.push(search);
+				}
+				
+				// Start the threaded scraper
+				ThreadedScraper::start(w, searches);
+			}
+		});
+		
+		res.set_content("OK - System scraping started", "text/plain");
+	}
+});
+
+// This adds file upload support for emulator cores
+// POST /upload/core - Upload emulator core file
+mHttpServer->Post("/upload/core", [this](const httplib::Request& req, httplib::Response& res)
+{
+	if (!isAllowed(req, res))
+		return;
+
+	if (!req.has_file("file"))
+	{
+		res.set_content("{\"error\":\"No file provided\"}", "application/json");
+		res.status = 400;
+		return;
+	}
+
+	const auto& file = req.get_file_value("file");
+	
+	// Check file size (100 MB limit)
+	const size_t MAX_FILE_SIZE = 100 * 1024 * 1024;
+	if (file.content.size() > MAX_FILE_SIZE)
+	{
+		res.set_content("{\"error\":\"File too large. Maximum size is 100 MB\"}", "application/json");
+		res.status = 400;
+		return;
+	}
+	
+	// Sanitize filename - remove path components and dangerous characters
+	std::string filename = file.filename;
+	size_t lastSlash = filename.find_last_of("/\\");
+	if (lastSlash != std::string::npos)
+		filename = filename.substr(lastSlash + 1);
+	
+	// Remove null bytes and other dangerous characters
+	filename.erase(std::remove(filename.begin(), filename.end(), '\0'), filename.end());
+	
+	if (filename.empty())
+	{
+		res.set_content("{\"error\":\"Invalid filename\"}", "application/json");
+		res.status = 400;
+		return;
+	}
+	
+	// Create cores directory if it doesn't exist
+	std::string coresDir = "/tmp/cores";
+	if (!Utils::FileSystem::exists(coresDir))
+	{
+		Utils::FileSystem::createDirectory(coresDir);
+	}
+	
+	// Full path to save file
+	std::string filepath = coresDir + "/" + filename;
+	
+	// Write file
+	std::ofstream outfile(filepath, std::ios::binary);
+	if (!outfile)
+	{
+		res.set_content("{\"error\":\"Failed to create file\"}", "application/json");
+		res.status = 500;
+		return;
+	}
+	
+	outfile.write(file.content.c_str(), file.content.size());
+	outfile.close();
+	
+	// Set executable permissions (0755)
+	chmod(filepath.c_str(), 0755);
+	
+	// Return success response
+	std::string jsonResponse = "{\"success\":true,\"filename\":\"" + filename + 
+	                           "\",\"size\":" + std::to_string(file.content.size()) + 
+	                           ",\"path\":\"" + filepath + "\"}";
+	res.set_content(jsonResponse, "application/json");
+});
+
+// GET /cores/list - List all uploaded cores
+mHttpServer->Get("/cores/list", [](const httplib::Request& req, httplib::Response& res)
+{
+	if (!isAllowed(req, res))
+		return;
+
+	std::string coresDir = "/tmp/cores";
+	
+	if (!Utils::FileSystem::exists(coresDir))
+	{
+		res.set_content("[]", "application/json");
+		return;
+	}
+	
+	auto dirContent = Utils::FileSystem::getDirContent(coresDir, false);
+	
+	std::string json = "[";
+	bool first = true;
+	
+	for (const auto& item : dirContent)
+	{
+		if (Utils::FileSystem::isDirectory(item))
+			continue;
+			
+		std::string filename = Utils::FileSystem::getFileName(item);
+
+		// Only list .so files (RetroArch cores), not .info files
+		if (filename.length() < 3 || filename.substr(filename.length() - 3) != ".so")
+			continue;
+		
+		// Get file size and modified time
+		struct stat st;
+		if (stat(item.c_str(), &st) != 0)
+			continue;
+		
+		if (!first) json += ",";
+		first = false;
+		
+		json += "{\"name\":\"" + filename + "\",";
+		json += "\"size\":" + std::to_string(st.st_size) + ",";
+		json += "\"modified\":" + std::to_string(st.st_mtime) + "}";
+	}
+	
+	json += "]";
+	
+	res.set_content(json, "application/json");
+});
+
+// DELETE /cores/{filename} - Delete a core file
+mHttpServer->Delete(R"(/cores/(.+))", [](const httplib::Request& req, httplib::Response& res)
+{
+	if (!isAllowed(req, res))
+		return;
+
+	std::string filename = req.matches[1];
+	
+	// Sanitize filename to prevent directory traversal
+	if (filename.find("..") != std::string::npos || 
+	    filename.find("/") != std::string::npos ||
+	    filename.find("\\") != std::string::npos)
+	{
+		res.set_content("{\"error\":\"Invalid filename\"}", "application/json");
+		res.status = 400;
+		return;
+	}
+	
+	std::string filepath = "/tmp/cores/" + filename;
+	
+	if (!Utils::FileSystem::exists(filepath))
+	{
+		res.set_content("{\"error\":\"File not found\"}", "application/json");
+		res.status = 404;
+		return;
+	}
+	
+	if (Utils::FileSystem::isDirectory(filepath))
+	{
+		res.set_content("{\"error\":\"Not a file\"}", "application/json");
+		res.status = 400;
+		return;
+	}
+	
+	// Delete the file
+	if (remove(filepath.c_str()) != 0)
+	{
+		res.set_content("{\"error\":\"Failed to delete file\"}", "application/json");
+		res.status = 500;
+		return;
+	}
+	
+	std::string jsonResponse = "{\"success\":true,\"message\":\"Deleted " + filename + "\"}";
+	res.set_content(jsonResponse, "application/json");
+});
+
+// GET /cores/{filename} - Download a core file
+mHttpServer->Get(R"(/cores/(.+))", [](const httplib::Request& req, httplib::Response& res)
+{
+	if (!isAllowed(req, res))
+		return;
+
+	std::string filename = req.matches[1];
+	
+	// Sanitize filename to prevent directory traversal
+	if (filename.find("..") != std::string::npos || 
+	    filename.find("/") != std::string::npos ||
+	    filename.find("\\") != std::string::npos)
+	{
+		res.set_content("400 bad request - invalid filename", "text/html");
+		res.status = 400;
+		return;
+	}
+	
+	std::string filepath = "/tmp/cores/" + filename;
+	
+	if (!Utils::FileSystem::exists(filepath))
+	{
+		res.set_content("404 file not found", "text/html");
+		res.status = 404;
+		return;
+	}
+	
+	// Read file content
+	std::ifstream file(filepath, std::ios::binary);
+	if (!file)
+	{
+		res.set_content("500 failed to read file", "text/html");
+		res.status = 500;
+		return;
+	}
+	
+	std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+	file.close();
+	
+	// Set appropriate headers for download
+	res.set_header("Content-Disposition", "attachment; filename=\"" + filename + "\"");
+	res.set_content(content, "application/octet-stream");
 });
 
 #endif
