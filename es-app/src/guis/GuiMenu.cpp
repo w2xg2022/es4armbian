@@ -971,6 +971,31 @@ void GuiMenu::createGamepadConfig(Window* window, GuiSettings* systemConfigurati
 		SystemConf::getInstance()->saveSystemConf();
 	});
 
+	// Rumble Strength
+	auto emuelec_rumble_def = std::make_shared< OptionListComponent<std::string> >(window, _("RUMBLE STRENGTH"), false);
+	std::vector<std::pair<std::string,int>> rumble_options;
+	rumble_options.push_back(std::make_pair("0%",0));
+	rumble_options.push_back(std::make_pair("25%",25));
+	rumble_options.push_back(std::make_pair("50%",50));
+	rumble_options.push_back(std::make_pair("75%",75));
+	rumble_options.push_back(std::make_pair("100%",100));
+
+	auto rumble_optionsS = SystemConf::getInstance()->get("ee_rumble_strength");
+	if (rumble_optionsS.empty())
+	rumble_optionsS = "0";
+	int ros = (int) atoi(rumble_optionsS.c_str());
+
+	for (auto it = rumble_options.cbegin(); it != rumble_options.cend(); it++)
+	emuelec_rumble_def->add(it->first, std::to_string(it->second), ros == it->second);
+
+	gamepadConfiguration->addWithLabel(_("RUMBLE STRENGTH"), emuelec_rumble_def);
+	gamepadConfiguration->addSaveFunc([emuelec_rumble_def] {
+		if (emuelec_rumble_def->changed()) {
+			SystemConf::getInstance()->set("ee_rumble_strength", emuelec_rumble_def->getSelected());
+			SystemConf::getInstance()->saveSystemConf();
+		}
+	});
+
 	window->pushGui(gamepadConfiguration);
 }
 
