@@ -37,8 +37,8 @@ EmuELEC 原版在非 EmuELEC 系统镜像下，语言设置无法保存、也不
 
 ### 2.4 中文翻译补全与术语统一
 
-- 补全简体中文 (`zh_CN`) / 繁体中文 (`zh_TW`) 翻译文件 `locale/lang/{zh_CN,zh_TW}/LC_MESSAGES/emulationstation2.po` 数百条缺失的词条。
-- 术语统一：同一英文术语在不同菜单中不依据各菜单的上下文各自直译，避免同义词混杂、降低界面一致性。例如英文 `SETTINGS` 在游戏设置 (GAMES SETTINGS)、系统设置 (SYSTEM SETTINGS)、声音设置 (SOUND SETTINGS) 等多个菜单标题中出现，应统一对应同一个中文词，而不是有的译成“设定”、有的译成“设置”、“配置”。
+- 翻译补全：补全简体中文 (`zh_CN`) / 繁体中文 (`zh_TW`) 翻译文件 `locale/lang/{zh_CN,zh_TW}/LC_MESSAGES/emulationstation2.po` 数百条缺失的词条。
+- 术语统一：同一英文术语在不同菜单中不依据上下文直译，避免同义词混杂、降低界面一致性。例如英文 `SETTINGS` 在游戏设置 (GAMES SETTINGS)、系统设置 (SYSTEM SETTINGS)、声音设置 (SOUND SETTINGS) 等多个菜单标题中出现，应统一对应同一个中文词，而不是有的译成“设定”、有的译成“设置”、“配置”。
 
 ### 2.5 其他系统层面注意事项（非代码改动，但部署必需）
 
