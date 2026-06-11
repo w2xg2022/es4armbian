@@ -236,7 +236,7 @@ void MenuComponent::addEntry(const std::string& name, bool add_arrow, const std:
 
 	addMenuIcon(mWindow, row, iconName);
 
-	auto text = std::make_shared<TextComponent>(mWindow, name, font, color);
+	auto text = std::make_shared<TextComponent>(mWindow, Utils::String::toUpper(name), font, color);
 	row.addElement(text, true);
 
 	if (EsLocale::isRTL())

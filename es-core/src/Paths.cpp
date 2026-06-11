@@ -103,7 +103,10 @@ Paths::Paths()
 	mDecorationsPath = "/storage/roms/bezels";
 	mUserDecorationsPath = "/tmp/overlays/bezels";
 	mVersionInfoPath = "/usr/config/EE_VERSION";
-	mSystemConfFilePath = "/emuelec/configs/emuelec.conf";
+	if (Utils::FileSystem::exists("/emuelec/configs/emuelec.conf"))
+		mSystemConfFilePath = "/emuelec/configs/emuelec.conf";
+	else
+		mSystemConfFilePath = "";
 	mScreenShotsPath = "/storage/roms/screenshots";
 	mSaveStatesPath = "/storage/roms/savestates";
 	mTimeZonesPath = "/usr/share/zoneinfo/";

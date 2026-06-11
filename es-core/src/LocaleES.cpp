@@ -20,7 +20,7 @@ const char* pgettext(const char* context, const char* msgid) {
 }
 #endif
 
-std::string EsLocale::default_LANGUAGE = "";
+std::string EsLocale::default_LANGUAGE = "zh_CN";
 
 std::string EsLocale::changeLocale(const std::string& locale) {
 	char *clocale = NULL;

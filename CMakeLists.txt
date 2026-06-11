@@ -59,6 +59,7 @@ option(ENABLE_GAMEFORCE "Set to ON to enable Gameforce specific changes" ${ENABL
 option(ODROIDGOA "Set to ON to enable Odroid Go Advance specific changes" ${ODROIDGOA})
 
 project(emulationstation-all)
+add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-include/build/emuelec-es/compat.h>)
 
 # Win32 custom directories assignation
 if(WIN32 AND CUSTOM_LIBDIR)

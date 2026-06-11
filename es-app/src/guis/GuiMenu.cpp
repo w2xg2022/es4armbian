@@ -233,7 +233,7 @@ GuiMenu::GuiMenu(Window *window, bool animate) : GuiComponent(window), mMenu(win
 #ifdef _ENABLEEMUELEC
 	if (isFullUI)
 	{
-		addEntry(_("EMUELEC SETTINGS").c_str(), true, [this] { openEmuELECSettings(); }, "iconEmuelec"); /* < emuelec */
+		addEntry(_("PLATFORM SETTINGS").c_str(), true, [this] { openEmuELECSettings(); }, "iconAdvanced"); /* < emuelec */
 	}
 #endif
 
@@ -382,7 +382,7 @@ std::shared_ptr<OptionListComponent<std::string>> GuiMenu::createSplashExitOptio
 /* < emuelec */
 void GuiMenu::openEmuELECSettings()
 {
-	auto s = new GuiSettings(mWindow, "EmuELEC Settings");
+	auto s = new GuiSettings(mWindow, _("PLATFORM SETTINGS"));
 
 	Window* window = mWindow;
 	std::string a;
@@ -1426,7 +1426,7 @@ void GuiMenu::addVersionInfo()
 		else
 		{
 #ifdef _ENABLEEMUELEC	
-		label = "EMUELEC ES V" + ApiSystem::getInstance()->getVersion() + buildDate + " IP:" + Utils::Platform::getShOutput(R"(/usr/bin/emuelec-utils getip)");
+		label = "ES4Armbian V" + ApiSystem::getInstance()->getVersion() + ", IP: " + Utils::Platform::queryIPAddress();
 #else
 			std::string aboutInfo = ApiSystem::getInstance()->getApplicationName() + " V" + ApiSystem::getInstance()->getVersion();
 			label = aboutInfo + buildDate;
@@ -1540,7 +1540,7 @@ class ExitKidModeMsgBox : public GuiSettings
 		Window* window = mWindow;
 		if (UIModeController::getInstance()->listen(config, input))
 		{
-			// window->pushGui(new GuiMsgBox(window, _("THE USER INTERFACE MODE IS NOW UNLOCKED"), _("OK")));
+			// detect boot media (eMMC vs SD/USB) and show matching reboot entry
 			return true;
 		}
 
@@ -2523,7 +2523,7 @@ void GuiMenu::openSystemSettings()
 	language_choice->add("Українська",           "uk_UA", language == "uk_UA");
 	language_choice->add("TIẾNG VIỆT",           "vi_VN", language == "vi_VN");
 	language_choice->add("简体中文", 	     "zh_CN", language == "zh_CN");
-	language_choice->add("正體中文", 	     "zh_TW", language == "zh_TW");
+	language_choice->add("繁體中文", 	     "zh_TW", language == "zh_TW");
 
 	s->addWithLabel(_("LANGUAGE (REGION)"), language_choice);
 	s->addSaveFunc([window, language_choice, language, s]
@@ -5557,43 +5557,56 @@ void GuiMenu::openQuitMenu_static(Window *window, bool quickAccessMenu, bool ani
 				Utils::Platform::quitES(Utils::Platform::QuitMode::QUIT);
 			}, _("NO"), nullptr));
 		}, "iconControllers");
+		if (SystemConf::getInstance()->getBool("extra_quit_menu.enabled", true))
+		{
+			// detect boot media (eMMC vs SD/USB) and show matching reboot entry
+			bool bootedFromEmmc = true;
 
-		
-		s->addEntry(_("REBOOT FROM NAND"), false, [window] {
-			window->pushGui(new GuiMsgBox(window, _("REALLY REBOOT FROM NAND?"), _("YES"),
-				[] {
-				Scripting::fireEvent("quit", "nand");
-				Utils::Platform::ProcessStartInfo("rebootfromnand").run();
-				Utils::Platform::ProcessStartInfo("sync").run();
-				Utils::Platform::ProcessStartInfo("systemctl reboot").run();
-				Utils::Platform::quitES(Utils::Platform::QuitMode::QUIT);
-			}, _("NO"), nullptr));
-		}, "iconAdvanced");
-		
-		// these are special entries for specific devices, they are hidden by default behind a setting in emuelec.conf extra_quit_menu.enable
-if (SystemConf::getInstance()->getBool("extra_quit_menu.enabled", true)) {
-		s->addEntry(_("REBOOT TO USB"), false, [window] {
-			window->pushGui(new GuiMsgBox(window, _("REALLY REBOOT TO USB?"), _("YES"),
-				[] {
-				Scripting::fireEvent("quit", "usb");
-				Utils::Platform::ProcessStartInfo("devmem 0xff6345d0 8 1").run();
-				Utils::Platform::ProcessStartInfo("sync").run();
-				Utils::Platform::ProcessStartInfo("systemctl reboot").run();
-				Utils::Platform::quitES(Utils::Platform::QuitMode::QUIT);
-			}, _("NO"), nullptr));
-		}, "iconAdvanced");
+			FILE* pipe = popen("lsblk -no PKNAME \"$(findmnt -no SOURCE /)\" 2>/dev/null", "r");
+			if (pipe != nullptr)
+			{
+				char buf[64] = "";
+				std::string rootDisk = (fgets(buf, sizeof(buf), pipe) != nullptr) ? Utils::String::trim(std::string(buf)) : "";
+				pclose(pipe);
 
-		s->addEntry(_("Reboot to CoreELEC"), false, [window] {
-			window->pushGui(new GuiMsgBox(window, _("REBOOT TO COREELEC?"), _("YES"),
-				[] {
-				Scripting::fireEvent("quit", "coreelec");
-				Utils::Platform::ProcessStartInfo("devmem 0xff6345d0 8 2").run();
-				Utils::Platform::ProcessStartInfo("sync").run();
-				Utils::Platform::ProcessStartInfo("systemctl reboot").run();
-				Utils::Platform::quitES(Utils::Platform::QuitMode::QUIT);
-			}, _("NO"), nullptr));
-		}, "iconAdvanced");
-	}
+				if (!rootDisk.empty())
+				{
+					pipe = popen(("cat /sys/block/" + rootDisk + "/removable 2>/dev/null").c_str(), "r");
+					if (pipe != nullptr)
+					{
+						char buf2[8] = "";
+						if (fgets(buf2, sizeof(buf2), pipe) != nullptr)
+							bootedFromEmmc = (Utils::String::trim(std::string(buf2)) == "0");
+						pclose(pipe);
+					}
+				}
+			}
+
+			if (bootedFromEmmc)
+			{
+				s->addEntry(_("REBOOT TO USB/SD"), false, [window] {
+					window->pushGui(new GuiMsgBox(window, _("REALLY REBOOT TO USB/SD?"), _("YES"),
+						[] {
+						Scripting::fireEvent("quit", "usb");
+						Utils::Platform::ProcessStartInfo("sync").run();
+						Utils::Platform::ProcessStartInfo("systemctl reboot").run();
+						Utils::Platform::quitES(Utils::Platform::QuitMode::QUIT);
+					}, _("NO"), nullptr));
+				}, "iconAdvanced");
+			}
+			else
+			{
+				s->addEntry(_("REBOOT TO EMMC"), false, [window] {
+					window->pushGui(new GuiMsgBox(window, _("REALLY REBOOT TO EMMC?"), _("YES"),
+						[] {
+						Scripting::fireEvent("quit", "emmc");
+						Utils::Platform::ProcessStartInfo("sync").run();
+						Utils::Platform::ProcessStartInfo("systemctl reboot").run();
+						Utils::Platform::quitES(Utils::Platform::QuitMode::QUIT);
+					}, _("NO"), nullptr));
+				}, "iconAdvanced");
+			}
+		}
 }
 
 	s->setUpdateType(ComponentListFlags::UPDATE_ALWAYS);

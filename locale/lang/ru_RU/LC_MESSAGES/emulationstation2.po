@@ -14,32 +14,83 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 3.6\n"
 
-msgid "SCANNING BLUETOOTH"
-msgstr "BLUETOOTH СКАНИРОВАНИЕ"
+msgid "THE EMULATOR EXITED UNEXPECTEDLY"
+msgstr "ЭМУЛЯТОР НЕОЖИДАННО ПРЕКРАТИЛ РАБОТУ"
 
-msgid "Searching for devices..."
-msgstr "Поиск устройств..."
+msgid "BAD COMMAND LINE ARGUMENTS"
+msgstr "НЕВЕРНЫЕ АРГУМЕНТЫ КОМАНДНОЙ СТРОКИ"
 
-msgid "BLUETOOTH SCAN IS ALREADY RUNNING."
-msgstr "BLUETOOTH СКАНИРОВАНИЕ УЖЕ ЗАПУЩЕНО."
+msgid "INVALID CONFIGURATION"
+msgstr "НЕВЕРНАЯ КОНФИГУРАЦИЯ"
 
-msgid "FORMATTING DEVICE"
-msgstr "ФОРМАТИРОВАНИЕ УСТРОЙСТВА"
+msgid "UNKNOWN EMULATOR"
+msgstr "НЕИЗВЕСТНЫЙ ЭМУЛЯТОР"
 
-msgid "Formatting"
-msgstr "Форматирование"
+msgid "EMULATOR IS MISSING"
+msgstr "ЭМУЛЯТОР ОТСУТСТВУЕТ"
 
-msgid "A REBOOT IS REQUIRED TO COMPLETE THE OPERATION"
-msgstr "ТРЕБУЕТСЯ ПЕРЕЗАГРУЗКА СИСТЕМЫ ДЛЯ ЗАВЕРШЕНИЯ ОПЕРАЦИИ"
+msgid "CORE IS MISSING"
+msgstr "ЯДРО ОТСУТСТВУЕТ"
 
-msgid "A DRIVE IS ALREADY BEING FORMATTED."
-msgstr "ДИСК УЖЕ ОТФОРМАТИРОВАН."
+msgid "UKNOWN ERROR"
+msgstr "НЕИЗВЕСТНАЯ ОШИБКА"
+
+msgid "AN ERROR OCCURRED"
+msgstr "ОШИБКА"
+
+msgid "OK"
+msgstr "ОК"
+
+msgid "LOADING PLEASE WAIT"
+msgstr ""
+
+msgid "ERROR LOADING FROM CLOUD"
+msgstr ""
+
+msgid "SAVING PLEASE WAIT"
+msgstr ""
+
+msgid "ERROR SAVING TO CLOUD"
+msgstr ""
+
+msgid "SAVED TO CLOUD"
+msgstr ""
+
+msgid "SEARCHING RETROACHIEVEMENTS"
+msgstr "ПОИСК РЕТРОДОСТИЖЕНИЙ"
+
+msgid "SEARCHING NETPLAY GAMES"
+msgstr "ПОИСК NETPLAY ИГР"
+
+msgid "INDEXING COMPLETED"
+msgstr "ИНДЕКСАЦИЯ ЗАВЕРШЕНА"
+
+msgid "UPDATE GAMELISTS TO APPLY CHANGES."
+msgstr "ОБНОВИТЕ СПИСОК ИГР, ЧТОБЫ ПРИМЕНИТЬ ИЗМЕНЕНИЯ."
+
+msgid "GAME HASHING IS RUNNING. DO YOU WANT TO STOP IT?"
+msgstr "ЗАПУЩЕНО ХЕШИРОВАНИЕ ИГР. ОСТАНОВИТЬ?"
+
+msgid "YES"
+msgstr "ДА"
+
+msgid "NO"
+msgstr "НЕТ"
+
+msgid "NO GAMES FIT THAT CRITERIA."
+msgstr "НЕТ ПОДХОДЯЩИХ ИГР."
 
 msgid "Name"
 msgstr "Название"
 
 msgid "this game's name"
 msgstr "название игры"
+
+msgid "sortname"
+msgstr "название для сортировки"
+
+msgid "this game's sort name"
+msgstr ""
 
 msgid "Description"
 msgstr "Описание"
@@ -275,6 +326,82 @@ msgstr "ID игры Cheevos"
 msgid "Screenscraper Game ID"
 msgstr "ID игры Screenscraper"
 
+msgid "INVALID CONTENT"
+msgstr "НЕДОПУСТИМОЕ СОДЕРЖАНИЕ"
+
+msgid ""
+"A valid account is required. Please register an account on https://"
+"retroachievements.org"
+msgstr ""
+"Требуется действующий аккаунт. Зарегистрироваться можно на https://"
+"retroachievements.org"
+
+msgid "UPDATE AVAILABLE"
+msgstr "ДОСТУПНО ОБНОВЛЕНИЕ"
+
+msgid "Extracting"
+msgstr "Распаковка"
+
+msgid "all games"
+msgstr "все игры"
+
+msgid "last played"
+msgstr "недавно играли"
+
+msgid "favorites"
+msgstr "избранное"
+
+msgid "2 players"
+msgstr "2 игрока"
+
+msgid "4 players"
+msgstr "4 игрока"
+
+msgid "never played"
+msgstr "не играл"
+
+msgid "retroachievements"
+msgstr "ретродостижения"
+
+msgid "arcade"
+msgstr "аркады"
+
+msgid "vertical arcade"
+msgstr "вертикальные акрады"
+
+msgid "lightgun games"
+msgstr "световой пистолет"
+
+msgid "wheel games"
+msgstr "игры с рулём"
+
+msgid "trackball games"
+msgstr "трекбол игры"
+
+msgid "spinner games"
+msgstr "спиннер игры"
+
+msgid "collections"
+msgstr "коллекции"
+
+#, c-format
+msgid "Added '%s' to '%s'"
+msgstr "'%s' добавлено в '%s'"
+
+#, c-format
+msgid "Removed '%s' from '%s'"
+msgstr "'%s' удалено из '%s'"
+
+msgid "This collection is empty."
+msgstr "Коллекция пуста."
+
+#. TRANSLATION: number of developpers / various developpers
+msgid "None"
+msgstr "Нет"
+
+msgid "Various"
+msgstr "Различные"
+
 #, c-format
 msgid "This collection contains %i game:%s"
 msgid_plural "This collection contains %i games, including:%s"
@@ -282,44 +409,227 @@ msgstr[0] "Коллекция содержит %i игру:%s"
 msgstr[1] "Коллекция содержит %i игры, включая:%s"
 msgstr[2] "Коллекция содержит %i игр, включая:%s"
 
-msgid "Collections"
-msgstr "Коллекции"
+msgid "SCANNING BLUETOOTH"
+msgstr "BLUETOOTH СКАНИРОВАНИЕ"
+
+msgid "Searching for devices..."
+msgstr "Поиск устройств..."
+
+msgid "BLUETOOTH SCAN IS ALREADY RUNNING."
+msgstr "BLUETOOTH СКАНИРОВАНИЕ УЖЕ ЗАПУЩЕНО."
+
+msgid "FORMATTING DEVICE"
+msgstr "ФОРМАТИРОВАНИЕ УСТРОЙСТВА"
+
+msgid "Formatting"
+msgstr "Форматирование"
+
+msgid "A REBOOT IS REQUIRED TO COMPLETE THE OPERATION"
+msgstr "ТРЕБУЕТСЯ ПЕРЕЗАГРУЗКА СИСТЕМЫ ДЛЯ ЗАВЕРШЕНИЯ ОПЕРАЦИИ"
+
+msgid "A DRIVE IS ALREADY BEING FORMATTED."
+msgstr "ДИСК УЖЕ ОТФОРМАТИРОВАН."
+
+msgid "DO YOU WANT TO SWITCH THE SCREEN ?"
+msgstr "ВЫ ХОТИТЕ ПЕРЕКЛЮЧИТЬ ЭКРАН?"
+
+msgid "Loading..."
+msgstr "Загрузка..."
+
+msgid "Loading system config..."
+msgstr "Загрузка системных настроек..."
+
+msgid "QUIT"
+msgstr "ВЫХОД"
+
+msgid "Loading theme"
+msgstr "Загрузка темы"
+
+msgid "SAVING METADATA. PLEASE WAIT..."
+msgstr "СОХРАНЕНИЕ МЕТАДАННЫХ. ПОДОЖДИТЕ..."
+
+msgid "Full"
+msgstr "Полный"
+
+msgid "Kiosk"
+msgstr "Киоск"
+
+msgid "Kid"
+msgstr "Детский"
+
+msgid "Basic"
+msgstr "Базовый"
+
+msgid ""
+"WARNING: THE EMULATOR/CORE CURRENTLY SET DOES NOT SUPPORT THIS GAME'S FILE "
+"FORMAT.\n"
+"DO YOU WANT TO LAUNCH IT ANYWAY?"
+msgstr ""
+"ВНИМАНИЕ: ФОРМАТ ЭТОЙ ИГРЫ НЕ ПОДДЕРЖИВАЕТСЯ ТЕКУЩИМ ЭМУЛЯТОРОМ/ЯДРОМ.\n"
+"ПОПРОБОВАТЬ ЗАПУСТИТЬ В ЛЮБОМ СЛУЧАЕ?"
+
+msgid ""
+"WARNING: THE SYSTEM HAS MISSING BIOS FILE(S) AND THE GAME MAY NOT WORK "
+"CORRECTLY.\n"
+"DO YOU WANT TO LAUNCH IT ANYWAY?"
+msgstr ""
+"ВНИМАНИЕ: В СИСТЕМЕ ОТСУТСТВУЕТ BIOS, ИГРА МОЖЕТ РАБОТАТЬ НЕПРАВИЛЬНО.\n"
+"ЗАПУСТИТЬ В ЛЮБОМ СЛУЧАЕ?"
+
+msgid "Preloading UI"
+msgstr "Предзагрузка интерфейса"
+
+msgid "Loading gamelists"
+msgstr "Загрузка списка игр"
+
+msgid "MENU"
+msgstr "МЕНЮ"
+
+msgid "Released"
+msgstr "Релиз"
+
+msgid "Times played"
+msgstr "Сыграно раз"
+
+#, c-format
+msgid "This folder contains %i game, including :%s"
+msgid_plural "This folder contains %i games, including :%s"
+msgstr[0] "Папка содержит %i игру, включая :%s"
+msgstr[1] "Папка содержит %i игры, включая :%s"
+msgstr[2] "Папка содержит %i игр, включая :%s"
 
 msgid "Unknown"
 msgstr "Неизвестно"
 
-msgid "Extracting"
-msgstr "Распаковка"
+msgid "FILTER GAMES BY TEXT"
+msgstr "ПОИСК"
 
-msgid "DOWNLOADING"
+msgid "Games similar to"
+msgstr "Игры похожие на"
+
+msgid "SYSTEM"
+msgstr "СИСТЕМА"
+
+msgid "CHOOSE"
+msgstr "ВЫБРАТЬ"
+
+msgid "BACK"
+msgstr "НАЗАД"
+
+msgid "SAVE STATES (HOLD)"
+msgstr "БЫСТРЫЕ СОХРАНЕНИЯ (УДЕРЖИВАТЬ)"
+
+msgid "GAME OPTIONS (HOLD)"
+msgstr "ПАРАМЕТРЫ (УДЕРЖИВАТЬ)"
+
+msgid "OPTIONS"
+msgstr "НАСТРОЙКИ"
+
+msgid "GAME OPTIONS"
+msgstr "ПАРАМЕТРЫ"
+
+msgid "FAVORITE"
+msgstr "ИЗБРАННОЕ"
+
+msgid "SAVE STATES"
+msgstr "БЫСТРОЕ СОХРАНЕНИЕ"
+
+msgid "SEARCH"
+msgstr "ПОИСК"
+
+msgid "RANDOM"
+msgstr "СЛУЧАЙНО"
+
+#, c-format
+msgid "Back to %s"
+msgstr "Назад к %s"
+
+msgid "No Entries Found"
+msgstr "Игр не найдено"
+
+msgid "SYSTEM INFO"
+msgstr "СИСТЕМНАЯ ИНФОРМАЦИЯ"
+
+msgid "ERROR: EVERY SYSTEM IS HIDDEN, RE-DISPLAYING ALL OF THEM NOW"
+msgstr "ОШИБКА: ВСЕ СИСТЕМЫ СКРЫТЫ, ВКЛЮЧЕНИЕ ПОВТОРНОГО ОТОБРАЖЕНИЯ"
+
+msgid "QUICK SEARCH"
+msgstr "БЫСТРЫЙ ПОИСК"
+
+msgid "YOU ARE NOT CONNECTED TO A NETWORK"
+msgstr "ВЫ НЕ ПОДКЛЮЧЕНЫ К СЕТИ"
+
+msgid "GO TO LETTER"
+msgstr "ПЕРЕЙТИ К СИМВОЛУ"
+
+msgid "COLLECTIONS"
+msgstr "КОЛЛЕКЦИИ"
+
+msgid "GO TO MANUFACTURER"
+msgstr "ПЕРЕЙТИ К ПРОИЗВОДИТЕЛЮ"
+
+msgid "GO TO HARDWARE"
+msgstr "ПЕРЕЙТИ К ЖЕЛЕЗУ"
+
+msgid "GO TO DECADE"
+msgstr "ПЕРЕЙТИ К ДЕСЯТИЛЕТИЮ"
+
+msgid "CONFIGURATION"
+msgstr "КОНФИГУРАЦИЯ"
+
+#, c-format
+msgid "%i COLLECTION"
+msgid_plural "%i COLLECTIONS"
+msgstr[0] "%i КОЛЛЕКЦИЯ"
+msgstr[1] "%i КОЛЛЕКЦИИ"
+msgstr[2] "%i КОЛЛЕКЦИЙ"
+
+#, c-format
+msgid "%i ITEM"
+msgid_plural "%i ITEMS"
+msgstr[0] "%i ОБЪЕКТ"
+msgstr[1] "%i ОБЪЕКТА"
+msgstr[2] "%i ОБЪЕКТОВ"
+
+#, c-format
+msgid "%i GAME"
+msgid_plural "%i GAMES"
+msgstr[0] "%i ИГРА"
+msgstr[1] "%i ИГРЫ"
+msgstr[2] "%i ИГР"
+
+msgid "SELECT"
+msgstr "ВЫБОР"
+
+msgid "NETPLAY"
+msgstr "NETPLAY"
+
+msgid "NAVIGATION BAR"
+msgstr "ПАНЕЛЬ НАВИГАЦИИ"
+
+msgid "FILES"
+msgstr "ФАЙЛЫ"
+
+msgid "Collections"
+msgstr "Коллекции"
+
+msgid "Interlaced"
+msgstr "Чересстрочной"
+
+msgid "INVALID CREDENTIALS"
+msgstr "НЕВЕРНЫЕ ЛОГИН/ПАРОЛЬ"
+
+msgid "SCRAPING"
 msgstr "ЗАГРУЗКА"
 
-msgid "THEME INSTALLED SUCCESSFULLY"
-msgstr "ТЕМА УСПЕШНО УСТАНОВЛЕНА"
+msgid "SCRAPE FAILED"
+msgstr "ЗАГРУЗКА НЕ УДАЛАСЬ"
 
-msgid "AN ERROR OCCURRED"
-msgstr "ОШИБКА"
-
-msgid "THEME UNINSTALLED SUCCESSFULLY"
-msgstr "ТЕМА УДАЛЕНА"
-
-msgid "BEZELS INSTALLED SUCCESSFULLY"
-msgstr "РАМКИ УСПЕШНО УСТАНОВЛЕНЫ"
-
-msgid "BEZELS UNINSTALLED SUCCESSFULLY"
-msgstr "РАМКИ УСПЕШНО УДАЛЕНЫ"
-
-msgid "PACKAGE INSTALLED SUCCESSFULLY"
-msgstr "ПАКЕТ УСПЕШНО УСТАНОВЛЕН"
-
-msgid "PACKAGE REMOVED SUCCESSFULLY"
-msgstr "ПАКЕТ УСПЕШНО УДАЛЁН"
+msgid "SCRAPING FINISHED"
+msgstr "ЗАГРУЗКА ЗАВЕРШЕНА"
 
 msgid "Searching"
 msgstr "Поиск"
-
-msgid "Released"
-msgstr "Релиз"
 
 msgid "NO GAMES FOUND - SKIP"
 msgstr "ИГРЫ НЕ НАЙДЕНЫ - ПРОПУСТИТЬ"
@@ -342,58 +652,176 @@ msgstr "ПОИСК ДЛЯ"
 msgid "ACCEPT RESULT"
 msgstr "ПРИНЯТЬ РЕЗУЛЬТАТ"
 
-msgid "THEMES DOWNLOADER"
-msgstr "ЗАГРУЗКА ТЕМ"
+msgid "FAVORITES"
+msgstr "ИЗБРАННОЕ"
 
-msgid "SELECT THEMES TO INSTALL/REMOVE"
-msgstr "ВЫБЕРИТЕ ТЕМЫ ДЛЯ УСТАНОВКИ/УДАЛЕНИЯ"
+msgid "GENRE"
+msgstr "ЖАНР"
 
-msgid "All"
-msgstr "Все"
+msgid "FAMILY"
+msgstr "СЕМЕЙСТВО"
 
-msgid "Installed"
-msgstr "Установлено"
+msgid "PLAYERS"
+msgstr "ИГРОКОВ"
 
-msgid "Available"
-msgstr "Доступно"
+msgid "PUBLISHER/DEVELOPER"
+msgstr "ИЗДАТЕЛЬ/РАЗРАБОТЧИК"
 
-msgid "BACK"
-msgstr "НАЗАД"
+msgid "RATING"
+msgstr "РЕЙТИНГ"
 
-msgid "No items"
-msgstr "Объектов нет"
+msgid "YEAR"
+msgstr "ГОД"
 
-msgid "PLEASE WAIT"
-msgstr "ПОДОЖДИТЕ"
+msgid "LANGUAGE"
+msgstr "ЯЗЫК"
 
-msgid "UPDATE"
-msgstr "ОБНОВИТЬ"
+msgid "REGION"
+msgstr "РЕГИОН"
 
-#, c-format
-msgid "'%s' ADDED TO DOWNLOAD QUEUE"
-msgstr "'%s' ДОБАВЛЕНА В ОЧЕРЕДЬ ЗАГРУЗКИ"
+msgid "KIDGAME"
+msgstr "ДЕТСКАЯ ИГРА"
 
-msgid "REMOVE"
-msgstr "УДАЛИТЬ"
+msgid "ALREADY PLAYED"
+msgstr "УЖЕ ИГРАЛ"
 
-msgid "INSTALL"
-msgstr "УСТАНОВИТЬ"
+msgid "HAS ACHIEVEMENTS"
+msgstr "ИМЕЮТСЯ РЕТРОДОСТИЖЕНИЯ"
 
-msgid "CLOSE"
-msgstr "ЗАКРЫТЬ"
+msgid "VERTICAL"
+msgstr "ВЕРТИКАЛЬНО"
 
-msgid "CURRENT THEME"
-msgstr "ТЕКУЩАЯ ТЕМА"
+msgid "LIGHTGUN"
+msgstr "СВЕТОВОЙ ПИСТОЛЕТ"
 
-#, c-format
-msgid "CURRENTLY IN DOWNLOAD QUEUE"
-msgstr "В ОЧЕРЕДИ ЗАГРУЗКИ"
+msgid "STEERING WHEEL"
+msgstr "РУЛЬ"
 
-msgid "FINISHED"
-msgstr "ЗАВЕРШЕНО"
+msgid "TRACKBALL"
+msgstr "ТРЕКБОЛ"
 
-msgid "OK"
-msgstr "ОК"
+msgid "SPINNER"
+msgstr "СПИННЕР"
+
+msgid "HAVING MEDIAS"
+msgstr "ИМЕЮЩИЕ МЕДИА"
+
+msgid "MISSING MEDIAS"
+msgstr "ОТСУТСТВУЮЩИЕ МЕДИА"
+
+msgid "DOWNLOADING"
+msgstr "ЗАГРУЗКА"
+
+msgid "THEME INSTALLED SUCCESSFULLY"
+msgstr "ТЕМА УСПЕШНО УСТАНОВЛЕНА"
+
+msgid "THEME UNINSTALLED SUCCESSFULLY"
+msgstr "ТЕМА УДАЛЕНА"
+
+msgid "BEZELS INSTALLED SUCCESSFULLY"
+msgstr "РАМКИ УСПЕШНО УСТАНОВЛЕНЫ"
+
+msgid "BEZELS UNINSTALLED SUCCESSFULLY"
+msgstr "РАМКИ УСПЕШНО УДАЛЕНЫ"
+
+msgid "PACKAGE INSTALLED SUCCESSFULLY"
+msgstr "ПАКЕТ УСПЕШНО УСТАНОВЛЕН"
+
+msgid "PACKAGE REMOVED SUCCESSFULLY"
+msgstr "ПАКЕТ УСПЕШНО УДАЛЁН"
+
+msgid "FILENAME, ASCENDING"
+msgstr "НАЗВАНИЕ ФАЙЛА, ПО ВОЗРАСТАНИЮ"
+
+msgid "FILENAME, DESCENDING"
+msgstr "НАЗВАНИЕ ФАЙЛА, ПО УБЫВАНИЮ"
+
+msgid "RATING, ASCENDING"
+msgstr "РЕЙТИНГ, ПО ВОЗРАСТАНИЮ"
+
+msgid "RATING, DESCENDING"
+msgstr "РЕЙТИНГ, ПО УБЫВАНИЮ"
+
+msgid "TIMES PLAYED, ASCENDING"
+msgstr "СЫГРАНО РАЗ, ПО ВОЗРАСТАНИЮ"
+
+msgid "TIMES PLAYED, DESCENDING"
+msgstr "СЫГРАНО РАЗ, ПО УБЫВАНИЮ"
+
+msgid "LAST PLAYED, ASCENDING"
+msgstr "НЕДАВНО ИГРАЛИ, ПО ВОЗРАСТАНИЮ"
+
+msgid "LAST PLAYED, DESCENDING"
+msgstr "НЕДАВНО ИГРАЛИ, ПО УБЫВАНИЮ"
+
+msgid "NUMBER PLAYERS, ASCENDING"
+msgstr "КОЛ-ВО ИГРОКОВ, ПО ВОЗРАСТАНИЮ"
+
+msgid "NUMBER PLAYERS, DESCENDING"
+msgstr "КОЛ-ВО ИГРОКОВ, ПО УБЫВАНИЮ"
+
+msgid "RELEASE DATE, ASCENDING"
+msgstr "ДАТА РЕЛИЗА, ПО ВОЗРАСТАНИЮ"
+
+msgid "RELEASE DATE, DESCENDING"
+msgstr "ДАТА РЕЛИЗА, ПО УБЫВАНИЮ"
+
+msgid "GENRE, ASCENDING"
+msgstr "ЖАНР, ПО ВОЗРАСТАНИЮ"
+
+msgid "GENRE, DESCENDING"
+msgstr "ЖАНР, ПО УБЫВАНИЮ"
+
+msgid "DEVELOPER, ASCENDING"
+msgstr "РАЗРАБОТЧИК, ПО ВОЗРАСТАНИЮ"
+
+msgid "DEVELOPER, DESCENDING"
+msgstr "РАЗРАБОТЧИК, ПО УБЫВАНИЮ"
+
+msgid "PUBLISHER, ASCENDING"
+msgstr "ИЗДАТЕЛЬ, ПО ВОЗРАСТАНИЮ"
+
+msgid "PUBLISHER, DESCENDING"
+msgstr "ИЗДАТЕЛЬ, ПО УБЫВАНИЮ"
+
+msgid "SYSTEM, ASCENDING"
+msgstr "СИСТЕМЫ, ПО ВОЗРАСТАНИЮ"
+
+msgid "SYSTEM, DESCENDING"
+msgstr "СИСТЕМЫ, ПО УБЫВАНИЮ"
+
+msgid "FILE CREATION DATE, ASCENDING"
+msgstr "ДАТА СОЗДАНИЯ ФАЙЛА, ПО ВОЗРАСТАНИЮ"
+
+msgid "FILE CREATION DATE, DESCENDING"
+msgstr "ДАТА СОЗДАНИЯ ФАЙЛА, ПО УБЫВАНИЮ"
+
+msgid "GAME TIME, ASCENDING"
+msgstr "ВРЕМЯ ИГРЫ, ПО ВОЗРАСТАНИЮ"
+
+msgid "GAME TIME, DESCENDING"
+msgstr "ВРЕМЯ ИГРЫ, ПО УБЫВАНИЮ"
+
+msgid "SYSTEM, RELEASE YEAR, ASCENDING"
+msgstr "СИСТЕМЫ, ДАТА РЕЛИЗА, ПО ВОЗРАСТАНИЮ"
+
+msgid "SYSTEM, RELEASE YEAR, DESCENDING"
+msgstr "СИСТЕМЫ, ДАТА РЕЛИЗА, ПО УБЫВАНИЮ"
+
+msgid "RELEASE YEAR, SYSTEM, ASCENDING"
+msgstr "ДАТА РЕЛИЗА, СИСТЕМЫ, ПО ВОЗРАСТАНИЮ"
+
+msgid "RELEASE YEAR, SYSTEM, DESCENDING"
+msgstr "ДАТА РЕЛИЗА, СИСТЕМЫ, ПО УБЫВАНИЮ"
+
+msgid "SORTNAME, ASCENDING"
+msgstr ""
+
+msgid "SORTNAME, DESCENDING"
+msgstr ""
+
+msgid "A,AN,THE"
+msgstr "A,AN,THE"
 
 msgid "REFRESH"
 msgstr "ОБНОВИТЬ"
@@ -407,218 +835,14 @@ msgstr "СЕТЬ WIFI НЕ НАЙДЕНА"
 msgid "SEARCHING WI-FI NETWORKS"
 msgstr "ПОИСК WIFI СЕТИ"
 
-msgid "DEVICE OPTIONS"
-msgstr "ОПЦИИ УСТРОЙСТВА"
-
-msgid "DISCONNECT"
-msgstr "ОТКЛЮЧИТЬ"
-
-msgid "CONNECT"
-msgstr "ПОДКЛЮЧИТЬ"
-
-msgid "FORGET"
-msgstr "ЗАБЫТЬ"
-
-#, c-format
-msgid "ARE YOU SURE YOU WANT TO FORGET '%s' ?"
-msgstr "ВЫ УВЕРЕНЫ, ЧТО ХОТИТЕ ЗАБЫТЬ '%s' ?"
-
-msgid "YES"
-msgstr "ДА"
-
-msgid "NO"
-msgstr "НЕТ"
-
-#, c-format
-msgid "ARE YOU SURE YOU WANT TO CONNECT TO '%s' ?"
-msgstr "ВЫ УВЕРЕНЫ, ЧТО ХОТИТЕ ПОДКЛЮЧИТЬ '%s' ?"
-
-#, c-format
-msgid "ARE YOU SURE YOU WANT TO DISCONNECT '%s' ?"
-msgstr "ВЫ УВЕРЕНЫ, ЧТО ХОТИТЕ ОТКЛЮЧИТЬ '%s' ?"
-
-msgid "PAD TO KEYBOARD CONFIGURATION"
-msgstr "НАСТРОЙКИ PADTOKEY"
-
-msgid "SELECT ACTIONS TO CHANGE"
-msgstr "ВЫБЕРИТЕ ДЕЙСТВИЯ ДЛЯ ИЗМЕНЕНИЯ"
-
-msgid "SAVE"
-msgstr "СОХРАНИТЬ"
-
-msgid "DELETE"
-msgstr "УДАЛИТЬ"
-
-msgid "PLAYER 1"
-msgstr "ИГРОК 1"
-
-msgid "PLAYER 2"
-msgstr "ИГРОК 2"
-
-msgid "PLAYER 3"
-msgstr "ИГРОК 3"
-
-msgid "PLAYER 4"
-msgstr "ИГРОК 4"
-
-msgid "COMBINATIONS"
-msgstr "КОМБИНАЦИИ"
-
-msgid "MOUSE CURSOR"
-msgstr "КУРСОР МЫШИ"
-
-msgid "EMULATE MOUSE CURSOR"
-msgstr "ЭМУЛЯЦИЯ КУРСОРА МЫШИ"
-
-msgid "LEFT ANALOG STICK"
-msgstr "ЛЕВЫЙ СТИК"
-
-msgid "RIGHT ANALOG STICK"
-msgstr "ПРАВЫЙ СТИК"
-
-msgid "EDIT DESCRIPTION"
-msgstr "ИЗМЕНИТЬ ОПИСАНИЕ"
-
-msgid "ARE YOU SURE YOU WANT TO DELETE THIS ITEM?"
-msgstr "ВЫ УВЕРЕНЫ, ЧТО ХОТИТЕ УДАЛИТЬ ЭТОТ ОБЪЕКТ?"
-
-msgid "DELETE MAPPING"
-msgstr "УДАЛИТЬ СОПОСТАВЛЕНИЕ"
-
-msgid "SAVE CHANGES?"
-msgstr "СОХРАНИТЬ ИЗМЕНЕНИЯ?"
-
-msgid "ARE YOU SURE?"
-msgstr "ВЫ УВЕРЕНЫ?"
-
-msgid "INFORMATION"
-msgstr "ХАРАКТЕРИСТИКИ"
-
-msgid "VERSION"
-msgstr "ВЕРСИЯ"
-
-msgid "USER DISK USAGE"
-msgstr "ЗАНЯТО НА ДИСКЕ ПОЛЬЗОВАТЕЛЯ"
-
-msgid "SYSTEM DISK USAGE"
-msgstr "ЗАНЯТО НА СИСТЕМНОМ ДИСКЕ"
-
-msgid "SYSTEM"
-msgstr "СИСТЕМА"
-
-msgid "VIDEO DRIVER"
-msgstr "ВИДЕО ДРАЙВЕР"
-
-msgid "SEOUL"
-msgstr "SEOUL"
-
-msgid "NETPLAY SETTINGS"
-msgstr "НАСТРОЙКИ NETPLAY"
+msgid "RETROACHIEVEMENT SETTINGS"
+msgstr "НАСТРОЙКИ РЕТРОДОСТИЖЕНИЙ"
 
 msgid "SETTINGS"
 msgstr "НАСТРОЙКИ"
 
-msgid "ENABLE NETPLAY"
-msgstr "ВКЛЮЧИТЬ NETPLAY"
-
-msgid "NICKNAME"
-msgstr "НИКНЕЙМ"
-
-msgid "OPTIONS"
-msgstr "НАСТРОЙКИ"
-
-msgid "PORT"
-msgstr "ПОРТ"
-
-msgid "AUTOMATICALLY CREATE LOBBY"
-msgstr "АВТОМАТИЧЕСКИ СОЗДАВАТЬ ЛОББИ"
-
-msgid "Automatically creates a Netplay lobby when starting a game."
-msgstr "Автоматически создает лобби Netplay при начале игры."
-
-msgid "SHOW RELAY SERVER GAMES ONLY"
-msgstr "ПОКАЗАТЬ ТОЛЬКО ИГРЫ RELAY-СЕРВЕРА"
-
-msgid "Relay server games have a higher chance of successful entry."
-msgstr "Игры на relay-серверах имеют больше шансов на успешное подключение."
-
-msgid "SHOW UNAVAILABLE GAMES"
-msgstr "ПОКАЗАТЬ НЕДОСТУПНЫЕ ИГРЫ"
-
-msgid "Show rooms for games not present on this machine."
-msgstr "Показать комнаты для игр, отсутствующие на данном устройстве."
-
-msgid "GAME INDEXES"
-msgstr "ИНДЕКСЫ ИГРЫ"
-
-msgid "INDEX NEW GAMES AT STARTUP"
-msgstr "ИНДЕКСИРОВАТЬ НОВЫЕ ИГРЫ ПРИ ЗАПУСКЕ"
-
-msgid "INDEX GAMES"
-msgstr "ИНДЕКСАЦИЯ ИГР"
-
-msgid "USE RELAY SERVER"
-msgstr "ИСПОЛЬЗОВАТЬ RELAY-СЕРВЕР"
-
-msgid "NONE"
-msgstr "НЕТ"
-
-msgid "NEW YORK"
-msgstr "НЬЮ-ЙОРК"
-
-msgid "MADRID"
-msgstr "МАДРИД"
-
-msgid "MONTREAL"
-msgstr "МОНРЕАЛЬ"
-
-msgid "SAO PAULO"
-msgstr "САН-ПАУЛУ"
-
-msgid "CUSTOM"
-msgstr "ПОЛЬЗОВАТЕЛЬСКИЙ"
-
-msgid "CUSTOM RELAY SERVER"
-msgstr "ПОЛЬЗОВАТЕЛЬСКИЙ RELAY-СЕРВЕР"
-
-msgid "INPUT"
-msgstr "ВВОД"
-
-msgid "SEARCH"
-msgstr "ПОИСК"
-
-#, c-format
-msgid "%d of %d softcore points"
-msgstr "%d из %d очков софткора"
-
-#, c-format
-msgid "%d of %d hardcore points"
-msgstr "%d из %d очков хардкора"
-
-#, c-format
-msgid "%d%% (%d of %d)"
-msgstr "%d%% (%d из %d)"
-
 msgid "RETROACHIEVEMENTS"
 msgstr "РЕТРОДОСТИЖЕНИЯ"
-
-msgid "Softcore points"
-msgstr "Очки (софткор)"
-
-msgid "Points (hardcore)"
-msgstr "Очки (хардкор)"
-
-msgid "Rank"
-msgstr "Ранг"
-
-msgid "VIEW DETAILS"
-msgstr "ПОДРОБНЕЕ"
-
-msgid "LAUNCH"
-msgstr "ЗАПУСК"
-
-msgid "RETROACHIEVEMENT SETTINGS"
-msgstr "НАСТРОЙКИ РЕТРОДОСТИЖЕНИЙ"
 
 msgid "USERNAME"
 msgstr "ИМЯ ПОЛЬЗОВАТЕЛЯ"
@@ -692,11 +916,383 @@ msgstr "ПОКАЗЫВАТЬ РЕТРОДОСТИЖЕНИЯ В ГЛАВНОМ М
 msgid "View your RetroAchievement stats right from the main menu!"
 msgstr "Показать свою статистику RetroAchievement прямо из главного меню!"
 
+msgid "GAME INDEXES"
+msgstr "ИНДЕКСЫ ИГРЫ"
+
+msgid "INDEX NEW GAMES AT STARTUP"
+msgstr "ИНДЕКСИРОВАТЬ НОВЫЕ ИГРЫ ПРИ ЗАПУСКЕ"
+
+msgid "INDEX GAMES"
+msgstr "ИНДЕКСАЦИЯ ИГР"
+
 msgid "UNABLE TO ACTIVATE RETROACHIEVEMENTS:"
 msgstr "НЕВОЗМОЖНО АКТИВИРОВАТЬ РЕТРОДОСТИЖЕНИЯ:"
 
+msgid "CONTROLLER SETTINGS"
+msgstr "НАСТРОЙКИ КОНТРОЛЛЕРА"
+
+msgid "CONTROLLER & BLUETOOTH SETTINGS"
+msgstr "НАСТРОЙКИ КОНТРОЛЛЕРОВ И УСТРОЙСТВ"
+
+msgid "CONTROLLERS PRIORITY"
+msgstr "ПРИОРИТЕТ КОНТРОЛЛЕРОВ"
+
+msgid "PLAYER ASSIGNMENTS"
+msgstr "НАЗНАЧЕНИЯ ИГРОКА"
+
+#, c-format
+msgid "CONTROLLER #%i"
+msgstr "КОНТРОЛЛЕР #%i"
+
+#, c-format
+msgid "P%i'S CONTROLLER"
+msgstr "P%i КОНТРОЛЛЕР"
+
+msgid "CONTROLLER MAPPING"
+msgstr "НАСТРОЙКА КОНТРОЛЛЕРОВ"
+
+msgid ""
+"YOU ARE GOING TO MAP A CONTROLLER. MAP BASED ON THE BUTTON'S POSITION, NOT "
+"ITS PHYSICAL LABEL. IF YOU DO NOT HAVE A SPECIAL BUTTON FOR HOTKEY, USE THE "
+"SELECT BUTTON. SKIP ALL BUTTONS/STICKS YOU DO NOT HAVE BY HOLDING ANY "
+"BUTTON. PRESS THE SOUTH BUTTON TO CONFIRM WHEN DONE."
+msgstr ""
+"ВЫ СОБИРАЕТЕСЬ НАСТРОИТЬ КОНТРОЛЛЕР. РАСКЛАДКА ОСНОВАНА НА СТОРОНАХ СВЕТА "
+"(СЕВЕР, ЮГ, ЗАПАД, ВОСТОК). ЕСЛИ У ВАС ОТСУТСТВУЕТ ОТДЕЛЬНОЙ КНОПКИ ДЛЯ "
+"ХОТКЕЯ, ИСПОЛЬЗУЙТЕ КНОПКУ SELECT. ПРОПУСТИТЕ ВСЕ КНОПКИ/СТИКИ, КОТОРЫХ У "
+"ВАС НЕТ, УДЕРЖИВАЯ ЛЮБУЮ КНОПКУ."
+
+msgid "SINDEN GUN SETTINGS"
+msgstr "НАСТРОЙКИ SINDEN GUN"
+
+msgid "WIIMOTE GUN SETTINGS"
+msgstr "НАСТРОЙКИ WIIMOTE GUN"
+
+msgid "STEAMDECK MOUSE/GUN SETTINGS"
+msgstr "STEAMDECK МЫШЬ/НАСТРОЙКИ ПИСТОЛЕТА"
+
+msgid "BLUETOOTH"
+msgstr "BLUETOOTH"
+
+msgid "ENABLE BLUETOOTH"
+msgstr "ВКЛЮЧИТЬ BLUETOOTH"
+
+msgid "PAIR BLUETOOTH PADS AUTOMATICALLY"
+msgstr "АВТОМАТИЧЕСКОЕ СОПРЯЖЕНИЕ BLUETOOTH УСТРОЙСТВ"
+
+msgid "ENABLE BLUETOOTH LEGACY SEARCH"
+msgstr ""
+
+msgid "PAIR A BLUETOOTH DEVICE MANUALLY"
+msgstr "РУЧНОЕ СОПРЯЖЕНИЕ BLUETOOTH УСТРОЙСТВ"
+
 msgid "BLUETOOTH DEVICE LIST"
 msgstr "СПИСОК BLUETOOTH УСТРОЙСТВ"
+
+msgid "DISPLAY OPTIONS"
+msgstr "НАСТРОЙКИ ЭКРАНА"
+
+msgid "SHOW CONTROLLER NOTIFICATIONS"
+msgstr "ПОКАЗЫВАТЬ УВЕДОМЛЕНИЯ КОНТРОЛЛЕРА"
+
+msgid "SHOW CONTROLLER ACTIVITY"
+msgstr "ПОКАЗАТЬ АКТИВНОСТЬ КОНТРОЛЛЕРА"
+
+msgid "SHOW CONTROLLER BATTERY LEVEL"
+msgstr "ПОКАЗАТЬ УРОВЕНЬ ЗАРЯДА КОНТРОЛЛЕРА"
+
+msgid "DRAW GUN CROSSHAIR"
+msgstr "ОТОБРАЖАТЬ ПЕРЕКРЕСТИЕ ПИСТОЛЕТА"
+
+msgid "BEHAVIOR"
+msgstr "ПОВЕДЕНИЕ"
+
+msgid "RESTRICT HOTKEYS TO EXIT"
+msgstr "ОГРАНИЧИТЬ ХОТКЕИ ДЛЯ ВЫХОДА"
+
+msgid "default"
+msgstr "по умолчанию"
+
+msgid "NOT CONNECTED"
+msgstr "НЕ ПОДКЛЮЧЕНО"
+
+msgid "BORDER SIZE"
+msgstr "РАЗМЕР РАМКИ"
+
+msgid "AUTO"
+msgstr "АВТО"
+
+msgid "THIN"
+msgstr "ТОНКИЙ"
+
+msgid "MEDIUM"
+msgstr "СРЕДНИЙ"
+
+msgid "BIG"
+msgstr "БОЛЬШОЙ"
+
+msgid "BORDER MODE"
+msgstr "РЕЖИМ ГРАНИЦ"
+
+msgid "NORMAL"
+msgstr "НОРМАЛЬНЫЙ"
+
+msgid "IN GAME ONLY"
+msgstr "ТОЛЬКО В ИГРЕ"
+
+msgid "HIDDEN"
+msgstr "СКРЫТЫЙ"
+
+msgid "BORDER COLOR"
+msgstr "ЦВЕТ РАМКИ"
+
+msgid "WHITE"
+msgstr "БЕЛЫЙ"
+
+msgid "RED"
+msgstr "КРАСНЫЙ"
+
+msgid "GREEN"
+msgstr "ЗЕЛЁНЫЙ"
+
+msgid "BLUE"
+msgstr "СИНИЙ"
+
+msgid "BORDER RATIO"
+msgstr "СООТНОШЕНИЕ РАМКИ"
+
+msgid "CAMERA CONTRAST"
+msgstr "КОНТРАСТ КАМЕРЫ"
+
+msgid "Daytime/Bright Sunlight (40)"
+msgstr "Дневное время/яркий солнечный свет (40)"
+
+msgid "Default (50)"
+msgstr "По умолчанию (50)"
+
+msgid "Dim Display/Evening (60)"
+msgstr "Тусклый дисплей/вечер (60)"
+
+msgid "CAMERA BRIGHTNESS"
+msgstr "ЯРКОСТЬ КАМЕРЫ"
+
+msgid "Daytime/Bright Sunlight (80)"
+msgstr "Дневное время/яркий солнечный свет (80)"
+
+msgid "Default (100)"
+msgstr "По умолчанию (100)"
+
+msgid "Dim Display/Evening (120)"
+msgstr "Тусклый дисплей/вечер (120)"
+
+msgid "CAMERA EXPOSURE"
+msgstr "ЭКСПОЗИЦИЯ КАМЕРЫ"
+
+msgid "Projector/CRT (-5)"
+msgstr "Проектор/ЭЛТ (-5)"
+
+msgid "Projector/CRT (-6)"
+msgstr "Проектор/ЭЛТ (-6)"
+
+msgid "Default (-7)"
+msgstr "По умолчанию (-7)"
+
+msgid "Other (-8)"
+msgstr "Другой (-8)"
+
+msgid "Other (-9)"
+msgstr "Другой (-9)"
+
+msgid "RECOIL"
+msgstr "RECOIL"
+
+msgid "DISABLED"
+msgstr "ОТКЛЮЧЕНО"
+
+msgid "GUN"
+msgstr "GUN"
+
+msgid "MACHINE GUN"
+msgstr "MACHINE GUN"
+
+msgid "QUIET GUN"
+msgstr "QUIET GUN"
+
+msgid "QUIET MACHINE GUN"
+msgstr "QUIET MACHINE GUN"
+
+msgid "MODE"
+msgstr "РЕЖИМ"
+
+msgid "JOYSTICK"
+msgstr "ДЖОЙСТИК"
+
+msgid "MOUSE ONLY"
+msgstr "ТОЛЬКО МЫШЬ"
+
+msgid "HAND"
+msgstr "РУКА"
+
+msgid "LEFT"
+msgstr "ВЛЕВО"
+
+msgid "RIGHT"
+msgstr "ВПРАВО"
+
+msgid "CONNECT TO NETPLAY"
+msgstr "ПОДКЛЮЧИТЬСЯ К NETPLAY"
+
+msgid "Select a game lobby to join"
+msgstr "Выберите лобби для присоединения"
+
+msgid "CLOSE"
+msgstr "ЗАКРЫТЬ"
+
+msgid "PLEASE WAIT"
+msgstr "ПОДОЖДИТЕ"
+
+msgid "FAILED"
+msgstr "НЕ УДАЛОСЬ"
+
+msgid "LAUNCH"
+msgstr "ЗАПУСК"
+
+msgid "UNKNOWN ROM VERSION"
+msgstr "НЕИЗВЕСТНАЯ ROM ВЕРСИЯ"
+
+msgid "DIFFERENT ROM"
+msgstr "ДРУГОЙ ROM"
+
+msgid "SAME ROM"
+msgstr "ОДИНАКОВЫЙ ROM"
+
+msgid "UNAVAILABLE CORE"
+msgstr "НЕДОСТУПНОЕ ЯДРО"
+
+msgid "LAN GAMES"
+msgstr "ИГРЫ ПО ЛОКАЛЬНОЙ СЕТИ"
+
+msgid "ONLINE GAMES"
+msgstr "СЕТЕВЫЕ ИГРЫ"
+
+msgid "AVAILABLE GAMES"
+msgstr "ДОСТУПНЫЕ ИГРЫ"
+
+msgid "UNAVAILABLE GAMES"
+msgstr "НЕДОСТУПНЫЕ ИГРЫ"
+
+msgid "NO GAMES FOUND"
+msgstr "ИГР НЕ НАЙДЕНО"
+
+msgid "JOIN GAME"
+msgstr "ПРИСОЕДИНИТЬСЯ К ИГРЕ"
+
+msgid "WATCH GAME"
+msgstr "СМОТРЕТЬ ИГРУ"
+
+msgid "PAD TO KEYBOARD CONFIGURATION"
+msgstr "НАСТРОЙКИ PADTOKEY"
+
+msgid "SELECT ACTIONS TO CHANGE"
+msgstr "ВЫБЕРИТЕ ДЕЙСТВИЯ ДЛЯ ИЗМЕНЕНИЯ"
+
+msgid "SAVE"
+msgstr "СОХРАНИТЬ"
+
+msgid "DELETE"
+msgstr "УДАЛИТЬ"
+
+msgid "PLAYER 1"
+msgstr "ИГРОК 1"
+
+msgid "PLAYER 2"
+msgstr "ИГРОК 2"
+
+msgid "PLAYER 3"
+msgstr "ИГРОК 3"
+
+msgid "PLAYER 4"
+msgstr "ИГРОК 4"
+
+msgid "COMBINATIONS"
+msgstr "КОМБИНАЦИИ"
+
+msgid "MOUSE CURSOR"
+msgstr "КУРСОР МЫШИ"
+
+msgid "EMULATE MOUSE CURSOR"
+msgstr "ЭМУЛЯЦИЯ КУРСОРА МЫШИ"
+
+msgid "LEFT ANALOG STICK"
+msgstr "ЛЕВЫЙ СТИК"
+
+msgid "RIGHT ANALOG STICK"
+msgstr "ПРАВЫЙ СТИК"
+
+msgid "EDIT DESCRIPTION"
+msgstr "ИЗМЕНИТЬ ОПИСАНИЕ"
+
+msgid "ARE YOU SURE YOU WANT TO DELETE THIS ITEM?"
+msgstr "ВЫ УВЕРЕНЫ, ЧТО ХОТИТЕ УДАЛИТЬ ЭТОТ ОБЪЕКТ?"
+
+msgid "DELETE MAPPING"
+msgstr "УДАЛИТЬ СОПОСТАВЛЕНИЕ"
+
+msgid "SAVE CHANGES?"
+msgstr "СОХРАНИТЬ ИЗМЕНЕНИЯ?"
+
+msgid "ARE YOU SURE?"
+msgstr "ВЫ УВЕРЕНЫ?"
+
+#, c-format
+msgid "%d of %d softcore points"
+msgstr "%d из %d очков софткора"
+
+#, c-format
+msgid "%d of %d hardcore points"
+msgstr "%d из %d очков хардкора"
+
+#, c-format
+msgid "%d%% (%d of %d)"
+msgstr "%d%% (%d из %d)"
+
+msgid "Softcore points"
+msgstr "Очки (софткор)"
+
+msgid "Points (hardcore)"
+msgstr "Очки (хардкор)"
+
+msgid "Rank"
+msgstr "Ранг"
+
+msgid "VIEW DETAILS"
+msgstr "ПОДРОБНЕЕ"
+
+msgid "FINISHED"
+msgstr "ЗАВЕРШЕНО"
+
+msgid "EDIT METADATA"
+msgstr "РЕДАКТИРОВАТЬ МЕТАДАННЫЕ"
+
+msgid "GENRES"
+msgstr "ЖАНРЫ"
+
+msgid "SCRAPE"
+msgstr "ЗАГРУЗИТЬ ДАННЫЕ"
+
+msgid ""
+"THIS WILL DELETE THE ACTUAL GAME FILE(S)!\n"
+"ARE YOU SURE?"
+msgstr ""
+"УДАЛЕНИЕ ФАЙЛОВ ИГРЫ!\n"
+"ВЫ УВЕРЕНЫ?"
+
+msgid ""
+"SOME FILES YOU LINKED ARE LOCATED OUTSIDE THE GAMELIST PATH.\n"
+"DO YOU WANT TO USE A COPY OF THESE FILES RELATIVE TO THE GAMELIST ?"
+msgstr ""
+"НЕКОТОРЫЕ ФАЙЛЫ, РАСПОЛОЖЕНЫ ВНЕ ПАПКИ СО СПИСКОМ ИГР.\n"
+"ВЫ ХОТИТЕ СОЗДАТЬ КОПИЮ ЭТИХ ФАЙЛОВ В ПАПКУ СО СПИСКОМ ИГР?"
 
 msgid "REMOVE ALL"
 msgstr "УДАЛИТЬ ВСЕ"
@@ -707,6 +1303,9 @@ msgstr "BLUETOOTH УСТРОЙСТВА НЕ НАЙДЕНЫ"
 msgid " (Connected)"
 msgstr " (Подключено)"
 
+msgid "REMOVE"
+msgstr "УДАЛИТЬ"
+
 msgid "BLUETOOTH DEVICES HAVE BEEN DELETED."
 msgstr "BLUETOOTH УСТРОЙСТВО УДАЛЕНО."
 
@@ -714,60 +1313,276 @@ msgstr "BLUETOOTH УСТРОЙСТВО УДАЛЕНО."
 msgid "ARE YOU SURE YOU WANT TO REMOVE '%s' ?"
 msgstr "ВЫ УВЕРЕНЫ, ЧТО ХОТИТЕ УДАЛИТЬ '%s'?"
 
-msgid "THE BEZEL PROJECT"
-msgstr "НАБОР РАМОК (ОВЕРЛЕЕВ)"
+msgid "BACKUP USER DATA"
+msgstr "РЕЗЕРВНАЯ КОПИЯ"
 
-msgid "SELECT BEZELS TO INSTALL/REMOVE"
-msgstr "ВЫБЕРИТЕ РАМКИ (ОВЕРЛЕИ) ДЛЯ УСТАНОВКИ/УДАЛЕНИЯ"
+msgid "TARGET DEVICE"
+msgstr "ЦЕЛЕВОЕ УСТРОЙСТВО"
 
-#, c-format
-msgid "UPDATING %s"
-msgstr "ОБНОВЛЕНИЕ %s"
+msgid "NO DEVICE FOUND"
+msgstr "УСТРОЙСТВО НЕ НАЙДЕНО"
 
-msgid "UPDATE IS READY"
-msgstr "ОБНОВЛЕНИЕ ГОТОВО"
+msgid "START"
+msgstr "НАЧАТЬ"
 
-msgid "REBOOT TO APPLY"
-msgstr "ПЕРЕЗАГРУЗИТЕ ДЛЯ ПРИМЕНЕНИЯ"
+msgid "VIEW OPTIONS"
+msgstr "НАСТРОЙКИ"
 
-msgid "REALLY UPDATE?"
-msgstr "ЖЕЛАЕТЕ ОБНОВИТЬ?"
+msgid "go back"
+msgstr "назад"
 
-#, c-format
-msgid ""
-"YOU ARE CURRENTLY USING VERSION %s\n"
-"DO YOU WANT TO UPDATE TO VERSION %s?"
+msgid "NAVIGATION"
+msgstr "НАВИГАЦИЯ"
+
+msgid "OTHER FILTERS"
+msgstr "ДРУГИЕ ФИЛЬТРЫ"
+
+msgid "SELECT RANDOM GAME"
+msgstr "ВЫБРАТЬ СЛУЧАЙНУЮ ИГРУ"
+
+msgid "JUMP TO GAME BEGINNING WITH THE LETTER"
+msgstr "ПЕРЕЙТИ К ИГРЕ НАЧИНАЮЩЕЙСЯ С БУКВЫ"
+
+msgid "SORT GAMES BY"
+msgstr "СОРТИРОВКА ПО"
+
+msgid "DYNAMIC COLLECTION"
+msgstr "ДИНАМИЧЕСКАЯ КОЛЛЕКЦИЯ"
+
+msgid "EDIT DYNAMIC COLLECTION FILTERS"
+msgstr "ИЗМЕНИТЬ ФИЛЬТРЫ ДИНАМ. КОЛЛЕКЦИИ"
+
+msgid "CUSTOM COLLECTION"
+msgstr "СВОЯ КОЛЛЕКЦИЯ"
+
+msgid "DELETE COLLECTION"
+msgstr "УДАЛИТЬ КОЛЛЕКЦИЮ"
+
+msgid "COLLECTION"
+msgstr "КОЛЛЕКЦИЯ"
+
+msgid "CREATE NEW DYNAMIC COLLECTION"
+msgstr "СОЗДАТЬ ДИНАМИЧЕСКУЮ КОЛЛЕКЦИЮ"
+
+msgid "GAMELIST VIEW STYLE"
+msgstr "ВИД СПИСКА ИГР"
+
+msgid "automatic"
+msgstr "автоматически"
+
+msgid "VIEW CUSTOMIZATION"
+msgstr "ПОСМОТРЕТЬ НАСТРОЙКИ"
+
+msgid "VIEW PAD TO KEYBOARD INFORMATION"
+msgstr "ПОСМОТРЕТЬ ДАННЫЕ PADTOKEY"
+
+msgid "ADVANCED SYSTEM OPTIONS"
+msgstr "ДОПОЛНИТЕЛЬНЫЕ НАСТРОЙКИ СИСТЕМЫ"
+
+msgid "RESET FILTERS"
+msgstr "СБРОСИТЬ ФИЛЬТРЫ"
+
+msgid "THIS FUNCTION IS DISABLED WHILE THE SCRAPER IS RUNNING"
+msgstr "ЭТА ФУНКЦИЯ ОТКЛЮЧЕНА ВО ВРЕМЯ СКАНИРОВАНИЯ"
+
+msgid "New Collection Name"
+msgstr "Название новой коллекции"
+
+msgid "PARIS"
 msgstr ""
-"ВЫ ИСПОЛЬЗУЕТЕ ВЕРСИЮ %s\n"
-"ХОТИТЕ ОБНОВИТЬ ДО ВЕРСИИ %s?"
+
+msgid "OSAKA"
+msgstr ""
+
+msgid "SEOUL"
+msgstr "SEOUL"
+
+msgid "NETPLAY SETTINGS"
+msgstr "НАСТРОЙКИ NETPLAY"
+
+msgid "ENABLE NETPLAY"
+msgstr "ВКЛЮЧИТЬ NETPLAY"
+
+msgid "NICKNAME"
+msgstr "НИКНЕЙМ"
+
+msgid "PORT"
+msgstr "ПОРТ"
+
+msgid "AUTOMATICALLY CREATE LOBBY"
+msgstr "АВТОМАТИЧЕСКИ СОЗДАВАТЬ ЛОББИ"
+
+msgid "Automatically creates a Netplay lobby when starting a game."
+msgstr "Автоматически создает лобби Netplay при начале игры."
+
+msgid "SHOW RELAY SERVER GAMES ONLY"
+msgstr "ПОКАЗАТЬ ТОЛЬКО ИГРЫ RELAY-СЕРВЕРА"
+
+msgid "Relay server games have a higher chance of successful entry."
+msgstr "Игры на relay-серверах имеют больше шансов на успешное подключение."
+
+msgid "SHOW UNAVAILABLE GAMES"
+msgstr "ПОКАЗАТЬ НЕДОСТУПНЫЕ ИГРЫ"
+
+msgid "Show rooms for games not present on this machine."
+msgstr "Показать комнаты для игр, отсутствующие на данном устройстве."
+
+msgid "USE RELAY SERVER"
+msgstr "ИСПОЛЬЗОВАТЬ RELAY-СЕРВЕР"
+
+msgid "NONE"
+msgstr "НЕТ"
+
+msgid "NEW YORK"
+msgstr "НЬЮ-ЙОРК"
+
+msgid "MADRID"
+msgstr "МАДРИД"
+
+msgid "MONTREAL"
+msgstr "МОНРЕАЛЬ"
+
+msgid "SAO PAULO"
+msgstr "САН-ПАУЛУ"
+
+msgid "CUSTOM"
+msgstr "ПОЛЬЗОВАТЕЛЬСКИЙ"
+
+msgid "CUSTOM RELAY SERVER"
+msgstr "ПОЛЬЗОВАТЕЛЬСКИЙ RELAY-СЕРВЕР"
+
+msgid "GAME MEDIA"
+msgstr "МЕДИА ИГРЫ"
+
+msgid "VIEW GAME MANUAL"
+msgstr "ПОСМОТРЕТЬ РУКОВОДСТВО"
+
+msgid "VIEW GAME MAGAZINE"
+msgstr "ПОСМОТРЕТЬ ЖУРНАЛ"
+
+msgid "VIEW GAME MAP"
+msgstr "ПОСМОТРЕТЬ КАРТУ"
+
+msgid "VIEW FULLSCREEN VIDEO"
+msgstr "ПОСМОТРЕТЬ ВИДЕО НА ВЕСЬ ЭКРАН"
+
+msgid "VIEW GAME MEDIA"
+msgstr "ПОСМОТРЕТЬ МЕДИА ИГРЫ"
+
+msgid "CURRENT CORE IS NOT COMPATIBLE"
+msgstr "ТЕКУЩЕЕ ЯДРО НЕ СОВМЕСТИМО"
+
+msgid "COMPATIBLE CORE(S)"
+msgstr "СОВМЕСТИМЫЕ ЯДРА"
+
+msgid "VIEW THIS GAME'S ACHIEVEMENTS"
+msgstr "ПОСМОТРЕТЬ ДОСТИЖЕНИЯ ИГРЫ"
+
+msgid "GAME"
+msgstr "ИГРА"
+
+msgid "SET GAME SPECIFIC SPLASH MEDIA"
+msgstr ""
+
+msgid "THE SELECTED FILE TYPE IS NOT SUPPORTED."
+msgstr ""
+
+msgid "FAILED TO CREATE SPLASH DIRECTORY."
+msgstr ""
+
+msgid "FAILED TO CREATE SYSTEM SPLASH DIRECTORY."
+msgstr ""
+
+msgid "THE SELECTED FILE IS ALREADY USED."
+msgstr ""
+
+msgid "UNABLE TO REMOVE EXISTING FILE."
+msgstr ""
+
+msgid "FAILED TO SAVE THE SELECTED FILE."
+msgstr ""
+
+msgid "CUSTOM LOADING MEDIA SAVED."
+msgstr ""
+
+msgid "SELECT MEDIA FILE"
+msgstr ""
+
+msgid "OPEN"
+msgstr "ОТКРЫТЬ"
+
+msgid "START A NETPLAY GAME"
+msgstr "НАЧАТЬ NETPLAY ИГРУ"
+
+msgid "START GAME"
+msgstr "НАЧАТЬ ИГРУ"
+
+msgid "HOST A NETPLAY GAME"
+msgstr "ХОСТ NETPLAY ИГРЫ"
+
+msgid "PUBLICLY ANNOUNCE GAME"
+msgstr "ПУБЛИЧНО АНОНСИРУЕМАЯ ИГРА"
+
+msgid "PLAYER PASSWORD"
+msgstr "ПАРОЛЬ ИГРОКА"
+
+msgid "VIEWER PASSWORD"
+msgstr "ПАРОЛЬ ЗРИТЕЛЯ"
+
+msgid "FIND SIMILAR GAMES..."
+msgstr "НАЙТИ ПОХОЖИЕ ИГРЫ..."
+
+msgid "DELETE ITEM"
+msgstr "УДАЛИТЬ ОБЪЕКТ"
+
+msgid "DELETE GAME"
+msgstr "УДАЛИТЬ ИГРУ"
+
+msgid "HIDE GAME"
+msgstr ""
+
+msgid "UNHIDE GAME"
+msgstr ""
+
+msgid "CREATE MULTIDISC"
+msgstr ""
+
+msgid ""
+"THIS WILL CREATE A MULTI-DISC FILE(S)!\n"
+"ARE YOU SURE?"
+msgstr ""
 
 #, c-format
-msgid ""
-"UNOFFICIAL SYSTEM MODIFICATIONS DETECTED.\n"
-"UPGRADING COULD BREAK YOUR SYSTEM.\n"
-"DO YOU WANT TO UPDATE TO VERSION %s?"
-msgstr ""
-"ОБНАРУЖЕНЫ НЕОФИЦИАЛЬНЫЕ МОДИФИКАЦИИ СИСТЕМЫ.\n"
-"ОБНОВЛЕНИЕ МОЖЕТ СЛОМАТЬ ВАШУ СИСТЕМУ.\n"
-"ХОТИТЕ ЛИ ВЫ ОБНОВИТЬСЯ ДО ВЕРСИИ %s?"
+msgid "REMOVE FROM %s"
+msgstr "УДАЛИТЬ ИЗ %s"
 
-msgid "NETWORK CONNECTION NEEDED"
-msgstr "ТРЕБУЕТСЯ ПОДКЛЮЧЕНИЕ К СЕТИ"
+#, c-format
+msgid "ADD TO %s"
+msgstr "ДОБАВИТЬ В %s"
 
-msgid "NO UPDATE AVAILABLE"
-msgstr "ОБНОВЛЕНИЙ НЕТ"
+msgid "ADD TO CUSTOM COLLECTION..."
+msgstr "ДОБАВИТЬ В КОЛЛЕКЦИЮ..."
+
+msgid "EDIT PADTOKEY PROFILE"
+msgstr "ИЗМЕНИТЬ ПРОФИЛЬ PADTOKEY"
+
+msgid "CREATE PADTOKEY PROFILE"
+msgstr "СОЗДАТЬ ПРОФИЛЬ PADTOKEY"
+
+msgid "ADVANCED GAME OPTIONS"
+msgstr "ДОПОЛНИТЕЛЬНЫЕ НАСТРОЙКИ ИГРЫ"
+
+msgid "EDIT FOLDER METADATA"
+msgstr "РЕДАКТИРОВАТЬ МЕТАДАННЫЕ ПАПКИ"
+
+msgid "EDIT THIS GAME'S METADATA"
+msgstr "РЕДАКТИРОВАТЬ МЕТАДАННЫЕ"
 
 msgid "SCRAPER"
 msgstr "СКРАПЕР"
 
-msgid "SCRAPE"
-msgstr "ЗАГРУЗИТЬ ДАННЫЕ"
-
 msgid "ACCOUNTS"
 msgstr "АККАУНТЫ"
-
-msgid "go back"
-msgstr "назад"
 
 msgid "SCRAPING DATABASE"
 msgstr "ИСТОЧНИК ЗАГРУЗКИ"
@@ -820,9 +1635,6 @@ msgstr "ВЫБРАННЫЕ СИСТЕМЫ"
 msgid "SCRAPE NOW"
 msgstr "ЗАГРУЗИТЬ ДАННЫЕ"
 
-msgid "START"
-msgstr "НАЧАТЬ"
-
 msgid "IMAGE SOURCE"
 msgstr "СТИЛЬ ИЗОБРАЖЕНИЯ"
 
@@ -864,9 +1676,6 @@ msgstr "БАНЕР"
 
 msgid "PREFERED REGION"
 msgstr "ПРЕДПОЧИТАЕМЫЙ РЕГИОН"
-
-msgid "AUTO"
-msgstr "АВТО"
 
 msgid "OVERWRITE NAMES"
 msgstr "ПЕРЕЗАПИСЫВАТЬ НАЗВАНИЯ"
@@ -930,27 +1739,6 @@ msgstr ""
 
 msgid "SCRAPING IS RUNNING. DO YOU WANT TO STOP IT?"
 msgstr "ДАННЫЕ ЗАГРУЖАЮТСЯ. ОСТАНОВИТЬ?"
-
-msgid "NO GAMES FIT THAT CRITERIA."
-msgstr "НЕТ ПОДХОДЯЩИХ ИГР."
-
-msgid "INSTALL ON A NEW DISK"
-msgstr "УСТАНОВИТЬ НА НОВЫЙ ДИСК"
-
-msgid "TARGET DEVICE"
-msgstr "ЦЕЛЕВОЕ УСТРОЙСТВО"
-
-msgid "SELECT"
-msgstr "ВЫБОР"
-
-msgid "TARGET ARCHITECTURE"
-msgstr "ЦЕЛЕВАЯ АРХИТЕКТУРА"
-
-msgid "NETWORK REQUIRED"
-msgstr "ТРЕБУЕТСЯ СЕТЬ"
-
-msgid "INVALID PARAMETERS"
-msgstr "НЕВЕРНЫЕ ПАРАМЕТРЫ"
 
 msgid "fade"
 msgstr "затухание"
@@ -1074,6 +1862,9 @@ msgstr "ПРОИЗВОДИТЕЛЬ"
 msgid "RENDERER"
 msgstr "РЕНДЕР"
 
+msgid "VERSION"
+msgstr "ВЕРСИЯ"
+
 msgid "SHADERS"
 msgstr "ШЕЙДЕРЫ"
 
@@ -1094,6 +1885,9 @@ msgstr "ГЛАВНОЕ МЕНЮ"
 
 msgid "KODI MEDIA CENTER"
 msgstr "МЕДИАЦЕНТР KODI"
+
+msgid "PLATFORM SETTINGS"
+msgstr ""
 
 msgid "GAME SETTINGS"
 msgstr "ИГРОВЫЕ НАСТРОЙКИ"
@@ -1122,20 +1916,384 @@ msgstr "ОБНОВЛЕНИЯ И ЗАГРУЗКИ"
 msgid "SYSTEM SETTINGS"
 msgstr "НАСТРОЙКИ СИСТЕМЫ"
 
+msgid "INFORMATION"
+msgstr "ХАРАКТЕРИСТИКИ"
+
 msgid "UNLOCK USER INTERFACE MODE"
 msgstr "РАЗБЛОКИРОВАТЬ ИНТЕРФЕЙС"
 
-msgid "QUIT"
-msgstr "ВЫХОД"
+msgid "LOADING SPLASH OPTION"
+msgstr ""
+
+msgid "SHOW DEFAULT SPLASH"
+msgstr ""
+
+msgid "SHOW CUSTOM SPLASH"
+msgstr ""
+
+msgid "SHOW RANDOM SPLASH"
+msgstr ""
+
+msgid "USE SCRAPED MEDIA"
+msgstr ""
+
+msgid "EXIT SPLASH OPTION"
+msgstr ""
+
+msgid "PLAY CUSTOM SPLASH"
+msgstr ""
+
+msgid "VIDEO MODE"
+msgstr "РАЗРЕШЕНИЕ"
+
+msgid "You are about to set EmuELEC resolution to:"
+msgstr ""
+
+msgid "Do you want to proceed ?"
+msgstr ""
+
+msgid "A REBOOT OF THE SYSTEM IS REQUIRED TO APPLY THE NEW CONFIGURATION"
+msgstr ""
+
+msgid "BUTTON LED COLOR"
+msgstr "ЦВЕТ КНОПКИ"
+
+msgid "STATUS LED"
+msgstr ""
+
+msgid "AUDIO DEVICE"
+msgstr ""
+
+msgid "Changes will need an EmulationStation restart."
+msgstr ""
+
+msgid "ENABLE SSH"
+msgstr ""
+
+msgid "START AT BOOT"
+msgstr ""
+
+msgid "RETROARCH LOGGING"
+msgstr ""
+
+msgid "SHOW RETROARCH FPS"
+msgstr ""
+
+msgid "ENABLE RA SPLASH"
+msgstr ""
+
+msgid "ALWAYS SHOW BOOT VIDEO"
+msgstr ""
+
+msgid "RANDOMIZE BOOT VIDEO"
+msgstr ""
+
+msgid "CONFIGURE SPLASH OPTIONS"
+msgstr ""
+
+msgid "DEFAULT YOUTUBE SEARCH WORD"
+msgstr ""
+
+msgid "GAMEPAD CONFIG"
+msgstr ""
+
+msgid "RETROARCH MENU"
+msgstr ""
+
+msgid "EXTERNAL MOUNT OPTIONS"
+msgstr ""
+
+msgid "DANGER ZONE"
+msgstr ""
+
+msgid "SPLASH SETTINGS"
+msgstr ""
+
+msgid "SPLASH LOADING OPTION"
+msgstr ""
+
+msgid "SET CUSTOM SPLASH LOADING MEDIA FILE"
+msgstr ""
+
+msgid "SET RANDOM SPLASH LOADING MEDIA FOLDER"
+msgstr ""
+
+msgid "SCRAPE XML PATH"
+msgstr ""
+
+msgid "SPLASH LOAD PLATFORMS AND ROMS"
+msgstr ""
+
+msgid "SPLASH LOADING DURATION"
+msgstr ""
+
+msgid "SPLASH EXIT OPTION"
+msgstr ""
+
+msgid "SET CUSTOM SPLASH EXIT MEDIA FILE"
+msgstr ""
+
+msgid "SPLASH EXIT DURATION"
+msgstr ""
+
+msgid "PUT RANDOM MEDIA IN '/storage/roms/splash/random'."
+msgstr ""
+
+msgid "SETTING DURATION 0 WILL MAKE VIDEOS DEFAULT TO PLAY 3 SECONDS."
+msgstr ""
+
+msgid "SETTING DURATIONS GREATER THAN 0 WILL ADD TO LOADING/EXIT SPLASH TIMES."
+msgstr ""
+
+msgid "CONNECT WIIMOTE(S)"
+msgstr ""
+
+msgid ""
+"Please ensure your Wiimote is in pairing mode (press buttons 1+2).\n"
+"\n"
+"When all the LED's are blinking,\n"
+"press OK to start the connection.\n"
+"\n"
+"This process can take a while, be patient!\n"
+"\n"
+"If the LED's stop blinking before the wiimote has been successfully paired, "
+"press buttons 1+2 again."
+msgstr ""
+
+msgid ""
+"SCANNING FOR WIIMOTE...If Wiimote stops blinking before a successfull "
+"pairing, hold 1+2 again."
+msgstr ""
+
+msgid "Wiimote successfully connected."
+msgstr ""
+
+msgid "Connection failed."
+msgstr ""
+
+msgid "ACTIVATE WIIMOTE WITH IR-SENSORBAR"
+msgstr ""
+
+msgid ""
+"Wiimote IR activated.\n"
+"\n"
+"Instructions:\n"
+"Set mouse index in retroarch to Wiimote IR to use the wiimote like a "
+"lightgun."
+msgstr ""
+
+msgid ""
+"Error while running script.\n"
+"\n"
+"Wiimote IR not started."
+msgstr ""
+
+msgid "AUTO CONFIG ADVANCEMAME GAMEPAD"
+msgstr ""
+
+msgid "INVERT AXIS FOR ADVANCEMAME "
+msgstr ""
+
+msgid "AUTO CONFIG DOLPHIN GAMEPAD"
+msgstr ""
+
+msgid "AUTO CONFIG DUCKSTATION GAMEPAD"
+msgstr ""
+
+msgid "AUTO CONFIG FLYCAST GAMEPAD"
+msgstr ""
+
+msgid "AUTO CONFIG MUPEN64PLUS GAMEPAD"
+msgstr ""
+
+msgid "AUTO CONFIG YABASANSHIRO GAMEPAD"
+msgstr ""
+
+msgid "AUTO CONFIG PPSSPPSDL GAMEPAD"
+msgstr ""
+
+msgid "RUMBLE STRENGTH"
+msgstr ""
+
+msgid "EXTERNAL DEVICE"
+msgstr ""
+
+msgid "Select the mounted drive to be used for ROMS."
+msgstr ""
+
+msgid "RETRY TIMES"
+msgstr ""
+
+msgid "How many times to retry the mount on boot."
+msgstr ""
+
+msgid "DELAY BETWEEN TRIES"
+msgstr ""
+
+msgid "How much delay in seconds between each retry."
+msgstr ""
+
+msgid "FORCE MOUNT NOW"
+msgstr ""
+
+msgid ""
+"WARNING THIS WILL RESTART EMULATIONSTATION!\n"
+"\n"
+"System will try to mount the external drive selected "
+msgstr ""
+
+msgid ""
+". Make sure you have all the settings saved before running this.\n"
+"\n"
+"TRY TO MOUNT EXTERNAL AND RESTART?"
+msgstr ""
+
+msgid "INTERNAL RESOLUTION DIMENSIONS"
+msgstr ""
+
+msgid "A REBOOT OF THE SYSTEM WILL OCCUR TO APPLY THE NEW CONFIGURATION"
+msgstr ""
+
+msgid "ADJUST INTERNAL RESOLUTION BORDERS"
+msgstr ""
+
+msgid "RESOLUTION BORDERS"
+msgstr ""
+
+msgid "LEFT BORDER"
+msgstr ""
+
+msgid "TOP BORDER"
+msgstr ""
+
+msgid "RIGHT BORDER"
+msgstr ""
+
+msgid "BOTTOM BORDER"
+msgstr ""
+
+msgid "OVERCLOCK"
+msgstr "РАЗГОН"
+
+msgid "Off"
+msgstr ""
+
+msgid "1.4ghz"
+msgstr ""
+
+msgid ""
+"OGA OC is HIGHLY experimental, you may encounter random lockups or your "
+"device might not boot anymore. \n"
+msgstr ""
+
+msgid ""
+"In case you cannot boot anymore, create an empty file called \"no_oc.oga\" "
+"on the boot (EMUELEC) partition.\n"
+"\n"
+msgstr ""
+
+msgid ""
+"There is also the posibility of SD card file corruption!!! Only enable OC if "
+"you agree to the risks!\n"
+"\n"
+msgstr ""
+
+msgid "INTERNAL VIDEO OPTIONS"
+msgstr ""
+
+msgid "CLOUD BACKUP SETTINGS AND GAME SAVES"
+msgstr ""
+
+msgid ""
+"WARNING THIS WILL RESTART EMULATIONSTATION!\n"
+"\n"
+"This will backup your game saves, savestates and emuelec configs to the "
+"cloud service configured on rclone.conf\n"
+"\n"
+"BACKUP TO CLOUD AND RESTART?"
+msgstr ""
+
+msgid "CLOUD RESTORE SETTINGS AND GAME SAVES"
+msgstr ""
+
+msgid ""
+"WARNING THIS WILL RESTART EMULATIONSTATION!\n"
+"\n"
+"This will restore your game saves, savestates and emuelec configs from the "
+"cloud service configured on rclone.conf, it will overwrite any existing "
+"file!!\n"
+"\n"
+"RESTORE FROM CLOUD AND RESTART?"
+msgstr ""
+
+msgid "ADD EMUSTATION ARGUMENTS"
+msgstr ""
+
+msgid "ADD RETROARCH ARGUMENTS"
+msgstr ""
+
+msgid "LOCAL BACKUP EMUELEC CONFIGS"
+msgstr ""
+
+msgid ""
+"WARNING THIS WILL RESTART EMULATIONSTATION!\n"
+"\n"
+"AFTER THE SCRIPT IS DONE REMEMBER TO COPY THE FILE /storage/roms/backup/"
+"ee_backup_config.tar.gz TO SOME PLACE!\n"
+"\n"
+"BACKUP CURRENT CONFIG AND RESTART?"
+msgstr ""
+
+msgid "RESET EMUELEC SCRIPTS AND BINARIES TO DEFAULT"
+msgstr ""
+
+msgid ""
+"WARNING: SYSTEM WILL RESET SCRIPTS AND BINARIES !\n"
+"UPDATE, DOWNLOADS, THEMES, BLUETOOTH PAIRINGS AND ROMS FOLDER WILL NOT BE "
+"AFFECTED.\n"
+"\n"
+"RESET SCRIPTS AND BINARIES TO DEFAULT AND RESTART?"
+msgstr ""
+
+msgid "RESET RETROARCH CONFIG TO DEFAULT"
+msgstr ""
+
+msgid ""
+"WARNING: RETROARCH CONFIG WILL RESET TO DEFAULT\n"
+"\n"
+"PER-CORE CONFIGURATIONS WILL NOT BE AFFECTED BUT NO BACKUP WILL BE CREATED!\n"
+"\n"
+"RESET RETROARCH CONFIG TO DEFAULT?"
+msgstr ""
+
+msgid "RESET SYSTEM TO DEFAULT CONFIG"
+msgstr ""
+
+msgid ""
+"WARNING: ALL CONFIGURATIONS WILL BE RESET AND NO BACKUP WILL BE CREATED!\n"
+"\n"
+"IF YOU WANT TO KEEP YOUR SETTINGS MAKE A BACKUP AND SAVE IT ON AN EXTERNAL "
+"DRIVE BEFORE RUNING THIS OPTION!\n"
+"\n"
+"RESET SYSTEM TO DEFAULT CONFIG AND RESTART?"
+msgstr ""
+
+msgid "FORCE UPDATE"
+msgstr ""
+
+msgid ""
+"WARNING: A FORCE UPDATE WILL DOWNLOAD WHATEVER VERSION IS AVAILABLE FOR "
+"UPDATE REGARDLESS OF VERSION BASED ON THE TYPE YOU HAVE SELECTED IN THE "
+"UPDATE & DOWNLOADS (beta or stable)\n"
+"\n"
+"SYSTEM WILL RESET SCRIPTS AND BINARIES !\n"
+"DOWNLOADS, THEMES, BLUETOOTH PAIRINGS AND ROMS FOLDER WILL NOT BE AFFECTED.\n"
+"\n"
+"CONTINUE WITH FORCE UPDATE?"
+msgstr ""
 
 msgid "ARE YOU SURE YOU WANT TO CONFIGURE THE INPUT?"
 msgstr "ВЫ УВЕРЕНЫ, ЧТО ХОТИТЕ НАСТРОИТЬ УПРАВЛЕНИЕ?"
-
-msgid "THIS FUNCTION IS DISABLED WHILE THE SCRAPER IS RUNNING"
-msgstr "ЭТА ФУНКЦИЯ ОТКЛЮЧЕНА ВО ВРЕМЯ СКАНИРОВАНИЯ"
-
-msgid "CHOOSE"
-msgstr "ВЫБРАТЬ"
 
 msgid "ENTER THE CODE NOW TO UNLOCK"
 msgstr "ВВЕДИТЕ КОД ДЛЯ РАЗБЛОКИРОВКИ"
@@ -1148,9 +2306,6 @@ msgstr "DMD"
 
 msgid "SERVER"
 msgstr "СЕРВЕР"
-
-msgid "DISABLED"
-msgstr "ОТКЛЮЧЕНО"
 
 msgid "DMDSERVER (for real dmd)"
 msgstr "DMDSERVER (для настоящего dmd)"
@@ -1190,9 +2345,6 @@ msgstr "ТЕМА"
 
 msgid "VIDEO OUTPUT"
 msgstr "ВИДЕО ВЫХОД"
-
-msgid "VIDEO MODE"
-msgstr "РАЗРЕШЕНИЕ"
 
 msgid "Sets the display's resolution."
 msgstr "Устанавливает разрешение экрана."
@@ -1467,6 +2619,9 @@ msgstr "ЗАГРУЗКА КОНТЕНТА"
 msgid "THEMES"
 msgstr "ТЕМЫ"
 
+msgid "THE BEZEL PROJECT"
+msgstr "НАБОР РАМОК (ОВЕРЛЕЕВ)"
+
 msgid "SOFTWARE UPDATES"
 msgstr "ПРОГРАММНОЕ ОБНОВЛЕНИЕ"
 
@@ -1485,11 +2640,8 @@ msgstr "ЗАПУСТИТЬ ОБНОВЛЕНИЕ"
 msgid "UPDATER IS ALREADY RUNNING"
 msgstr "ОБНОВЛЕНИЕ УЖЕ ЗАПУЩЕНО"
 
-msgid "YOU ARE NOT CONNECTED TO A NETWORK"
-msgstr "ВЫ НЕ ПОДКЛЮЧЕНЫ К СЕТИ"
-
-msgid "LANGUAGE"
-msgstr "ЯЗЫК"
+msgid "TIMEZONE"
+msgstr "ЧАСОВОЙ ПОЯС"
 
 msgid "LANGUAGE (REGION)"
 msgstr "ЯЗЫК (РЕГИОН)"
@@ -1594,9 +2746,6 @@ msgstr "ВКЛ"
 msgid "OFF"
 msgstr "ВЫКЛ"
 
-msgid "BUTTON LED COLOR"
-msgstr "ЦВЕТ КНОПКИ"
-
 msgid "off"
 msgstr "выкл"
 
@@ -1630,20 +2779,11 @@ msgstr "пульсация"
 msgid "on"
 msgstr "вкл"
 
-msgid "OVERCLOCK"
-msgstr "РАЗГОН"
-
 msgid "LED HARDWARE"
 msgstr "LED HARDWARE"
 
-msgid "RED"
-msgstr "КРАСНЫЙ"
-
-msgid "GREEN"
-msgstr "ЗЕЛЁНЫЙ"
-
-msgid "BLUE"
-msgstr "СИНИЙ"
+msgid "ENABLE LED"
+msgstr ""
 
 msgid "LED BRIGHTNESS"
 msgstr "LED ЯРКОСТЬ"
@@ -1654,8 +2794,8 @@ msgstr "МЕСТО ХРАНЕНИЯ"
 msgid "STORAGE DEVICE"
 msgstr "УСТРОЙСТВО ХРАНЕНИЯ"
 
-msgid "BACKUP USER DATA"
-msgstr "РЕЗЕРВНАЯ КОПИЯ"
+msgid "INSTALL ON A NEW DISK"
+msgstr "УСТАНОВИТЬ НА НОВЫЙ ДИСК"
 
 msgid "ADVANCED"
 msgstr "ДОПОЛНИТЕЛЬНО"
@@ -1781,6 +2921,12 @@ msgstr "Устанавливает разрешение дисплея. Не в�
 msgid "SMOOTH GAMES (BILINEAR FILTERING)"
 msgstr "СГЛАЖИВАНИЕ ИГР (БИЛИНЕЙНАЯ ФИЛЬТРАЦИЯ)"
 
+msgid "ENABLE RA BEZELS"
+msgstr ""
+
+msgid "ENABLE MAX PERFORMANCE"
+msgstr ""
+
 msgid "REWIND"
 msgstr "ПЕРЕМОТКА"
 
@@ -1792,11 +2938,20 @@ msgstr ""
 msgid "INTEGER SCALING (PIXEL PERFECT)"
 msgstr "ЦЕЛОЧИСЛЕННОЕ МАСШТАБИРОВАНИЕ (PP)"
 
+msgid "INTEGER SCALING (OVERSCALE)"
+msgstr ""
+
+msgid "SMART"
+msgstr ""
+
 msgid "SHADER SET"
 msgstr "ШЕЙДЕРЫ"
 
 msgid "VIDEO FILTER"
 msgstr "ВИДЕО ФИЛЬТР"
+
+msgid "RGA SCALING"
+msgstr "RGA СКАЛИРОВАНИЕ"
 
 msgid "DECORATIONS"
 msgstr "РАМКИ (ОВЕРЛЕИ)"
@@ -1864,9 +3019,6 @@ msgstr "ДОПОЛНИТЕЛЬНЫЕ НАСТРОЙКИ СИСТЕМЫ"
 msgid "SCRAPER IS RUNNING. DO YOU WANT TO STOP IT?"
 msgstr "ДАННЫЕ ЗАГРУЖАЮТСЯ. ОСТАНОВИТЬ?"
 
-msgid "GAME HASHING IS RUNNING. DO YOU WANT TO STOP IT?"
-msgstr "ЗАПУЩЕНО ХЕШИРОВАНИЕ ИГР. ОСТАНОВИТЬ?"
-
 msgid "REALLY UPDATE GAMELISTS?"
 msgstr "ТОЧНО ОБНОВИТЬ СПИСОК ИГР?"
 
@@ -1876,17 +3028,8 @@ msgstr "ВЫ ДОЛЖНЫ ПРИМЕНИТЬ ТЕМУ ПЕРЕД ИЗМЕНЕН�
 msgid "THEME CONFIGURATION"
 msgstr "НАСТРОЙКА ТЕМЫ"
 
-msgid "VIEW CUSTOMIZATION"
-msgstr "ПОСМОТРЕТЬ НАСТРОЙКИ"
-
 msgid "GAMELIST STYLE"
 msgstr "СТИЛЬ СПИСКА ИГР"
-
-msgid "GAMELIST VIEW STYLE"
-msgstr "ВИД СПИСКА ИГР"
-
-msgid "automatic"
-msgstr "автоматически"
 
 msgid "basic"
 msgstr "базовый"
@@ -1945,6 +3088,9 @@ msgstr "ПОКАЗАТЬ ИКОНКУ СОХРАНЕНИЙ В СПИСКАХ"
 msgid "SHOW MANUAL ICON"
 msgstr "ПОКАЗАТЬ ИКОНКУ РУКОВОДСТВА В СПИСКАХ"
 
+msgid "HIDE SORTNAMES IN GAMELIST"
+msgstr ""
+
 msgid "SHOW RETROACHIEVEMENTS ICON"
 msgstr "ПОКАЗАТЬ ИКОНКУ РЕТРОДОСТИЖЕНИЙ"
 
@@ -1980,9 +3126,6 @@ msgstr "видео"
 
 msgid "grid"
 msgstr "сетка"
-
-msgid "DISPLAY OPTIONS"
-msgstr "НАСТРОЙКИ ЭКРАНА"
 
 msgid "SCREENSAVER SETTINGS"
 msgstr "НАСТРОЙКА ЗАСТАВКИ"
@@ -2065,6 +3208,9 @@ msgstr "ВЫБОР ИЗБРАННЫХ ПЕСЕН"
 msgid "SOUNDS"
 msgstr "ЗВУКИ"
 
+msgid "CUSTOM MENU SCROLL SOUND"
+msgstr ""
+
 msgid "ENABLE NAVIGATION SOUNDS"
 msgstr "ВКЛЮЧИТЬ ЗВУКИ НАВИГАЦИИ"
 
@@ -2076,9 +3222,6 @@ msgstr "IP АДРЕС"
 
 msgid "CONNECTED"
 msgstr "ПОДКЛЮЧЕНО"
-
-msgid "NOT CONNECTED"
-msgstr "НЕ ПОДКЛЮЧЕНО"
 
 msgid "INTERNET STATUS"
 msgstr "СТАТУС СЕТИ"
@@ -2128,6 +3271,40 @@ msgstr "ОТКЛЮЧИТЬ АВИАРЕЖИМ"
 msgid "ENABLE PLANE MODE"
 msgstr "ВКЛЮЧИТЬ АВИАРЕЖИМ"
 
+msgid "RESTART EMULATIONSTATION"
+msgstr ""
+
+msgid "REALLY RESTART EMULATIONSTATION?"
+msgstr ""
+
+msgid "START RETROARCH"
+msgstr ""
+
+msgid "REALLY START RETROARCH?"
+msgstr ""
+
+msgid "REBOOT TO USB/SD"
+msgstr ""
+
+msgid "REALLY REBOOT TO USB/SD?"
+msgstr ""
+
+msgid "REBOOT TO EMMC"
+msgstr ""
+
+msgid "REALLY REBOOT TO EMMC?"
+msgstr ""
+
+msgid "SHUTDOWN AFTER INACTIVITY"
+msgstr ""
+
+msgid ""
+"Shuts down the system if no controller activity occurs within the timer."
+msgstr ""
+
+msgid "Persistent Autoshutdown"
+msgstr ""
+
 msgid "RESTART SYSTEM"
 msgstr "ПЕРЕЗАГРУЗИТЬ СИСТЕМУ"
 
@@ -2161,6 +3338,59 @@ msgstr "ВЫЙТИ ИЗ EMULATIONSTATION"
 msgid "REALLY QUIT?"
 msgstr "ВЫЙТИ?"
 
+msgid "BUTTON REMAP CONFIG"
+msgstr ""
+
+msgid "EDIT REMAP"
+msgstr ""
+
+msgid ""
+"ERROR - Remap is not configured properly, All buttons must be assigned and "
+"no duplicates."
+msgstr ""
+
+msgid "ARE YOU SURE YOU WANT TO CREATE THE REMAP?"
+msgstr ""
+
+msgid "CREATE BUTTON REMAP"
+msgstr ""
+
+msgid "YOU CANNOT HAVE COMMAS OR SPACES IN REMAP NAME"
+msgstr ""
+
+msgid "REMAP NAME MUST BE UNIQUE"
+msgstr ""
+
+msgid "All buttons must be assigned and no duplicates."
+msgstr ""
+
+msgid "REMAP NAME"
+msgstr ""
+
+msgid "CANNOT DELETE DEFAULT BUTTON MAPS."
+msgstr ""
+
+msgid "ARE YOU SURE YOU WANT TO DELETE THE REMAP?"
+msgstr ""
+
+msgid "VIRTUAL KEYBOARD"
+msgstr ""
+
+msgid "NATIVE VIDEO"
+msgstr ""
+
+msgid " UNSAFE RESOLUTION DETECTED, CONTINUE?"
+msgstr ""
+
+msgid "BUTTON REMAP"
+msgstr ""
+
+msgid "DELETE REMAP"
+msgstr ""
+
+msgid "Use HLE BIOS"
+msgstr ""
+
 msgid "AUTO SAVE/LOAD ON GAME LAUNCH"
 msgstr "АВТО СОХРАНЕНИЕ/ЗАГРУЗКА ПРИ ЗАПУСКЕ"
 
@@ -2168,6 +3398,33 @@ msgid "Load latest save state on game launch and save state when exiting game."
 msgstr ""
 "Загружает последнее сохранение при запуске игры и сохраняет при выходе из "
 "игры."
+
+msgid "ENABLE CLOUD SAVE"
+msgstr ""
+
+msgid "SHADERS SET"
+msgstr ""
+
+msgid "ENABLE VERTICAL"
+msgstr ""
+
+msgid "VERTICAL ASPECT RATIO"
+msgstr ""
+
+msgid "16:9"
+msgstr ""
+
+msgid "3:2"
+msgstr ""
+
+msgid "21:9"
+msgstr ""
+
+msgid "4:3"
+msgstr ""
+
+msgid "BEZEL"
+msgstr ""
 
 msgid "SHOW CONTROLLER OVERLAYS"
 msgstr "ПОКАЗАТЬ ОВЕРЛЕЙ КОНТРОЛЛЕРА"
@@ -2180,6 +3437,15 @@ msgstr "РАСПОЛОЖЕНИЕ ОВЕРЛЕЯ"
 
 msgid "COLORIZATION"
 msgstr "КОЛОРИЗАЦИЯ"
+
+msgid "GBC"
+msgstr ""
+
+msgid "SGB"
+msgstr ""
+
+msgid "Best Guess"
+msgstr ""
 
 msgid "FULL BOOT"
 msgstr "ПОЛНАЯ ЗАГРУЗКА"
@@ -2199,14 +3465,11 @@ msgstr "БОК О БОК"
 msgid "INTERNAL RESOLUTION"
 msgstr "ВНУТРЕННЕЕ РАЗРЕШЕНИЕ"
 
-msgid "EDIT PADTOKEY PROFILE"
-msgstr "ИЗМЕНИТЬ ПРОФИЛЬ PADTOKEY"
-
-msgid "CREATE PADTOKEY PROFILE"
-msgstr "СОЗДАТЬ ПРОФИЛЬ PADTOKEY"
-
 msgid "LAUNCH THIS GAME AT STARTUP"
 msgstr "ЗАГРУЖАТЬ ЭТУ ИГРУ ПРИ ЗАПУСКЕ"
+
+msgid "RETROARCH MIDI"
+msgstr ""
 
 msgid "FORMAT DEVICE"
 msgstr "ФОРМАТИРОВАТЬ"
@@ -2226,135 +3489,41 @@ msgstr "ВЫБРАННЫЕ НАСТРОЙКИ НЕДЕЙСТВИТЕЛЬНЫ"
 msgid "ARE YOU SURE YOU WANT TO FORMAT THIS DRIVE?"
 msgstr "ВЫ УВЕРЕНЫ, ЧТО ХОТИТЕ ОТФОРМАТИРОВАТЬ УСТРОЙСТВО?"
 
-msgid "Points"
-msgstr "Очки"
+msgid "DEVICE OPTIONS"
+msgstr "ОПЦИИ УСТРОЙСТВА"
 
-msgid "Unlocked on"
-msgstr "Получено"
+msgid "DISCONNECT"
+msgstr "ОТКЛЮЧИТЬ"
 
-msgid "THIS GAME HAS NO ACHIEVEMENTS YET"
-msgstr "ИГРА НЕ ИМЕЕТ ДОСТИЖЕНИЙ"
+msgid "CONNECT"
+msgstr "ПОДКЛЮЧИТЬ"
 
-msgid "Achievements (softcore)"
-msgstr "Достижения (софткор)"
-
-msgid "Achievements (hardcore)"
-msgstr "Достижения (хардкор)"
+msgid "FORGET"
+msgstr "ЗАБЫТЬ"
 
 #, c-format
-msgid "%d%% complete"
-msgstr "%d%% готово"
-
-msgid "GAME MEDIA"
-msgstr "МЕДИА ИГРЫ"
-
-msgid "VIEW GAME MANUAL"
-msgstr "ПОСМОТРЕТЬ РУКОВОДСТВО"
-
-msgid "VIEW GAME MAGAZINE"
-msgstr "ПОСМОТРЕТЬ ЖУРНАЛ"
-
-msgid "VIEW GAME MAP"
-msgstr "ПОСМОТРЕТЬ КАРТУ"
-
-msgid "VIEW FULLSCREEN VIDEO"
-msgstr "ПОСМОТРЕТЬ ВИДЕО НА ВЕСЬ ЭКРАН"
-
-msgid "VIEW GAME MEDIA"
-msgstr "ПОСМОТРЕТЬ МЕДИА ИГРЫ"
-
-msgid "CURRENT CORE IS NOT COMPATIBLE"
-msgstr "ТЕКУЩЕЕ ЯДРО НЕ СОВМЕСТИМО"
-
-msgid "COMPATIBLE CORE(S)"
-msgstr "СОВМЕСТИМЫЕ ЯДРА"
-
-msgid "VIEW THIS GAME'S ACHIEVEMENTS"
-msgstr "ПОСМОТРЕТЬ ДОСТИЖЕНИЯ ИГРЫ"
-
-msgid "GAME"
-msgstr "ИГРА"
-
-msgid "SAVE STATES"
-msgstr "БЫСТРОЕ СОХРАНЕНИЕ"
-
-msgid "OPEN"
-msgstr "ОТКРЫТЬ"
-
-msgid "START A NETPLAY GAME"
-msgstr "НАЧАТЬ NETPLAY ИГРУ"
-
-msgid "NETPLAY"
-msgstr "NETPLAY"
-
-msgid "START GAME"
-msgstr "НАЧАТЬ ИГРУ"
-
-msgid "HOST A NETPLAY GAME"
-msgstr "ХОСТ NETPLAY ИГРЫ"
-
-msgid "PUBLICLY ANNOUNCE GAME"
-msgstr "ПУБЛИЧНО АНОНСИРУЕМАЯ ИГРА"
-
-msgid "PLAYER PASSWORD"
-msgstr "ПАРОЛЬ ИГРОКА"
-
-msgid "VIEWER PASSWORD"
-msgstr "ПАРОЛЬ ЗРИТЕЛЯ"
-
-msgid "FIND SIMILAR GAMES..."
-msgstr "НАЙТИ ПОХОЖИЕ ИГРЫ..."
-
-msgid "DELETE ITEM"
-msgstr "УДАЛИТЬ ОБЪЕКТ"
-
-msgid "DELETE GAME"
-msgstr "УДАЛИТЬ ИГРУ"
-
-msgid ""
-"THIS WILL DELETE THE ACTUAL GAME FILE(S)!\n"
-"ARE YOU SURE?"
-msgstr ""
-"УДАЛЕНИЕ ФАЙЛОВ ИГРЫ!\n"
-"ВЫ УВЕРЕНЫ?"
-
-msgid "COLLECTIONS"
-msgstr "КОЛЛЕКЦИИ"
+msgid "ARE YOU SURE YOU WANT TO FORGET '%s' ?"
+msgstr "ВЫ УВЕРЕНЫ, ЧТО ХОТИТЕ ЗАБЫТЬ '%s' ?"
 
 #, c-format
-msgid "REMOVE FROM %s"
-msgstr "УДАЛИТЬ ИЗ %s"
+msgid "ARE YOU SURE YOU WANT TO CONNECT TO '%s' ?"
+msgstr "ВЫ УВЕРЕНЫ, ЧТО ХОТИТЕ ПОДКЛЮЧИТЬ '%s' ?"
 
 #, c-format
-msgid "ADD TO %s"
-msgstr "ДОБАВИТЬ В %s"
+msgid "ARE YOU SURE YOU WANT TO DISCONNECT '%s' ?"
+msgstr "ВЫ УВЕРЕНЫ, ЧТО ХОТИТЕ ОТКЛЮЧИТЬ '%s' ?"
 
-msgid "FAVORITES"
-msgstr "ИЗБРАННОЕ"
+msgid "USER DISK USAGE"
+msgstr "ЗАНЯТО НА ДИСКЕ ПОЛЬЗОВАТЕЛЯ"
 
-msgid "ADD TO CUSTOM COLLECTION..."
-msgstr "ДОБАВИТЬ В КОЛЛЕКЦИЮ..."
+msgid "SYSTEM DISK USAGE"
+msgstr "ЗАНЯТО НА СИСТЕМНОМ ДИСКЕ"
 
-msgid "DELETE COLLECTION"
-msgstr "УДАЛИТЬ КОЛЛЕКЦИЮ"
+msgid "DISK USAGE"
+msgstr "ИСПОЛЬЗОВАНИЕ ДИСКА"
 
-msgid "ADVANCED GAME OPTIONS"
-msgstr "ДОПОЛНИТЕЛЬНЫЕ НАСТРОЙКИ ИГРЫ"
-
-msgid "EDIT FOLDER METADATA"
-msgstr "РЕДАКТИРОВАТЬ МЕТАДАННЫЕ ПАПКИ"
-
-msgid "EDIT THIS GAME'S METADATA"
-msgstr "РЕДАКТИРОВАТЬ МЕТАДАННЫЕ"
-
-msgid "VIEW PAD TO KEYBOARD INFORMATION"
-msgstr "ПОСМОТРЕТЬ ДАННЫЕ PADTOKEY"
-
-msgid "RESET"
-msgstr "СБРОС"
-
-msgid "ADD COMBINATION KEY"
-msgstr "ДОБАВИТЬ КОМБИНАЦИЮ"
+msgid "VIDEO DRIVER"
+msgstr "ВИДЕО ДРАЙВЕР"
 
 msgid "PAIR A BLUETOOTH DEVICE"
 msgstr "СОПРЯЖЕНИЕ BLUETOOTH УСТРОЙСТВ"
@@ -2362,8 +3531,74 @@ msgstr "СОПРЯЖЕНИЕ BLUETOOTH УСТРОЙСТВ"
 msgid "PAIR"
 msgstr "CОПРЯЖЕНИЕ"
 
-msgid "NO DEVICE FOUND"
-msgstr "УСТРОЙСТВО НЕ НАЙДЕНО"
+msgid "SELECT CONTENT TO INSTALL/REMOVE"
+msgstr "ВЫБЕРИТЕ КОНТЕНТ ДЛЯ УСТАНОВКИ/УДАЛЕНИЯ"
+
+msgid "UPDATE INSTALLED CONTENT"
+msgstr "ОБНОВИТЬ УСТАНОВЛЕННЫЙ КОНТЕНТ"
+
+msgid "No items"
+msgstr "Объектов нет"
+
+msgid "MISC"
+msgstr "РАЗНОЕ"
+
+msgid "UPDATE"
+msgstr "ОБНОВИТЬ"
+
+#, c-format
+msgid "'%s' ADDED TO DOWNLOAD QUEUE"
+msgstr "'%s' ДОБАВЛЕНА В ОЧЕРЕДЬ ЗАГРУЗКИ"
+
+msgid "UNINSTALLATION ADDED TO QUEUE"
+msgstr "УДАЛЕНИЕ ДОБАВЛЕНО В ОЧЕРЕДЬ"
+
+msgid "INSTALL"
+msgstr "УСТАНОВИТЬ"
+
+#, c-format
+msgid "CURRENTLY IN DOWNLOAD QUEUE"
+msgstr "В ОЧЕРЕДИ ЗАГРУЗКИ"
+
+msgid "UPDATING EMUELEC"
+msgstr ""
+
+#, c-format
+msgid "UPDATING %s"
+msgstr "ОБНОВЛЕНИЕ %s"
+
+msgid "UPDATE IS READY"
+msgstr "ОБНОВЛЕНИЕ ГОТОВО"
+
+msgid "REBOOT TO APPLY"
+msgstr "ПЕРЕЗАГРУЗИТЕ ДЛЯ ПРИМЕНЕНИЯ"
+
+msgid "REALLY UPDATE?"
+msgstr "ЖЕЛАЕТЕ ОБНОВИТЬ?"
+
+#, c-format
+msgid ""
+"YOU ARE CURRENTLY USING VERSION %s\n"
+"DO YOU WANT TO UPDATE TO VERSION %s?"
+msgstr ""
+"ВЫ ИСПОЛЬЗУЕТЕ ВЕРСИЮ %s\n"
+"ХОТИТЕ ОБНОВИТЬ ДО ВЕРСИИ %s?"
+
+#, c-format
+msgid ""
+"UNOFFICIAL SYSTEM MODIFICATIONS DETECTED.\n"
+"UPGRADING COULD BREAK YOUR SYSTEM.\n"
+"DO YOU WANT TO UPDATE TO VERSION %s?"
+msgstr ""
+"ОБНАРУЖЕНЫ НЕОФИЦИАЛЬНЫЕ МОДИФИКАЦИИ СИСТЕМЫ.\n"
+"ОБНОВЛЕНИЕ МОЖЕТ СЛОМАТЬ ВАШУ СИСТЕМУ.\n"
+"ХОТИТЕ ЛИ ВЫ ОБНОВИТЬСЯ ДО ВЕРСИИ %s?"
+
+msgid "NETWORK CONNECTION NEEDED"
+msgstr "ТРЕБУЕТСЯ ПОДКЛЮЧЕНИЕ К СЕТИ"
+
+msgid "NO UPDATE AVAILABLE"
+msgstr "ОБНОВЛЕНИЙ НЕТ"
 
 msgid "COLLECTIONS TO DISPLAY"
 msgstr "ОТОБРАЖАТЬ КОЛЛЕКЦИИ"
@@ -2377,9 +3612,6 @@ msgstr "СГРУППИРОВАННЫЕ СИСТЕМЫ"
 msgid "CREATE CUSTOM COLLECTION"
 msgstr "СОЗДАТЬ СВОЮ КОЛЛЕКЦИЮ"
 
-msgid "New Collection Name"
-msgstr "Название новой коллекции"
-
 msgid "ENTER NAME"
 msgstr "ВВЕДИТЕ ИМЯ"
 
@@ -2388,9 +3620,6 @@ msgstr "СОЗДАТЬ ИЗ ТЕМЫ"
 
 msgid "CREATE NEW EDITABLE COLLECTION"
 msgstr "СОЗДАТЬ НОВУЮ КОЛЛЕКЦИЮ"
-
-msgid "CREATE NEW DYNAMIC COLLECTION"
-msgstr "СОЗДАТЬ ДИНАМИЧЕСКУЮ КОЛЛЕКЦИЮ"
 
 msgid "SORT COLLECTIONS AND SYSTEMS"
 msgstr "СОРТИРОВКА КОЛЛЕКЦИЙ И СИСТЕМ"
@@ -2440,9 +3669,6 @@ msgstr "ОТОБРАЖАТЬ ПУСТЫЕ СИСТЕМЫ"
 msgid "DON'T SHOW GROUPS WITH ONLY ONE SYSTEM"
 msgstr "НЕ ПОКАЗЫВАТЬ ГРУППЫ С ОДНОЙ СИСТЕМОЙ"
 
-msgid "Loading..."
-msgstr "Загрузка..."
-
 msgid "SELECT COLLECTIONS"
 msgstr "ВЫБОР КОЛЛЕКЦИИ"
 
@@ -2467,26 +3693,75 @@ msgstr "ДИНАМИЧЕСКИЕ КОЛЛЕКЦИИ"
 msgid "CUSTOM GAME COLLECTIONS"
 msgstr "КОЛЛЕКЦИИ ИГР"
 
+msgid "SELECT BEZELS TO INSTALL/REMOVE"
+msgstr "ВЫБЕРИТЕ РАМКИ (ОВЕРЛЕИ) ДЛЯ УСТАНОВКИ/УДАЛЕНИЯ"
+
 msgid "GAMES TO INDEX"
 msgstr "ИГРЫ ПО ИНДЕКСУ"
 
 msgid "ONLY MISSING"
 msgstr "ТОЛЬКО ОТСУТСТВУЮЩИЕ"
 
-msgid "SELECT CONTENT TO INSTALL/REMOVE"
-msgstr "ВЫБЕРИТЕ КОНТЕНТ ДЛЯ УСТАНОВКИ/УДАЛЕНИЯ"
+msgid "Points"
+msgstr "Очки"
 
-msgid "UPDATE INSTALLED CONTENT"
-msgstr "ОБНОВИТЬ УСТАНОВЛЕННЫЙ КОНТЕНТ"
+msgid "Unlocked on"
+msgstr "Получено"
 
-msgid "MISC"
-msgstr "РАЗНОЕ"
+msgid "THIS GAME HAS NO ACHIEVEMENTS YET"
+msgstr "ИГРА НЕ ИМЕЕТ ДОСТИЖЕНИЙ"
 
-msgid "UNINSTALLATION ADDED TO QUEUE"
-msgstr "УДАЛЕНИЕ ДОБАВЛЕНО В ОЧЕРЕДЬ"
+msgid "Achievements (softcore)"
+msgstr "Достижения (софткор)"
+
+msgid "Achievements (hardcore)"
+msgstr "Достижения (хардкор)"
+
+#, c-format
+msgid "%d%% complete"
+msgstr "%d%% готово"
+
+msgid "THEMES DOWNLOADER"
+msgstr "ЗАГРУЗКА ТЕМ"
+
+msgid "SELECT THEMES TO INSTALL/REMOVE"
+msgstr "ВЫБЕРИТЕ ТЕМЫ ДЛЯ УСТАНОВКИ/УДАЛЕНИЯ"
+
+msgid "All"
+msgstr "Все"
+
+msgid "Installed"
+msgstr "Установлено"
+
+msgid "Available"
+msgstr "Доступно"
+
+msgid "CURRENT THEME"
+msgstr "ТЕКУЩАЯ ТЕМА"
+
+msgid "FILE BROWSER"
+msgstr "ФАЙЛОВЫЙ БРАУЗЕР"
+
+msgid "RESET"
+msgstr "СБРОС"
+
+msgid "PARENT FOLDER"
+msgstr "РОДИТЕЛЬСКАЯ ПАПКА"
+
+msgid "SCREENSHOTS FOLDER"
+msgstr "ПАПКА СКРИНШОТОВ"
+
+msgid "FAVORITE SONGS"
+msgstr "ИЗБРАННЫЕ ПЕСНИ"
+
+msgid "ADD COMBINATION KEY"
+msgstr "ДОБАВИТЬ КОМБИНАЦИЮ"
 
 msgid "SAVESTATE MANAGER"
 msgstr "МЕНЕДЖЕР БЫСТРЫХ СОХРАНЕНИЙ"
+
+msgid "SAVE TO CLOUD"
+msgstr ""
 
 msgid "START NEW GAME"
 msgstr "НАЧАТЬ НОВУЮ ИГРУ"
@@ -2503,310 +3778,8 @@ msgstr "СЛОТ"
 msgid "COPY TO FREE SLOT"
 msgstr "КОПИРОВАТЬ В СВОБОДНЫЙ СЛОТ"
 
-msgid "VIEW OPTIONS"
-msgstr "НАСТРОЙКИ"
-
-msgid "NAVIGATION"
-msgstr "НАВИГАЦИЯ"
-
-msgid "OTHER FILTERS"
-msgstr "ДРУГИЕ ФИЛЬТРЫ"
-
-msgid "SELECT RANDOM GAME"
-msgstr "ВЫБРАТЬ СЛУЧАЙНУЮ ИГРУ"
-
-msgid "JUMP TO GAME BEGINNING WITH THE LETTER"
-msgstr "ПЕРЕЙТИ К ИГРЕ НАЧИНАЮЩЕЙСЯ С БУКВЫ"
-
-msgid "SORT GAMES BY"
-msgstr "СОРТИРОВКА ПО"
-
-msgid "DYNAMIC COLLECTION"
-msgstr "ДИНАМИЧЕСКАЯ КОЛЛЕКЦИЯ"
-
-msgid "EDIT DYNAMIC COLLECTION FILTERS"
-msgstr "ИЗМЕНИТЬ ФИЛЬТРЫ ДИНАМ. КОЛЛЕКЦИИ"
-
-msgid "CUSTOM COLLECTION"
-msgstr "СВОЯ КОЛЛЕКЦИЯ"
-
-msgid "COLLECTION"
-msgstr "КОЛЛЕКЦИЯ"
-
-msgid "ADVANCED SYSTEM OPTIONS"
-msgstr "ДОПОЛНИТЕЛЬНЫЕ НАСТРОЙКИ СИСТЕМЫ"
-
-msgid "RESET FILTERS"
-msgstr "СБРОСИТЬ ФИЛЬТРЫ"
-
-msgid "FILTER GAMES BY TEXT"
-msgstr "ПОИСК"
-
-msgid "NO MISSING BIOS FILES"
-msgstr "НЕТ ОТСУТСТВУЮЩИХ БИОСОВ"
-
-msgid "Installed systems"
-msgstr "Установленные системы"
-
-msgid "refresh"
-msgstr "обновить"
-
-msgid "NO MISSING BIOS"
-msgstr "НЕТ ОТСУТСТВУЮЩИХ БИОСОВ"
-
-msgid "ZOOM OUT"
-msgstr "УМЕНЬШИТЬ"
-
-msgid "ZOOM IN"
-msgstr "УВЕЛИЧИТЬ"
-
-msgid "MOVE"
-msgstr "ДВИГАТЬ"
-
-msgid "ZOOM"
-msgstr "МАСШТАБ"
-
-msgid "EDIT METADATA"
-msgstr "РЕДАКТИРОВАТЬ МЕТАДАННЫЕ"
-
-msgid "GENRES"
-msgstr "ЖАНРЫ"
-
-msgid ""
-"SOME FILES YOU LINKED ARE LOCATED OUTSIDE THE GAMELIST PATH.\n"
-"DO YOU WANT TO USE A COPY OF THESE FILES RELATIVE TO THE GAMELIST ?"
-msgstr ""
-"НЕКОТОРЫЕ ФАЙЛЫ, РАСПОЛОЖЕНЫ ВНЕ ПАПКИ СО СПИСКОМ ИГР.\n"
-"ВЫ ХОТИТЕ СОЗДАТЬ КОПИЮ ЭТИХ ФАЙЛОВ В ПАПКУ СО СПИСКОМ ИГР?"
-
-msgid "FAVORITE SONGS"
-msgstr "ИЗБРАННЫЕ ПЕСНИ"
-
-msgid "CONNECT TO NETPLAY"
-msgstr "ПОДКЛЮЧИТЬСЯ К NETPLAY"
-
-msgid "Select a game lobby to join"
-msgstr "Выберите лобби для присоединения"
-
-msgid "FAILED"
-msgstr "НЕ УДАЛОСЬ"
-
-msgid "UNKNOWN ROM VERSION"
-msgstr "НЕИЗВЕСТНАЯ ROM ВЕРСИЯ"
-
-msgid "DIFFERENT ROM"
-msgstr "ДРУГОЙ ROM"
-
-msgid "SAME ROM"
-msgstr "ОДИНАКОВЫЙ ROM"
-
-msgid "UNAVAILABLE CORE"
-msgstr "НЕДОСТУПНОЕ ЯДРО"
-
-msgid "LAN GAMES"
-msgstr "ИГРЫ ПО ЛОКАЛЬНОЙ СЕТИ"
-
-msgid "ONLINE GAMES"
-msgstr "СЕТЕВЫЕ ИГРЫ"
-
-msgid "AVAILABLE GAMES"
-msgstr "ДОСТУПНЫЕ ИГРЫ"
-
-msgid "UNAVAILABLE GAMES"
-msgstr "НЕДОСТУПНЫЕ ИГРЫ"
-
-msgid "NO GAMES FOUND"
-msgstr "ИГР НЕ НАЙДЕНО"
-
-msgid "JOIN GAME"
-msgstr "ПРИСОЕДИНИТЬСЯ К ИГРЕ"
-
-msgid "WATCH GAME"
-msgstr "СМОТРЕТЬ ИГРУ"
-
-msgid "CONTROLLER SETTINGS"
-msgstr "НАСТРОЙКИ КОНТРОЛЛЕРА"
-
-msgid "CONTROLLER & BLUETOOTH SETTINGS"
-msgstr "НАСТРОЙКИ КОНТРОЛЛЕРОВ И УСТРОЙСТВ"
-
-msgid "CONTROLLERS PRIORITY"
-msgstr "ПРИОРИТЕТ КОНТРОЛЛЕРОВ"
-
-msgid "PLAYER ASSIGNMENTS"
-msgstr "НАЗНАЧЕНИЯ ИГРОКА"
-
-#, c-format
-msgid "CONTROLLER #%i"
-msgstr "КОНТРОЛЛЕР #%i"
-
-#, c-format
-msgid "P%i'S CONTROLLER"
-msgstr "P%i КОНТРОЛЛЕР"
-
-msgid "CONTROLLER MAPPING"
-msgstr "НАСТРОЙКА КОНТРОЛЛЕРОВ"
-
-msgid ""
-"YOU ARE GOING TO MAP A CONTROLLER. MAP BASED ON THE BUTTON'S POSITION, NOT "
-"ITS PHYSICAL LABEL. IF YOU DO NOT HAVE A SPECIAL BUTTON FOR HOTKEY, USE THE "
-"SELECT BUTTON. SKIP ALL BUTTONS/STICKS YOU DO NOT HAVE BY HOLDING ANY "
-"BUTTON. PRESS THE SOUTH BUTTON TO CONFIRM WHEN DONE."
-msgstr ""
-"ВЫ СОБИРАЕТЕСЬ НАСТРОИТЬ КОНТРОЛЛЕР. РАСКЛАДКА ОСНОВАНА НА СТОРОНАХ СВЕТА "
-"(СЕВЕР, ЮГ, ЗАПАД, ВОСТОК). ЕСЛИ У ВАС ОТСУТСТВУЕТ ОТДЕЛЬНОЙ КНОПКИ ДЛЯ "
-"ХОТКЕЯ, ИСПОЛЬЗУЙТЕ КНОПКУ SELECT. ПРОПУСТИТЕ ВСЕ КНОПКИ/СТИКИ, КОТОРЫХ У "
-"ВАС НЕТ, УДЕРЖИВАЯ ЛЮБУЮ КНОПКУ."
-
-msgid "SINDEN GUN SETTINGS"
-msgstr "НАСТРОЙКИ SINDEN GUN"
-
-msgid "WIIMOTE GUN SETTINGS"
-msgstr "НАСТРОЙКИ WIIMOTE GUN"
-
-msgid "STEAMDECK MOUSE/GUN SETTINGS"
-msgstr "STEAMDECK МЫШЬ/НАСТРОЙКИ ПИСТОЛЕТА"
-
-msgid "BLUETOOTH"
-msgstr "BLUETOOTH"
-
-msgid "ENABLE BLUETOOTH"
-msgstr "ВКЛЮЧИТЬ BLUETOOTH"
-
-msgid "PAIR BLUETOOTH PADS AUTOMATICALLY"
-msgstr "АВТОМАТИЧЕСКОЕ СОПРЯЖЕНИЕ BLUETOOTH УСТРОЙСТВ"
-
-msgid "PAIR A BLUETOOTH DEVICE MANUALLY"
-msgstr "РУЧНОЕ СОПРЯЖЕНИЕ BLUETOOTH УСТРОЙСТВ"
-
-msgid "SHOW CONTROLLER NOTIFICATIONS"
-msgstr "ПОКАЗЫВАТЬ УВЕДОМЛЕНИЯ КОНТРОЛЛЕРА"
-
-msgid "SHOW CONTROLLER ACTIVITY"
-msgstr "ПОКАЗАТЬ АКТИВНОСТЬ КОНТРОЛЛЕРА"
-
-msgid "SHOW CONTROLLER BATTERY LEVEL"
-msgstr "ПОКАЗАТЬ УРОВЕНЬ ЗАРЯДА КОНТРОЛЛЕРА"
-
-msgid "DRAW GUN CROSSHAIR"
-msgstr "ОТОБРАЖАТЬ ПЕРЕКРЕСТИЕ ПИСТОЛЕТА"
-
-msgid "BEHAVIOR"
-msgstr "ПОВЕДЕНИЕ"
-
-msgid "RESTRICT HOTKEYS TO EXIT"
-msgstr "ОГРАНИЧИТЬ ХОТКЕИ ДЛЯ ВЫХОДА"
-
-msgid "default"
-msgstr "по умолчанию"
-
-msgid "BORDER SIZE"
-msgstr "РАЗМЕР РАМКИ"
-
-msgid "THIN"
-msgstr "ТОНКИЙ"
-
-msgid "MEDIUM"
-msgstr "СРЕДНИЙ"
-
-msgid "BIG"
-msgstr "БОЛЬШОЙ"
-
-msgid "BORDER MODE"
-msgstr "РЕЖИМ ГРАНИЦ"
-
-msgid "NORMAL"
-msgstr "НОРМАЛЬНЫЙ"
-
-msgid "IN GAME ONLY"
-msgstr "ТОЛЬКО В ИГРЕ"
-
-msgid "HIDDEN"
-msgstr "СКРЫТЫЙ"
-
-msgid "BORDER COLOR"
-msgstr "ЦВЕТ РАМКИ"
-
-msgid "WHITE"
-msgstr "БЕЛЫЙ"
-
-msgid "BORDER RATIO"
-msgstr "СООТНОШЕНИЕ РАМКИ"
-
-msgid "CAMERA CONTRAST"
-msgstr "КОНТРАСТ КАМЕРЫ"
-
-msgid "Daytime/Bright Sunlight (40)"
-msgstr "Дневное время/яркий солнечный свет (40)"
-
-msgid "Default (50)"
-msgstr "По умолчанию (50)"
-
-msgid "Dim Display/Evening (60)"
-msgstr "Тусклый дисплей/вечер (60)"
-
-msgid "CAMERA BRIGHTNESS"
-msgstr "ЯРКОСТЬ КАМЕРЫ"
-
-msgid "Daytime/Bright Sunlight (80)"
-msgstr "Дневное время/яркий солнечный свет (80)"
-
-msgid "Default (100)"
-msgstr "По умолчанию (100)"
-
-msgid "Dim Display/Evening (120)"
-msgstr "Тусклый дисплей/вечер (120)"
-
-msgid "CAMERA EXPOSURE"
-msgstr "ЭКСПОЗИЦИЯ КАМЕРЫ"
-
-msgid "Projector/CRT (-5)"
-msgstr "Проектор/ЭЛТ (-5)"
-
-msgid "Projector/CRT (-6)"
-msgstr "Проектор/ЭЛТ (-6)"
-
-msgid "Default (-7)"
-msgstr "По умолчанию (-7)"
-
-msgid "Other (-8)"
-msgstr "Другой (-8)"
-
-msgid "Other (-9)"
-msgstr "Другой (-9)"
-
-msgid "RECOIL"
-msgstr "RECOIL"
-
-msgid "GUN"
-msgstr "GUN"
-
-msgid "MACHINE GUN"
-msgstr "MACHINE GUN"
-
-msgid "QUIET GUN"
-msgstr "QUIET GUN"
-
-msgid "QUIET MACHINE GUN"
-msgstr "QUIET MACHINE GUN"
-
-msgid "MODE"
-msgstr "РЕЖИМ"
-
-msgid "JOYSTICK"
-msgstr "ДЖОЙСТИК"
-
-msgid "MOUSE ONLY"
-msgstr "ТОЛЬКО МЫШЬ"
-
-msgid "HAND"
-msgstr "РУКА"
-
-msgid "LEFT"
-msgstr "ВЛЕВО"
-
-msgid "RIGHT"
-msgstr "ВПРАВО"
+msgid "INPUT"
+msgstr "ВВОД"
 
 msgid "FILTER GAMELIST BY"
 msgstr "ФИЛЬТР СПИСКА ИГР ПО"
@@ -2820,14 +3793,26 @@ msgstr "НАЙТИ ИГРЫ"
 msgid "SYSTEMS"
 msgstr "СИСТЕМЫ"
 
-msgid "FILE BROWSER"
-msgstr "ФАЙЛОВЫЙ БРАУЗЕР"
+msgid "TARGET ARCHITECTURE"
+msgstr "ЦЕЛЕВАЯ АРХИТЕКТУРА"
 
-msgid "PARENT FOLDER"
-msgstr "РОДИТЕЛЬСКАЯ ПАПКА"
+msgid "NETWORK REQUIRED"
+msgstr "ТРЕБУЕТСЯ СЕТЬ"
 
-msgid "SCREENSHOTS FOLDER"
-msgstr "ПАПКА СКРИНШОТОВ"
+msgid "INVALID PARAMETERS"
+msgstr "НЕВЕРНЫЕ ПАРАМЕТРЫ"
+
+msgid "ZOOM OUT"
+msgstr "УМЕНЬШИТЬ"
+
+msgid "ZOOM IN"
+msgstr "УВЕЛИЧИТЬ"
+
+msgid "MOVE"
+msgstr "ДВИГАТЬ"
+
+msgid "ZOOM"
+msgstr "МАСШТАБ"
 
 msgid "dim"
 msgstr "затемнение"
@@ -2931,399 +3916,17 @@ msgstr "ИСПОЛЬЗОВАТЬ ИЗОБРАЖЕНИЯ ИЗ ПОДПАПКИ П
 msgid "CUSTOM IMAGE FILE EXTENSIONS"
 msgstr "РАСШИРЕНИЕ ПОЛЬЗ. ИЗОБРАЖЕНИЯ"
 
-msgid "INVALID CONTENT"
-msgstr "НЕДОПУСТИМОЕ СОДЕРЖАНИЕ"
+msgid "NO MISSING BIOS FILES"
+msgstr "НЕТ ОТСУТСТВУЮЩИХ БИОСОВ"
 
-msgid ""
-"A valid account is required. Please register an account on https://"
-"retroachievements.org"
-msgstr ""
-"Требуется действующий аккаунт. Зарегистрироваться можно на https://"
-"retroachievements.org"
+msgid "Installed systems"
+msgstr "Установленные системы"
 
-msgid "Full"
-msgstr "Полный"
+msgid "refresh"
+msgstr "обновить"
 
-msgid "Kiosk"
-msgstr "Киоск"
-
-msgid "Kid"
-msgstr "Детский"
-
-msgid "Basic"
-msgstr "Базовый"
-
-msgid "Games similar to"
-msgstr "Игры похожие на"
-
-msgid "SAVE STATES (HOLD)"
-msgstr "БЫСТРЫЕ СОХРАНЕНИЯ (УДЕРЖИВАТЬ)"
-
-msgid "GAME OPTIONS (HOLD)"
-msgstr "ПАРАМЕТРЫ (УДЕРЖИВАТЬ)"
-
-msgid "GAME OPTIONS"
-msgstr "ПАРАМЕТРЫ"
-
-msgid "FAVORITE"
-msgstr "ИЗБРАННОЕ"
-
-msgid "RANDOM"
-msgstr "СЛУЧАЙНО"
-
-#, c-format
-msgid "Back to %s"
-msgstr "Назад к %s"
-
-msgid "No Entries Found"
-msgstr "Игр не найдено"
-
-msgid "Times played"
-msgstr "Сыграно раз"
-
-#, c-format
-msgid "This folder contains %i game, including :%s"
-msgid_plural "This folder contains %i games, including :%s"
-msgstr[0] "Папка содержит %i игру, включая :%s"
-msgstr[1] "Папка содержит %i игры, включая :%s"
-msgstr[2] "Папка содержит %i игр, включая :%s"
-
-msgid "SYSTEM INFO"
-msgstr "СИСТЕМНАЯ ИНФОРМАЦИЯ"
-
-msgid "ERROR: EVERY SYSTEM IS HIDDEN, RE-DISPLAYING ALL OF THEM NOW"
-msgstr "ОШИБКА: ВСЕ СИСТЕМЫ СКРЫТЫ, ВКЛЮЧЕНИЕ ПОВТОРНОГО ОТОБРАЖЕНИЯ"
-
-msgid "QUICK SEARCH"
-msgstr "БЫСТРЫЙ ПОИСК"
-
-msgid "GO TO LETTER"
-msgstr "ПЕРЕЙТИ К СИМВОЛУ"
-
-msgid "GO TO MANUFACTURER"
-msgstr "ПЕРЕЙТИ К ПРОИЗВОДИТЕЛЮ"
-
-msgid "GO TO HARDWARE"
-msgstr "ПЕРЕЙТИ К ЖЕЛЕЗУ"
-
-msgid "GO TO DECADE"
-msgstr "ПЕРЕЙТИ К ДЕСЯТИЛЕТИЮ"
-
-msgid "CONFIGURATION"
-msgstr "КОНФИГУРАЦИЯ"
-
-#, c-format
-msgid "%i COLLECTION"
-msgid_plural "%i COLLECTIONS"
-msgstr[0] "%i КОЛЛЕКЦИЯ"
-msgstr[1] "%i КОЛЛЕКЦИИ"
-msgstr[2] "%i КОЛЛЕКЦИЙ"
-
-#, c-format
-msgid "%i ITEM"
-msgid_plural "%i ITEMS"
-msgstr[0] "%i ОБЪЕКТ"
-msgstr[1] "%i ОБЪЕКТА"
-msgstr[2] "%i ОБЪЕКТОВ"
-
-#, c-format
-msgid "%i GAME"
-msgid_plural "%i GAMES"
-msgstr[0] "%i ИГРА"
-msgstr[1] "%i ИГРЫ"
-msgstr[2] "%i ИГР"
-
-msgid "NAVIGATION BAR"
-msgstr "ПАНЕЛЬ НАВИГАЦИИ"
-
-msgid "FILES"
-msgstr "ФАЙЛЫ"
-
-msgid ""
-"WARNING: THE EMULATOR/CORE CURRENTLY SET DOES NOT SUPPORT THIS GAME'S FILE "
-"FORMAT.\n"
-"DO YOU WANT TO LAUNCH IT ANYWAY?"
-msgstr ""
-"ВНИМАНИЕ: ФОРМАТ ЭТОЙ ИГРЫ НЕ ПОДДЕРЖИВАЕТСЯ ТЕКУЩИМ ЭМУЛЯТОРОМ/ЯДРОМ.\n"
-"ПОПРОБОВАТЬ ЗАПУСТИТЬ В ЛЮБОМ СЛУЧАЕ?"
-
-msgid ""
-"WARNING: THE SYSTEM HAS MISSING BIOS FILE(S) AND THE GAME MAY NOT WORK "
-"CORRECTLY.\n"
-"DO YOU WANT TO LAUNCH IT ANYWAY?"
-msgstr ""
-"ВНИМАНИЕ: В СИСТЕМЕ ОТСУТСТВУЕТ BIOS, ИГРА МОЖЕТ РАБОТАТЬ НЕПРАВИЛЬНО.\n"
-"ЗАПУСТИТЬ В ЛЮБОМ СЛУЧАЕ?"
-
-msgid "Preloading UI"
-msgstr "Предзагрузка интерфейса"
-
-msgid "Loading theme"
-msgstr "Загрузка темы"
-
-msgid "Loading gamelists"
-msgstr "Загрузка списка игр"
-
-msgid "MENU"
-msgstr "МЕНЮ"
-
-msgid "GENRE"
-msgstr "ЖАНР"
-
-msgid "FAMILY"
-msgstr "СЕМЕЙСТВО"
-
-msgid "PLAYERS"
-msgstr "ИГРОКОВ"
-
-msgid "PUBLISHER/DEVELOPER"
-msgstr "ИЗДАТЕЛЬ/РАЗРАБОТЧИК"
-
-msgid "RATING"
-msgstr "РЕЙТИНГ"
-
-msgid "YEAR"
-msgstr "ГОД"
-
-msgid "REGION"
-msgstr "РЕГИОН"
-
-msgid "KIDGAME"
-msgstr "ДЕТСКАЯ ИГРА"
-
-msgid "ALREADY PLAYED"
-msgstr "УЖЕ ИГРАЛ"
-
-msgid "HAS ACHIEVEMENTS"
-msgstr "ИМЕЮТСЯ РЕТРОДОСТИЖЕНИЯ"
-
-msgid "VERTICAL"
-msgstr "ВЕРТИКАЛЬНО"
-
-msgid "LIGHTGUN"
-msgstr "СВЕТОВОЙ ПИСТОЛЕТ"
-
-msgid "STEERING WHEEL"
-msgstr "РУЛЬ"
-
-msgid "TRACKBALL"
-msgstr "ТРЕКБОЛ"
-
-msgid "SPINNER"
-msgstr "СПИННЕР"
-
-msgid "HAVING MEDIAS"
-msgstr "ИМЕЮЩИЕ МЕДИА"
-
-msgid "MISSING MEDIAS"
-msgstr "ОТСУТСТВУЮЩИЕ МЕДИА"
-
-msgid "DO YOU WANT TO SWITCH THE SCREEN ?"
-msgstr "ВЫ ХОТИТЕ ПЕРЕКЛЮЧИТЬ ЭКРАН?"
-
-msgid "INVALID CREDENTIALS"
-msgstr "НЕВЕРНЫЕ ЛОГИН/ПАРОЛЬ"
-
-msgid "SCRAPING"
-msgstr "ЗАГРУЗКА"
-
-msgid "SCRAPE FAILED"
-msgstr "ЗАГРУЗКА НЕ УДАЛАСЬ"
-
-msgid "SCRAPING FINISHED"
-msgstr "ЗАГРУЗКА ЗАВЕРШЕНА"
-
-msgid "UPDATE GAMELISTS TO APPLY CHANGES."
-msgstr "ОБНОВИТЕ СПИСОК ИГР, ЧТОБЫ ПРИМЕНИТЬ ИЗМЕНЕНИЯ."
-
-msgid "Loading system config..."
-msgstr "Загрузка системных настроек..."
-
-msgid "SAVING METADATA. PLEASE WAIT..."
-msgstr "СОХРАНЕНИЕ МЕТАДАННЫХ. ПОДОЖДИТЕ..."
-
-msgid "THE EMULATOR EXITED UNEXPECTEDLY"
-msgstr "ЭМУЛЯТОР НЕОЖИДАННО ПРЕКРАТИЛ РАБОТУ"
-
-msgid "BAD COMMAND LINE ARGUMENTS"
-msgstr "НЕВЕРНЫЕ АРГУМЕНТЫ КОМАНДНОЙ СТРОКИ"
-
-msgid "INVALID CONFIGURATION"
-msgstr "НЕВЕРНАЯ КОНФИГУРАЦИЯ"
-
-msgid "UNKNOWN EMULATOR"
-msgstr "НЕИЗВЕСТНЫЙ ЭМУЛЯТОР"
-
-msgid "EMULATOR IS MISSING"
-msgstr "ЭМУЛЯТОР ОТСУТСТВУЕТ"
-
-msgid "CORE IS MISSING"
-msgstr "ЯДРО ОТСУТСТВУЕТ"
-
-msgid "UKNOWN ERROR"
-msgstr "НЕИЗВЕСТНАЯ ОШИБКА"
-
-msgid "Interlaced"
-msgstr "Чересстрочной"
-
-msgid "all games"
-msgstr "все игры"
-
-msgid "last played"
-msgstr "недавно играли"
-
-msgid "favorites"
-msgstr "избранное"
-
-msgid "2 players"
-msgstr "2 игрока"
-
-msgid "4 players"
-msgstr "4 игрока"
-
-msgid "never played"
-msgstr "не играл"
-
-msgid "retroachievements"
-msgstr "ретродостижения"
-
-msgid "arcade"
-msgstr "аркады"
-
-msgid "vertical arcade"
-msgstr "вертикальные акрады"
-
-msgid "lightgun games"
-msgstr "световой пистолет"
-
-msgid "wheel games"
-msgstr "игры с рулём"
-
-msgid "trackball games"
-msgstr "трекбол игры"
-
-msgid "spinner games"
-msgstr "спиннер игры"
-
-msgid "collections"
-msgstr "коллекции"
-
-#, c-format
-msgid "Added '%s' to '%s'"
-msgstr "'%s' добавлено в '%s'"
-
-#, c-format
-msgid "Removed '%s' from '%s'"
-msgstr "'%s' удалено из '%s'"
-
-msgid "This collection is empty."
-msgstr "Коллекция пуста."
-
-#. TRANSLATION: number of developpers / various developpers
-msgid "None"
-msgstr "Нет"
-
-msgid "Various"
-msgstr "Различные"
-
-msgid "SEARCHING RETROACHIEVEMENTS"
-msgstr "ПОИСК РЕТРОДОСТИЖЕНИЙ"
-
-msgid "SEARCHING NETPLAY GAMES"
-msgstr "ПОИСК NETPLAY ИГР"
-
-msgid "INDEXING COMPLETED"
-msgstr "ИНДЕКСАЦИЯ ЗАВЕРШЕНА"
-
-msgid "FILENAME, ASCENDING"
-msgstr "НАЗВАНИЕ ФАЙЛА, ПО ВОЗРАСТАНИЮ"
-
-msgid "FILENAME, DESCENDING"
-msgstr "НАЗВАНИЕ ФАЙЛА, ПО УБЫВАНИЮ"
-
-msgid "RATING, ASCENDING"
-msgstr "РЕЙТИНГ, ПО ВОЗРАСТАНИЮ"
-
-msgid "RATING, DESCENDING"
-msgstr "РЕЙТИНГ, ПО УБЫВАНИЮ"
-
-msgid "TIMES PLAYED, ASCENDING"
-msgstr "СЫГРАНО РАЗ, ПО ВОЗРАСТАНИЮ"
-
-msgid "TIMES PLAYED, DESCENDING"
-msgstr "СЫГРАНО РАЗ, ПО УБЫВАНИЮ"
-
-msgid "LAST PLAYED, ASCENDING"
-msgstr "НЕДАВНО ИГРАЛИ, ПО ВОЗРАСТАНИЮ"
-
-msgid "LAST PLAYED, DESCENDING"
-msgstr "НЕДАВНО ИГРАЛИ, ПО УБЫВАНИЮ"
-
-msgid "NUMBER PLAYERS, ASCENDING"
-msgstr "КОЛ-ВО ИГРОКОВ, ПО ВОЗРАСТАНИЮ"
-
-msgid "NUMBER PLAYERS, DESCENDING"
-msgstr "КОЛ-ВО ИГРОКОВ, ПО УБЫВАНИЮ"
-
-msgid "RELEASE DATE, ASCENDING"
-msgstr "ДАТА РЕЛИЗА, ПО ВОЗРАСТАНИЮ"
-
-msgid "RELEASE DATE, DESCENDING"
-msgstr "ДАТА РЕЛИЗА, ПО УБЫВАНИЮ"
-
-msgid "GENRE, ASCENDING"
-msgstr "ЖАНР, ПО ВОЗРАСТАНИЮ"
-
-msgid "GENRE, DESCENDING"
-msgstr "ЖАНР, ПО УБЫВАНИЮ"
-
-msgid "DEVELOPER, ASCENDING"
-msgstr "РАЗРАБОТЧИК, ПО ВОЗРАСТАНИЮ"
-
-msgid "DEVELOPER, DESCENDING"
-msgstr "РАЗРАБОТЧИК, ПО УБЫВАНИЮ"
-
-msgid "PUBLISHER, ASCENDING"
-msgstr "ИЗДАТЕЛЬ, ПО ВОЗРАСТАНИЮ"
-
-msgid "PUBLISHER, DESCENDING"
-msgstr "ИЗДАТЕЛЬ, ПО УБЫВАНИЮ"
-
-msgid "SYSTEM, ASCENDING"
-msgstr "СИСТЕМЫ, ПО ВОЗРАСТАНИЮ"
-
-msgid "SYSTEM, DESCENDING"
-msgstr "СИСТЕМЫ, ПО УБЫВАНИЮ"
-
-msgid "FILE CREATION DATE, ASCENDING"
-msgstr "ДАТА СОЗДАНИЯ ФАЙЛА, ПО ВОЗРАСТАНИЮ"
-
-msgid "FILE CREATION DATE, DESCENDING"
-msgstr "ДАТА СОЗДАНИЯ ФАЙЛА, ПО УБЫВАНИЮ"
-
-msgid "GAME TIME, ASCENDING"
-msgstr "ВРЕМЯ ИГРЫ, ПО ВОЗРАСТАНИЮ"
-
-msgid "GAME TIME, DESCENDING"
-msgstr "ВРЕМЯ ИГРЫ, ПО УБЫВАНИЮ"
-
-msgid "SYSTEM, RELEASE YEAR, ASCENDING"
-msgstr "СИСТЕМЫ, ДАТА РЕЛИЗА, ПО ВОЗРАСТАНИЮ"
-
-msgid "SYSTEM, RELEASE YEAR, DESCENDING"
-msgstr "СИСТЕМЫ, ДАТА РЕЛИЗА, ПО УБЫВАНИЮ"
-
-msgid "RELEASE YEAR, SYSTEM, ASCENDING"
-msgstr "ДАТА РЕЛИЗА, СИСТЕМЫ, ПО ВОЗРАСТАНИЮ"
-
-msgid "RELEASE YEAR, SYSTEM, DESCENDING"
-msgstr "ДАТА РЕЛИЗА, СИСТЕМЫ, ПО УБЫВАНИЮ"
-
-msgid "A,AN,THE"
-msgstr "A,AN,THE"
-
-msgid "UPDATE AVAILABLE"
-msgstr "ДОСТУПНО ОБНОВЛЕНИЕ"
+msgid "NO MISSING BIOS"
+msgstr "НЕТ ОТСУТСТВУЮЩИХ БИОСОВ"
 
 #, c-format
 msgid "%s connected"
@@ -3332,6 +3935,12 @@ msgstr "%s подключен"
 #, c-format
 msgid "%s disconnected"
 msgstr "%s отключен"
+
+msgid "SCREEN READER ENABLED"
+msgstr "ЭКРАННЫЙ ДИКТОР ВКЛЮЧЕН"
+
+msgid "SCREEN READER DISABLED"
+msgstr "ЭКРАННЫЙ ДИКТОР ВЫКЛЮЧЕН"
 
 #, c-format
 msgid "%d d"
@@ -3384,20 +3993,30 @@ msgstr[0] "%d секунду назад"
 msgstr[1] "%d секунды назад"
 msgstr[2] "%d секунд назад"
 
+msgid ""
+"CALIBRATING GUN\n"
+"Fire on targets to calibrate"
+msgstr ""
+"КАЛИБРОВКА ПИСТОЛЕТА\n"
+"Стреляйте по мишеням для калибровки"
+
+msgid "WORKING..."
+msgstr "ОБРАБОТКА..."
+
+msgid "CHANGE"
+msgstr "ИЗМЕНИТЬ"
+
+msgid "up/down"
+msgstr "вверх/вниз"
+
 msgid "MOVE CURSOR"
 msgstr "ПЕРЕДВИНУТЬ КУРСОР"
 
 msgid "EDIT"
 msgstr "РЕДАКТИРОВАТЬ"
 
-msgid "CHANGE"
-msgstr "ИЗМЕНИТЬ"
-
-msgid "WORKING..."
-msgstr "ОБРАБОТКА..."
-
-msgid "up/down"
-msgstr "вверх/вниз"
+msgid "ENABLED"
+msgstr "ВКЛЮЧЕНО"
 
 msgid "accept"
 msgstr "принять"
@@ -3421,12 +4040,6 @@ msgstr[0] "%i ВЫБРАН"
 msgstr[1] "%i ВЫБРАНО"
 msgstr[2] "%i ВЫБРАНО"
 
-msgid "ENABLED"
-msgstr "ВКЛЮЧЕНО"
-
-msgid "DISCARD CHANGES"
-msgstr "ОТМЕНИТЬ ИЗМЕНЕНИЯ"
-
 msgid "WELCOME"
 msgstr "ДОБРО ПОЖАЛОВАТЬ"
 
@@ -3448,6 +4061,9 @@ msgstr "НАЖМИТЕ ESC ДЛЯ ОТМЕНЫ."
 
 msgid "PRESS ESC OR A HOTKEY TO CANCEL."
 msgstr "НАЖМИТЕ ESC ИЛИ ХОТКЕЙ ДЛЯ ОТМЕНЫ."
+
+msgid "DISCARD CHANGES"
+msgstr "ОТМЕНИТЬ ИЗМЕНЕНИЯ"
 
 msgid "SHIFTS FOR UPPER,LOWER, AND SPECIAL"
 msgstr "SHIFT ДЛЯ РЕГИСТРА И СИМВОЛОВ"
@@ -3605,19 +4221,6 @@ msgstr "НАЖМИТЕ ЛЮБУЮ КНОПКУ"
 
 msgid "ALREADY TAKEN"
 msgstr "УЖЕ ЗАНЯТО"
-
-msgid "SCREEN READER ENABLED"
-msgstr "ЭКРАННЫЙ ДИКТОР ВКЛЮЧЕН"
-
-msgid "SCREEN READER DISABLED"
-msgstr "ЭКРАННЫЙ ДИКТОР ВЫКЛЮЧЕН"
-
-msgid ""
-"CALIBRATING GUN\n"
-"Fire on targets to calibrate"
-msgstr ""
-"КАЛИБРОВКА ПИСТОЛЕТА\n"
-"Стреляйте по мишеням для калибровки"
 
 #~ msgid "SCRAPER SETTINGS"
 #~ msgstr "НАСТРОЙКИ СКРАПЕРА"
@@ -3887,9 +4490,6 @@ msgstr ""
 
 #~ msgid "FLATTEN-GLOW"
 #~ msgstr "FLATTEN-GLOW"
-
-#~ msgid "RGA SCALING"
-#~ msgstr "RGA СКАЛИРОВАНИЕ"
 
 #~ msgid "SCRAPE CRITERIA"
 #~ msgstr "КРИТЕРИИ ЗАГРУЗКИ"
@@ -4169,9 +4769,6 @@ msgstr ""
 
 #~ msgid "SELECT YOUR TIMEZONE"
 #~ msgstr "ВЫБРАТЬ ЧАСОВОЙ ПОЯС"
-
-#~ msgid "TIMEZONE"
-#~ msgstr "ЧАСОВОЙ ПОЯС"
 
 #~ msgid "TEXT TO SPEECH"
 #~ msgstr "ПРЕОБРАЗОВАНИЕ ТЕКСТА В РЕЧЬ"
@@ -4555,9 +5152,6 @@ msgstr ""
 #~ msgid "favorite"
 #~ msgstr "избранное"
 
-#~ msgid "DISK USAGE"
-#~ msgstr "ИСПОЛЬЗОВАНИЕ ДИСКА"
-
 #~ msgid "This collection contains %i game, including %s."
 #~ msgid_plural "This collection contains %i games, including %s."
 #~ msgstr[0] "Коллекция содержит %i игру, включая %s."
@@ -4749,6 +5343,3 @@ msgstr ""
 
 #~ msgid "enter game sort name"
 #~ msgstr "введите название для сортируемой игры"
-
-#~ msgid "sortname"
-#~ msgstr "название для сортировки"

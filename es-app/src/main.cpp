@@ -327,10 +327,16 @@ int setLocale(char * argv1)
 #if WIN32
 	std::locale::global(std::locale("en-US"));
 #else
-	if (Utils::FileSystem::exists("./locale/lang")) // for local builds
-		EsLocale::init("", "./locale/lang");	
+	std::string mLocalePath = Paths::getEmulationStationPath() + "/locale/lang";
+
+	std::string savedLanguage = SystemConf::getInstance()->get("system.language");
+
+	if (Utils::FileSystem::exists(mLocalePath))
+		EsLocale::init(savedLanguage, mLocalePath);
+	else if (Utils::FileSystem::exists("./locale/lang"))
+		EsLocale::init(savedLanguage, "./locale/lang");
 	else
-		EsLocale::init("", "/usr/share/locale");	
+		EsLocale::init(savedLanguage, "/usr/share/locale");
 #endif
 
 	setlocale(LC_TIME, "");
