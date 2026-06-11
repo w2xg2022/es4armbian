@@ -31,18 +31,18 @@ EmuELEC 原版在非 EmuELEC 系统镜像下，语言设置无法保存、也不
 
 - EmulationStation 菜单文字的大小写由代码渲染时的 `Utils::String::toUpper()` 决定，与 `.po` 翻译文件里 `msgstr` 的原始大小写无关。
 - 原版中：
-  - `MenuComponent::addRow` / `addWithDescription` / `addSwitch`（如“ 平台设置”子菜单）会调用 `toUpper`，英文字母统一显示为大写；
-  - `MenuComponent::addEntry`（主菜单、退出/QUIT 子菜单等带图标的项目）**没有**调用 `toUpper`，导致“ 重新启动EmulationStation”“ 启动RetroArch”等条目大小写与其他菜单不一致。
+  - `MenuComponent::addRow` / `addWithDescription` / `addSwitch`（如“平台设置”子菜单）会调用 `toUpper`，英文字母统一显示为大写；
+  - `MenuComponent::addEntry`（主菜单、退出/QUIT 子菜单等带图标的项目）**没有**调用 `toUpper`，导致“重新启动EmulationStation”、“启动RetroArch”等条目大小写与其他菜单不一致。
 - 修改：在 `addEntry` 中也调用 `Utils::String::toUpper(name)`，使全部菜单统一为大写英文风格。
 
 ### 2.4 中文翻译补全与术语统一
 
 - 补全简体中文 (`zh_CN`) / 繁体中文 (`zh_TW`) 翻译文件 `locale/lang/{zh_CN,zh_TW}/LC_MESSAGES/emulationstation2.po` 数百条缺失的词条。
-- 术语统一：同一英文术语在不同菜单中不依据各菜单的上下文各自直译，避免同义词混杂、降低界面一致性。例如英文 `SETTINGS` 在游戏设置 (GAMES SETTINGS)、系统设置 (SYSTEM SETTINGS)、声音设置 (SOUND SETTINGS) 等多个菜单标题中出现，应统一对应同一个中文词，而不是有的译成“ 设定”、有的译成“ 设置”、“ 配置”。
+- 术语统一：同一英文术语在不同菜单中不依据各菜单的上下文各自直译，避免同义词混杂、降低界面一致性。例如英文 `SETTINGS` 在游戏设置 (GAMES SETTINGS)、系统设置 (SYSTEM SETTINGS)、声音设置 (SOUND SETTINGS) 等多个菜单标题中出现，应统一对应同一个中文词，而不是有的译成“设定”、有的译成“设置”、“配置”。
 
 ### 2.5 其他系统层面注意事项（非代码改动，但部署必需）
 
-- ES 以非 root 的 `game` 账号运行，“ 重启 / 关机”通过 `systemctl reboot` / `systemctl poweroff`（经 D-Bus 调用 `systemd-logind`）。Debian trixie 上需要安装 `polkitd` + `pkexec`，否则非 root 用户的重启/关机请求会被 `logind` 拒绝，表现为“只重启了 EmulationStation 但系统没重启”。
+- ES 以非 root 的 `game` 账号运行，“重启 / 关机”通过 `systemctl reboot` / `systemctl poweroff`（经 D-Bus 调用 `systemd-logind`）。Debian trixie 上需要安装 `polkitd` + `pkexec`，否则非 root 用户的重启/关机请求会被 `logind` 拒绝，表现为“只重启了 EmulationStation 但系统没重启”。
 - 运行依赖：`libsdl2-mixer-2.0-0` 等（`ldd` 检查缺失库）。
 
 ## 3. 运行环境（可无需 X11）
