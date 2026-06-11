@@ -39,34 +39,26 @@ EmuELEC 原版在非 EmuELEC 系统镜像下，语言设置无法保存、也不
 
 - 补全简体中文 (`zh_CN`) / 繁体中文 (`zh_TW`) 翻译文件 `locale/lang/{zh_CN,zh_TW}/LC_MESSAGES/emulationstation2.po` 中大量缺失的词条（涉及云存档、启动画面 Splash 设置、按键重映射、Wiimote、外部存储挂载、分辨率边框调整等较新的功能）。
 
-- **术语统一原则**：同一英文术语在不同菜单中应翻译为同一个中文词，不依据各菜单的上下文各自直译，避免同义词混杂、降低界面一致性。
+- 术语统一原则：同一英文术语在不同菜单中应翻译为同一个中文词，不依据各菜单的上下文各自直译，避免同义词混杂、降低界面一致性。例如英文 `SETTINGS` 在游戏设置 (GAMES SETTINGS)、系统设置 (SYSTEM SETTINGS)、声音设置 (SOUND SETTINGS) 等多个菜单标题中出现，应统一对应同一个中文词，而不是有的译成「设定」、有的译成「设置」、「配置」。
 
-  - **概念举例**：英文 `SETTINGS` 在游戏设定 (GAMES SETTINGS)、系统设定 (SYSTEM SETTINGS)、声音设定 (SOUND SETTINGS) 等多个菜单标题中出现，应统一对应同一个中文词，而不是有的译成「设定」、有的译成「设置」、「配置」。
+### 2.5 其他系统层面注意事项（非代码改动，但部署必需）
 
-  - **简体中文 (zh_CN) 例子**：各菜单标题原本已统一使用「设定」（如「游戏设定」「系统设定」「声音设定」），本次补译延续此用词，未发现需要调整的不一致项。
+- ES 以非 root 的 `game` 账号运行，「重启 / 关机」通过 `systemctl reboot` / `systemctl poweroff`（经 D-Bus 调用 `systemd-logind`）。Debian trixie 上需要安装 `polkitd` + `pkexec`，否则非 root 用户的重启/关机请求会被 `logind` 拒绝，表现为“只重启了 EmulationStation 但系统没重启”。
+- 运行依赖：`libsdl2-mixer-2.0-0` 等（`ldd` 检查缺失库）。
 
-  - **繁体中文 (zh_TW) 例子**：
-    - 「平台設置」→「平台設定」：原本「平台设置」单独使用「設置」，与其余菜单（遊戲設定、使用者介面設定、控制器與藍牙設定、聲音設定、遊戲合輯設定、系統設定）的「設定」不一致，本次统一改为「平台設定」。
-    - 语言选择菜单：「正體中文」→「繁體中文」。前者是「Traditional Chinese」的字面直译，后者是繁体中文使用者更常见、更自然的自称用语，此项修改对所有语言界面下的语言选择列表均生效（即英文界面切换语言时，繁体中文选项也会显示为「繁體中文」而非「正體中文」）。
-
-### 2.5 运行环境（无需 X11）
+## 3. 运行环境（可无需 X11）
 
 - EmulationStation 基于 SDL2 渲染，除了 X11，SDL2 本身也支持 `KMSDRM` / `fbdev` 等视频驱动，理论上可以直接在没有 X 服务器（即 Armbian 的纯 console / `multi-user.target`）的环境下运行，从而减少一层 X11 的资源开销。
 - **当前测试环境**仍然通过 `startx` 启动 Xorg 后再运行 `emulationstation`（`DISPLAY=:0`），主要是为了方便用 `xdotool` / `scrot` 等 X11 工具进行调试和截图验证，**并非运行的硬性要求**。
 - 若要切换为无 X11 的 `KMSDRM` 模式，需要将 `SDL_VIDEODRIVER` 设为 `kmsdrm`（或留空让 SDL2 自动探测），并直接以具备 `/dev/dri`、`/dev/input` 访问权限的用户启动 `emulationstation`，跳过 `startx`/`xinit`。该模式尚未在本项目中正式验证，作为后续优化方向记录于此。
 
-### 2.6 其他系统层面注意事项（非代码改动，但部署必需）
+## 4. 编译方法
 
-- ES 以非 root 的 `game` 账号运行，「重启 / 关机」通过 `systemctl reboot` / `systemctl poweroff`（经 D-Bus 调用 `systemd-logind`）。Debian trixie 上需要安装 `polkitd` + `pkexec`，否则非 root 用户的重启/关机请求会被 `logind` 拒绝，表现为“只重启了 EmulationStation 但系统没重启”。
-- 运行依赖：`libsdl2-mixer-2.0-0` 等（`ldd` 检查缺失库）。
-
-## 3. 编译方法
-
-### 3.1 编译环境
+### 4.1 编译环境
 
 推荐使用与目标设备同架构（aarch64）的 Docker 容器或 chroot 环境（例如基于 **Debian 13 / trixie**（`arm64v8/debian:trixie`）的容器），避免交叉编译带来的兼容性问题。
 
-### 3.2 配置与编译
+### 4.2 配置与编译
 
 ```bash
 cd emuelec-es
@@ -88,7 +80,7 @@ make -j8
 
 > 若只修改了 `.cpp` / `.h` 源码（不涉及翻译文件），可以只重新链接相关目标，无需重新跑 i18n。若修改了 `.po` 文件或涉及 es-core 公共组件（如 `MenuComponent.cpp`），需要完整执行一次 `make -j8`，耗时约 25-30 分钟。
 
-### 3.3 部署到设备
+### 4.3 部署到设备
 
 将以下文件复制到设备的 `/opt/emulationstation/` 目录：
 
@@ -106,7 +98,7 @@ apt-get install -y libsdl2-mixer-2.0-0 polkitd pkexec
 
 赋予可执行权限后，以普通用户（如 `game`）启动 `emulationstation` 即可。
 
-## 4. 授权 License
+## 5. 授权 License
 
 本项目沿用上游 EmulationStation / EmuELEC 的 **MIT License**（见 [LICENSE.md](LICENSE.md)，原始版权声明 `Copyright (c) 2014 Alec Lofquist`）。
 
