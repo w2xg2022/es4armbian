@@ -985,7 +985,7 @@ msgid "SHOW CONTROLLER BATTERY LEVEL"
 msgstr "显示手柄电池电量"
 
 msgid "DRAW GUN CROSSHAIR"
-msgstr "绘制枪的准星"
+msgstr "显示光枪的准星"
 
 msgid "BEHAVIOR"
 msgstr "行为"
@@ -1919,6 +1919,9 @@ msgstr "显示随机启动画面"
 msgid "USE SCRAPED MEDIA"
 msgstr "使用刮削媒体"
 
+msgid "DO NOT SHOW SPLASH"
+msgstr "不显示画面"
+
 msgid "EXIT SPLASH OPTION"
 msgstr "退出画面选项"
 
@@ -1948,9 +1951,6 @@ msgstr "音频设备"
 
 msgid "Changes will need an EmulationStation restart."
 msgstr "更改需要重启EmulationStation。"
-
-msgid "ENABLE SSH"
-msgstr "启用SSH"
 
 msgid "START AT BOOT"
 msgstr "开机启动项"
@@ -1991,6 +1991,9 @@ msgstr "危险区域"
 msgid "SPLASH SETTINGS"
 msgstr "启动画面设置"
 
+msgid "ENABLE LOADING SPLASH SCREEN"
+msgstr "启用启动加载画面"
+
 msgid "SPLASH LOADING OPTION"
 msgstr "启动加载画面选项"
 
@@ -2008,6 +2011,9 @@ msgstr "启动画面加载平台和ROM"
 
 msgid "SPLASH LOADING DURATION"
 msgstr "启动加载画面持续时间"
+
+msgid "ENABLE EXIT SPLASH SCREEN"
+msgstr "启用启动退出画面"
 
 msgid "SPLASH EXIT OPTION"
 msgstr "启动退出画面选项"
@@ -4168,6 +4174,12 @@ msgstr "按任意键"
 
 msgid "ALREADY TAKEN"
 msgstr "按键已被占用"
+
+#~ msgid "ENABLE SPLASH SCREEN"
+#~ msgstr "启用启动画面"
+
+#~ msgid "ENABLE SSH"
+#~ msgstr "启用SSH"
 
 #~ msgid "SCRAPER SETTINGS"
 #~ msgstr "抓取设置"

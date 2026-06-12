@@ -962,7 +962,7 @@ msgid "ENABLE BLUETOOTH"
 msgstr "啟用藍牙"
 
 msgid "PAIR BLUETOOTH PADS AUTOMATICALLY"
-msgstr "自動配對藍牙手把"
+msgstr "自動配對藍牙控制器"
 
 msgid "ENABLE BLUETOOTH LEGACY SEARCH"
 msgstr "啟用藍牙舊版搜尋"
@@ -1175,7 +1175,7 @@ msgid "WATCH GAME"
 msgstr "參觀遊戲"
 
 msgid "PAD TO KEYBOARD CONFIGURATION"
-msgstr "手把轉鍵盤設定"
+msgstr "控制器轉鍵盤設定"
 
 msgid "SELECT ACTIONS TO CHANGE"
 msgstr "選擇一個動作來修改"
@@ -1358,7 +1358,7 @@ msgid "VIEW CUSTOMIZATION"
 msgstr "檢視自定義選項"
 
 msgid "VIEW PAD TO KEYBOARD INFORMATION"
-msgstr "檢視手把轉鍵盤資訊"
+msgstr "檢視控制器轉鍵盤資訊"
 
 msgid "ADVANCED SYSTEM OPTIONS"
 msgstr "進階遊戲平台選項"
@@ -1548,10 +1548,10 @@ msgid "ADD TO CUSTOM COLLECTION..."
 msgstr "新增至自定義合輯..."
 
 msgid "EDIT PADTOKEY PROFILE"
-msgstr "編輯手把轉鍵盤設定檔"
+msgstr "編輯控制器轉鍵盤設定檔"
 
 msgid "CREATE PADTOKEY PROFILE"
-msgstr "建立手把轉鍵盤設定檔"
+msgstr "建立控制器轉鍵盤設定檔"
 
 msgid "ADVANCED GAME OPTIONS"
 msgstr "進階遊戲選項"
@@ -1698,7 +1698,7 @@ msgid "MANUAL"
 msgstr "使用手冊"
 
 msgid "PADTOKEY SETTINGS"
-msgstr "手把轉鍵盤設定"
+msgstr "控制器轉鍵盤設定"
 
 msgid "SCREENSCRAPER"
 msgstr "ScreenScraper"
@@ -1920,6 +1920,9 @@ msgstr "顯示隨機啟動畫面"
 msgid "USE SCRAPED MEDIA"
 msgstr "使用刮削媒體"
 
+msgid "DO NOT SHOW SPLASH"
+msgstr "不顯示畫面"
+
 msgid "EXIT SPLASH OPTION"
 msgstr "退出畫面選項"
 
@@ -1950,9 +1953,6 @@ msgstr "音訊裝置"
 msgid "Changes will need an EmulationStation restart."
 msgstr "變更需要重新啟動EmulationStation。"
 
-msgid "ENABLE SSH"
-msgstr "啟用SSH"
-
 msgid "START AT BOOT"
 msgstr "開機啟動項"
 
@@ -1978,7 +1978,7 @@ msgid "DEFAULT YOUTUBE SEARCH WORD"
 msgstr "預設YouTube搜尋字詞"
 
 msgid "GAMEPAD CONFIG"
-msgstr "手把設定"
+msgstr "控制器設定"
 
 msgid "RETROARCH MENU"
 msgstr "RetroArch選單"
@@ -1991,6 +1991,9 @@ msgstr "危險區域"
 
 msgid "SPLASH SETTINGS"
 msgstr "啟動畫面設定"
+
+msgid "ENABLE LOADING SPLASH SCREEN"
+msgstr "啟用啟動加載畫面"
 
 msgid "SPLASH LOADING OPTION"
 msgstr "啟動載入畫面選項"
@@ -2009,6 +2012,9 @@ msgstr "啟動畫面載入平台與ROM"
 
 msgid "SPLASH LOADING DURATION"
 msgstr "啟動載入畫面持續時間"
+
+msgid "ENABLE EXIT SPLASH SCREEN"
+msgstr "啟用啟動退出畫面"
 
 msgid "SPLASH EXIT OPTION"
 msgstr "啟動退出畫面選項"
@@ -2072,28 +2078,28 @@ msgid ""
 msgstr ""
 
 msgid "AUTO CONFIG ADVANCEMAME GAMEPAD"
-msgstr "自動設定AdvanceMAME手把"
+msgstr "自動設定AdvanceMAME控制器"
 
 msgid "INVERT AXIS FOR ADVANCEMAME "
 msgstr "反轉AdvanceMAME的軸"
 
 msgid "AUTO CONFIG DOLPHIN GAMEPAD"
-msgstr "自動設定Dolphin手把"
+msgstr "自動設定Dolphin控制器"
 
 msgid "AUTO CONFIG DUCKSTATION GAMEPAD"
-msgstr "自動設定DuckStation手把"
+msgstr "自動設定DuckStation控制器"
 
 msgid "AUTO CONFIG FLYCAST GAMEPAD"
-msgstr "自動設定Flycast手把"
+msgstr "自動設定Flycast控制器"
 
 msgid "AUTO CONFIG MUPEN64PLUS GAMEPAD"
-msgstr "自動設定Mupen64Plus手把"
+msgstr "自動設定Mupen64Plus控制器"
 
 msgid "AUTO CONFIG YABASANSHIRO GAMEPAD"
-msgstr "自動設定YabaSanshiro手把"
+msgstr "自動設定YabaSanshiro控制器"
 
 msgid "AUTO CONFIG PPSSPPSDL GAMEPAD"
-msgstr "自動設定PPSSPPSDL手把"
+msgstr "自動設定PPSSPPSDL控制器"
 
 msgid "RUMBLE STRENGTH"
 msgstr "震動強度"
@@ -3997,10 +4003,10 @@ msgstr "歡迎"
 #, c-format
 msgid "%i GAMEPAD DETECTED"
 msgid_plural "%i GAMEPADS DETECTED"
-msgstr[0] "偵測到 %i 支手把"
+msgstr[0] "偵測到 %i 個控制器"
 
 msgid "NO GAMEPADS DETECTED"
-msgstr "沒有偵測到遊戲手把"
+msgstr "沒有偵測到控制器"
 
 msgid "HOLD A BUTTON ON YOUR DEVICE TO CONFIGURE IT."
 msgstr "長按您要設定的控制器上的任一按鈕。"
@@ -4137,7 +4143,7 @@ msgstr "CEC"
 
 #, c-format
 msgid "GAMEPAD %i"
-msgstr "手把 %i"
+msgstr "控制器 %i"
 
 msgid "HOLD ANY BUTTON TO SKIP"
 msgstr "長按任意按鈕跳過"
@@ -4168,6 +4174,12 @@ msgstr "按下對應的按鈕"
 
 msgid "ALREADY TAKEN"
 msgstr "已經被指派了"
+
+#~ msgid "ENABLE SPLASH SCREEN"
+#~ msgstr "啟用啟動畫面"
+
+#~ msgid "ENABLE SSH"
+#~ msgstr "啟用SSH"
 
 #~ msgid "SCRAPER SETTINGS"
 #~ msgstr "搜刮器設定"

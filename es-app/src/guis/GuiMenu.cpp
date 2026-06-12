@@ -343,6 +343,7 @@ std::shared_ptr<OptionListComponent<std::string>> GuiMenu::createSplashLoadingOp
 	splashmode.push_back(_("SHOW CUSTOM SPLASH")); // 1
 	splashmode.push_back(_("SHOW RANDOM SPLASH")); // 2
 	splashmode.push_back(_("USE SCRAPED MEDIA")); // 3
+	splashmode.push_back(_("DO NOT SHOW SPLASH")); // 4
 
 	std::string str_index = SystemConf::getInstance()->get("ee_splashloading");
 	int index = 0;
@@ -364,6 +365,7 @@ std::shared_ptr<OptionListComponent<std::string>> GuiMenu::createSplashExitOptio
 	std::vector<std::string> splashmode;
 	splashmode.push_back(_("SHOW DEFAULT SPLASH")); // 0
 	splashmode.push_back(_("PLAY CUSTOM SPLASH")); // 1
+	splashmode.push_back(_("DO NOT SHOW SPLASH")); // 2
 
 	std::string str_index = SystemConf::getInstance()->get("ee_splashexit");
 	int index = 0;
@@ -560,26 +562,6 @@ void GuiMenu::openEmuELECSettings()
 			}
 		});
 
-  	auto sshd_enabled = std::make_shared<SwitchComponent>(mWindow);
-		bool baseEnabled = SystemConf::getInstance()->get("ee_ssh.enabled") == "1";
-		sshd_enabled->setState(baseEnabled);
-		s->addWithLabel(_("ENABLE SSH"), sshd_enabled);
-		s->addSaveFunc([sshd_enabled] {
-			if (sshd_enabled->changed()) {
-			if (sshd_enabled->getState() == false) {
-				Utils::Platform::ProcessStartInfo("systemctl stop sshd").run();
-				Utils::Platform::ProcessStartInfo("rm /storage/.cache/services/sshd.conf").run();
-			} else { 
-				Utils::Platform::ProcessStartInfo("mkdir -p /storage/.cache/services/").run();
-				Utils::Platform::ProcessStartInfo("touch /storage/.cache/services/sshd.conf").run();
-				Utils::Platform::ProcessStartInfo("systemctl start sshd").run();
-			}
-                bool sshenabled = sshd_enabled->getState();
-                SystemConf::getInstance()->set("ee_ssh.enabled", sshenabled ? "1" : "0");
-				SystemConf::getInstance()->saveSystemConf();
-			}
-		});
-			
 		auto emuelec_boot_def = std::make_shared< OptionListComponent<std::string> >(mWindow, "START AT BOOT", false);
 		std::vector<std::string> devices;
 		devices.push_back("Emulationstation");
@@ -723,6 +705,13 @@ void GuiMenu::createConfigureSplash(Window* mWindow, int menuIndex)
 	
 	s->setUpdateType(ComponentListFlags::UPDATE_ALWAYS);
 	
+		auto enable_splashscreen = std::make_shared<SwitchComponent>(mWindow);
+	enable_splashscreen->setState(Settings::getInstance()->getBool("SplashScreen"));
+	s->addWithLabel(_("ENABLE LOADING SPLASH SCREEN"), enable_splashscreen);
+	s->addSaveFunc([enable_splashscreen] {
+		Settings::getInstance()->setBool("SplashScreen", enable_splashscreen->getState());
+	});
+
 	auto splashLoadingOptionList = createSplashLoadingOptionList(mWindow);
 	s->addWithLabel(_("SPLASH LOADING OPTION"), splashLoadingOptionList);
 	splashLoadingOptionList->setSelectedChangedCallback([=](std::string name) {
@@ -781,6 +770,13 @@ void GuiMenu::createConfigureSplash(Window* mWindow, int menuIndex)
 		SystemConf::getInstance()->set("ee_splash_loading_duration", val);
 	});
 	s->addWithLabel(_("SPLASH LOADING DURATION"), splashLoadingTime);
+
+	auto enable_splashscreen_exit = std::make_shared<SwitchComponent>(mWindow);
+	enable_splashscreen_exit->setState(Settings::getInstance()->getBool("SplashScreenExit"));
+	s->addWithLabel(_("ENABLE EXIT SPLASH SCREEN"), enable_splashscreen_exit);
+	s->addSaveFunc([enable_splashscreen_exit] {
+		Settings::getInstance()->setBool("SplashScreenExit", enable_splashscreen_exit->getState());
+	});
 
 	auto splashExitOptionList = createSplashExitOptionList(mWindow);
 	s->addWithLabel(_("SPLASH EXIT OPTION"), splashExitOptionList);

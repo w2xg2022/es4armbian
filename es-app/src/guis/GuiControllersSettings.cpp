@@ -155,7 +155,7 @@ GuiControllersSettings::GuiControllersSettings(Window* wnd, int autoSel) : GuiSe
 		});
 #endif
 
-#if defined(BATOCERA) || defined(WIN32)
+#if defined(BATOCERA) || defined(WIN32) || defined(_ENABLEEMUELEC)
 		// PAIR A BLUETOOTH CONTROLLER OR BT AUDIO DEVICE
 		addEntry(_("PAIR A BLUETOOTH DEVICE MANUALLY"), false, [window]
 		{

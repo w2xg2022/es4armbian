@@ -80,6 +80,7 @@ std::vector<const char*> settings_dont_save {
 	{ "AlternateSplashScreen" },
 	{ "SplashScreen" },
 	{ "SplashScreenProgress" },
+	{ "SplashScreenExit" },
 	// { "VSync" },
 	{ "FullscreenBorderless" },
 	{ "Windowed" },
@@ -131,6 +132,7 @@ void Settings::setDefaults()
 	mBoolMap["SplashScreen"] = true;
 	mStringMap["AlternateSplashScreen"] = "";
 	mBoolMap["SplashScreenProgress"] = true;
+	mBoolMap["SplashScreenExit"] = true;
 	mBoolMap["StartupOnGameList"] = false;
 	mStringMap["StartupSystem"] = "lastsystem";
 

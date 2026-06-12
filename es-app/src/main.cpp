@@ -797,6 +797,20 @@ int err = snd_pcm_open(&pcm_handle, "default", SND_PCM_STREAM_PLAYBACK, 0);
 	while (window.peekGui() != nullptr)
 		delete window.peekGui();
 
+	if (Settings::getInstance()->getBool("SplashScreenExit"))
+	{
+		int exitDuration = 3;
+		std::string exitDurationStr = systemConf->get("ee_splash_exit_duration");
+		if (!exitDurationStr.empty())
+			exitDuration = atoi(exitDurationStr.c_str());
+		if (exitDuration <= 0)
+			exitDuration = 3;
+
+		window.renderSplashScreen("");
+		SDL_Delay(exitDuration * 1000);
+		window.closeSplashScreen();
+	}
+
 	window.deinit();
 
 	Utils::Platform::processQuitMode();

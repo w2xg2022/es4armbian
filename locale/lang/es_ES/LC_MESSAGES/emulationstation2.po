@@ -1934,6 +1934,9 @@ msgstr ""
 msgid "USE SCRAPED MEDIA"
 msgstr ""
 
+msgid "DO NOT SHOW SPLASH"
+msgstr ""
+
 msgid "EXIT SPLASH OPTION"
 msgstr ""
 
@@ -1963,9 +1966,6 @@ msgstr "DISPOSITIVO DE AUDIO"
 
 msgid "Changes will need an EmulationStation restart."
 msgstr ""
-
-msgid "ENABLE SSH"
-msgstr "ACTIVAR SSH"
 
 msgid "START AT BOOT"
 msgstr "EJECUTAR AL ARRANCAR"
@@ -2006,6 +2006,9 @@ msgstr ""
 msgid "SPLASH SETTINGS"
 msgstr ""
 
+msgid "ENABLE LOADING SPLASH SCREEN"
+msgstr ""
+
 msgid "SPLASH LOADING OPTION"
 msgstr ""
 
@@ -2022,6 +2025,9 @@ msgid "SPLASH LOAD PLATFORMS AND ROMS"
 msgstr ""
 
 msgid "SPLASH LOADING DURATION"
+msgstr ""
+
+msgid "ENABLE EXIT SPLASH SCREEN"
 msgstr ""
 
 msgid "SPLASH EXIT OPTION"
@@ -4232,6 +4238,9 @@ msgstr "PULSA CUALQUIER BOTÓN"
 
 msgid "ALREADY TAKEN"
 msgstr "EN USO"
+
+#~ msgid "ENABLE SSH"
+#~ msgstr "ACTIVAR SSH"
 
 #~ msgid "REBOOT FROM NAND"
 #~ msgstr "REINICIAR A LA MEMORIA INTERNA"
