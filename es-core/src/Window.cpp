@@ -677,6 +677,12 @@ void Window::render()
 
 		auto menuBackground = ThemeData::getMenuTheme()->Background;
 
+		// 选单已关闭（bottom == top）时，先清空上一帧残留的背景特效快取，
+		// 避免本帧因 mMenuBackgroundShaderTextureCache != -1 而跳过 bottom->render()，
+		// 导致背景画面闪现一帧叠加特效后残影（退出『用户界面设置』时的泛白闪烁）
+		if (bottom == top)
+			resetMenuBackgroundShader();
+
 		// Don't render bottom if we have a MenuBackgroundShaderTextureCache
 		if (mMenuBackgroundShaderTextureCache == -1)
 			bottom->render(transform);
@@ -952,7 +958,11 @@ void Window::renderSplashScreen(std::string text, float percent, float opacity)
 {
 	if (mSplash == NULL)
 	{
-		std::string splashImage = Settings::getInstance()->getBool("SplashScreen") ? getCustomSplashScreenImage() : "";
+		// 开机画面与退出画面共用同一张自订图片（AlternateSplashScreen），
+		// 只要其中一个开关启用就应该能取到图档路径，否则单独启用
+		// 『退出画面』时会因 SplashScreen（开机画面开关）为 false 而找不到图档
+		bool useCustomSplash = Settings::getInstance()->getBool("SplashScreen") || Settings::getInstance()->getBool("SplashScreenExit");
+		std::string splashImage = useCustomSplash ? getCustomSplashScreenImage() : "";
 		mSplash = std::make_shared<Splash>(this, splashImage);
 	}
 

@@ -21,6 +21,8 @@
 - **Logo重做**：将实际生效的启动画面 `resources/logo.png` 重绘为 es4armbian / ARMBIAN 风格（1920x1080，白到灰渐层背景，灰色 EMULATIONSTATION 字样，沿用原版排版位置）。
 - **菜单与功能调整**：移除 SSH 开关、修正 PLATFORM SETTINGS 图标、将网络/蓝牙设定迁移并改用 `batocera-wifi`/`batocera-bluetooth`，支持手动配对蓝牙设备。
 - **系统层面适配（部署必需，非代码改动）**：非 root 用户重启/关机依赖 `polkitd` + `pkexec`；需安装 `libsdl2-mixer-2.0-0` 等运行依赖。
+- **退出『用户界面设置』泛白闪烁修复**（`Window.cpp`）：菜单关闭瞬间（`bottom == top`）若上一帧仍有 `mMenuBackgroundShaderTextureCache` 缓存未清空，会导致本帧错误跳过 `bottom->render()`，背景画面残留叠加特效闪现一帧。修复为关闭瞬间先调用 `resetMenuBackgroundShader()` 清空缓存。
+- **退出画面（Exit Splash）单独启用失效修复**（`Window.cpp`）：原逻辑仅在 `SplashScreen`（开机画面开关）为真时才取得自定图片路径，导致只启用 `SplashScreenExit` 时找不到图档而不显示。修复为 `SplashScreen || SplashScreenExit` 任一开启即可取得共用的 `AlternateSplashScreen` 图片。
 
 ## 3. 运行环境（可无需 X11）
 
