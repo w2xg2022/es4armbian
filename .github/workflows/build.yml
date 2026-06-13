@@ -5,6 +5,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-24.04-arm
@@ -15,7 +18,7 @@ jobs:
         run: |
           apt-get update
           apt-get install -y --no-install-recommends \
-            build-essential cmake git pkg-config gettext ca-certificates \
+            build-essential cmake git pkg-config gettext ca-certificates zip \
             libsdl2-dev libsdl2-mixer-dev \
             libfreeimage-dev libfreetype-dev \
             libcurl4-openssl-dev libpugixml-dev rapidjson-dev \
@@ -23,6 +26,8 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Configure (CMake)
         run: |
@@ -36,12 +41,24 @@ jobs:
       - name: Package artifacts
         run: |
           mkdir -p dist/emulationstation
-          cp build/emulationstation2 dist/emulationstation/emulationstation
+          cp emulationstation dist/emulationstation/emulationstation
           cp -r resources dist/emulationstation/
           cp -r locale dist/emulationstation/
+          cd dist
+          zip -r emulationstation-armbian-aarch64.zip emulationstation
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: emulationstation-armbian-aarch64
-          path: dist/
+          path: dist/emulationstation/
+
+      - name: Publish Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: es4armbian 最新构建
+          make_latest: true
+          files: dist/emulationstation-armbian-aarch64.zip
+          body: |
+            压缩包内含三部分：emulationstation（主程序）、resources（图标、启动画面等资源文件）、locale（多语言翻译文件）。部署时将这三者分别复制覆盖到设备 /opt/emulationstation/ 对应目录，无需重新编译，重启 EmulationStation 即可生效。
