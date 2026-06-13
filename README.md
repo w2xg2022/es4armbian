@@ -1,22 +1,23 @@
 # es4armbian: EmulationStation for Armbian v1.0
 
-基于 EmuELEC [EmulationStation](https://github.com/EmuELEC/emuelec-emulationstation) 的二次开发版本，目标是让 EmulationStation 前端可以在 **Armbian** 系统上独立运行，而不依赖完整的 EmuELEC 发行版环境。
+基于 [EmuELEC EmulationStation](https://github.com/EmuELEC/emuelec-emulationstation) 的二次开发版本，目标是让 EmulationStation 前端可以在 Armbian 系统上独立运行，且简体中文/繁体中文翻译基本可读。
+<img src="screenshot.png" width=720  />
 
 
 ## 1. 仓库来源与定位
 
 - 代码来源：EmuELEC 项目中的 `emulationstation` 子模块（`es-core` / `es-app` / `locale` 等），版本基于 EmuELEC 当前主线。
-- 修改目的：EmuELEC 原版 EmulationStation 假设运行在完整的 EmuELEC 系统镜像之上（依赖 `/emulationstation`、`/emuelec/configs/emuelec.conf` 等 EmuELEC 专属路径和服务）。本项目将其移植到普通的 **Armbian aarch64** 环境中，作为独立的游戏前端 / launcher 使用，并逐步替换为 es4armbian / Armbian 品牌。
+- 修改目的：EmuELEC 原版 EmulationStation 假设运行在完整的 EmuELEC 系统镜像之上（依赖 `/emulationstation`、`/emuelec/configs/emuelec.conf` 等 EmuELEC 专属路径和服务）。本项目将其移植到标准的Armbian aarch64环境中，作为独立的游戏前端使用，并逐步替换为 es4armbian / EmulationStation for Armbian。
 - 设备测试环境：RK3566 MD1000 一体机主板，运行 Armbian（**Debian 13 / trixie**），内核 `6.18.33-ophub`（aarch64）。
 
 ## 2. 主要修改内容
 
-- **编译适配**：必须使用 `-DGLES=OFF -DGLES2=ON -DENABLE_EMUELEC=1 -DCEC=OFF` 编译，否则因头文件/渲染相关宏不匹配导致编译错误（详见 4.2）。
+- **编译适配**：必须使用 `-DGLES=OFF -DGLES2=ON -DENABLE_EMUELEC=1 -DCEC=OFF` 编译，否则因头文件/渲染相关宏不匹配导致编译错误。
 - **语言切换修复**：`Paths.cpp`/`main.cpp` 改为通过 `Settings`（`~/.emulationstation/es_settings.cfg`）持久化和读取语言设置，使中文等语言可正常切换并在重启后保留。
 - **菜单大小写统一**：`MenuComponent::addEntry` 也调用 `toUpper`，使主菜单、退出菜单等图标项与其他菜单的大写风格保持一致。
 - **中文翻译补全与术语统一**：补全简体/繁体中文数百条缺失词条，统一同一英文术语（如 `SETTINGS`）在不同菜单中的译法，避免“设定/设置/配置”混用。
 - **启动/退出画面（Splash）**：实现独立的启动画面、退出画面开关并支持渲染退出画面；修复两个开关在“平台设置”中无法保存、重启后被重置为默认值的问题（`Settings.cpp` 的 `settings_dont_save` 误排除了相关字段）。
-- **品牌重做**：将实际生效的启动画面 `resources/logo.png` 重绘为 es4armbian / ARMBIAN 风格（1920x1080，白到灰渐层背景，灰色 EMULATIONSTATION 字样，沿用原版排版位置）。
+- **Logo重做**：将实际生效的启动画面 `resources/logo.png` 重绘为 es4armbian / ARMBIAN 风格（1920x1080，白到灰渐层背景，灰色 EMULATIONSTATION 字样，沿用原版排版位置）。
 - **菜单与功能调整**：移除 SSH 开关、修正 PLATFORM SETTINGS 图标、将网络/蓝牙设定迁移并改用 `batocera-wifi`/`batocera-bluetooth`，支持手动配对蓝牙设备。
 - **系统层面适配（部署必需，非代码改动）**：非 root 用户重启/关机依赖 `polkitd` + `pkexec`；需安装 `libsdl2-mixer-2.0-0` 等运行依赖。
 
