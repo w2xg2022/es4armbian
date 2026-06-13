@@ -500,7 +500,7 @@ endif()
 find_program (PYTHON3_EXECUTABLE python3)
 if(PYTHON3_EXECUTABLE)
   add_custom_target (checkgamesdb ALL COMMENT "Checking guns and wheels games db.")
-  add_custom_command (TARGET checkgamesdb COMMAND "${PYTHON3_EXECUTABLE}" "resources/checkWheelGunGamesResources.py")
+  add_custom_command (TARGET checkgamesdb COMMAND "${PYTHON3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/resources/checkWheelGunGamesResources.py" WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")
 endif()
 
 #-------------------------------------------------------------------------------
