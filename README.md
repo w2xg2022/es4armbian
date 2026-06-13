@@ -47,7 +47,7 @@ cmake .. \
   -DCEC=OFF \
   -DENABLE_EMUELEC=1
 
-make -j8
+make -j$(nproc)
 ```
 
 编译产物：
@@ -55,7 +55,7 @@ make -j8
 - `emulationstation2`（可执行文件，部署时建议命名/链接为 `emulationstation`）
 - `locale/lang/*/LC_MESSAGES/emulationstation2.mo`（由 `.po` 文件通过 `make i18n` 相关目标生成，约处理 40 种语言，耗时较长）
 
-> 若只修改了 `.cpp` / `.h` 源码（不涉及翻译文件），可以只重新链接相关目标，无需重新跑 i18n。若修改了 `.po` 文件或涉及 es-core 公共组件（如 `MenuComponent.cpp`），需要完整执行一次 `make -j8`，耗时约 25-30 分钟。
+> 若只修改了 `.cpp` / `.h` 源码（不涉及翻译文件），可以只重新链接相关目标，无需重新跑 i18n。若修改了 `.po` 文件或涉及 es-core 公共组件（如 `MenuComponent.cpp`），需要完整执行一次 `make -j$(nproc)`，耗时约 25-30 分钟。
 
 ### 4.3 部署到设备
 
