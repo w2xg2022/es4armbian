@@ -11,6 +11,7 @@
 #include "guis/GuiMsgBox.h"
 #include "InputManager.h"
 #include "SystemConf.h"
+#include "utils/Platform.h"
 
 #define gettext_controllers_settings				_("CONTROLLER SETTINGS")
 #define gettext_controllers_and_bluetooth_settings  _("CONTROLLER & BLUETOOTH SETTINGS")
@@ -88,6 +89,28 @@ GuiControllersSettings::GuiControllersSettings(Window* wnd, int autoSel) : GuiSe
 	if (ApiSystem::getInstance()->isScriptingSupported(ApiSystem::BLUETOOTH))
 	{
 		addGroup(_("BLUETOOTH"));
+#ifdef _ENABLEEMUELEC
+		auto bluetoothd_enabled = std::make_shared<SwitchComponent>(mWindow);
+		bool btbaseEnabled = SystemConf::getInstance()->get("ee_bluetooth.enabled") == "1";
+		bluetoothd_enabled->setState(btbaseEnabled);
+		addWithLabel(_("ENABLE BLUETOOTH"), bluetoothd_enabled);
+		addSaveFunc([bluetoothd_enabled] {
+			if (bluetoothd_enabled->changed()) {
+			if (bluetoothd_enabled->getState() == false) {
+				Utils::Platform::ProcessStartInfo("systemctl stop bluetooth").run();
+				Utils::Platform::ProcessStartInfo("rm /storage/.cache/services/bluez.conf").run();
+			} else {
+				Utils::Platform::ProcessStartInfo("mkdir -p /storage/.cache/services/").run();
+				Utils::Platform::ProcessStartInfo("touch /storage/.cache/services/bluez.conf").run();
+				Utils::Platform::ProcessStartInfo("systemctl start bluetooth").run();
+			}
+				bool bluetoothenabled = bluetoothd_enabled->getState();
+				SystemConf::getInstance()->set("ee_bluetooth.enabled", bluetoothenabled ? "1" : "0");
+				SystemConf::getInstance()->saveSystemConf();
+			}
+		});
+#endif
+
 
 #if defined(BATOCERA)
 		// Bluetooth enable

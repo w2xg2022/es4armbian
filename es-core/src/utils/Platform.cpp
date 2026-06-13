@@ -376,6 +376,44 @@ namespace Utils
 
 		}
 
+		std::string queryWifiIPAddress()
+		{
+			std::string result;
+
+#if !WIN32
+			struct ifaddrs* ifAddrStruct = NULL;
+			struct ifaddrs* ifa = NULL;
+			void* tmpAddrPtr = NULL;
+
+			getifaddrs(&ifAddrStruct);
+
+			for (ifa = ifAddrStruct; ifa != NULL; ifa = ifa->ifa_next)
+			{
+				if (!ifa->ifa_addr)
+					continue;
+
+				if (ifa->ifa_addr->sa_family == AF_INET)
+				{
+					tmpAddrPtr = &((struct sockaddr_in*)ifa->ifa_addr)->sin_addr;
+					char addressBuffer[INET_ADDRSTRLEN];
+					inet_ntop(AF_INET, tmpAddrPtr, addressBuffer, INET_ADDRSTRLEN);
+
+					std::string ifName = ifa->ifa_name;
+					if (ifName.find("wlan") != std::string::npos || ifName.find("mlan") != std::string::npos || ifName.find("wl") != std::string::npos)
+					{
+						result = std::string(addressBuffer);
+						break;
+					}
+				}
+			}
+
+			if (ifAddrStruct != NULL)
+				freeifaddrs(ifAddrStruct);
+#endif
+
+			return result;
+		}
+
 		BatteryInformation queryBatteryInformation()
 		{
 			BatteryInformation ret;

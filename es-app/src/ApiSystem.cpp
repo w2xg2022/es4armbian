@@ -387,6 +387,19 @@ std::pair<std::string, int> ApiSystem::scrape(BusyComponent* ui)
 
 bool ApiSystem::ping() 
 {
+    // For mainland China (zh_CN), use China-reachable DNS servers
+    if (Settings::getInstance()->getString("Language") == "zh_CN")
+    {
+        // AliDNS
+        if (!executeScript("ping -c 1 -W 2 -t 255 223.5.5.5"))
+        {
+            // DNSPod
+            return executeScript("ping -c 1 -W 2 -t 255 119.29.29.29");
+        }
+
+        return true;
+    }
+
     // Google DNS
     if (!executeScript("ping -c 1 -W 2 -t 255 8.8.8.8"))
     {
@@ -542,6 +555,11 @@ std::string ApiSystem::getIpAddress()
 		return "NOT CONNECTED";
 
 	return result;
+}
+
+std::string ApiSystem::getWifiIpAddress()
+{
+	return Utils::Platform::queryWifiIPAddress();
 }
 
 bool ApiSystem::enableBluetooth()

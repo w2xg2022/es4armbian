@@ -343,12 +343,13 @@ std::shared_ptr<OptionListComponent<std::string>> GuiMenu::createSplashLoadingOp
 	splashmode.push_back(_("SHOW CUSTOM SPLASH")); // 1
 	splashmode.push_back(_("SHOW RANDOM SPLASH")); // 2
 	splashmode.push_back(_("USE SCRAPED MEDIA")); // 3
-	splashmode.push_back(_("DO NOT SHOW SPLASH")); // 4
 
 	std::string str_index = SystemConf::getInstance()->get("ee_splashloading");
 	int index = 0;
 	if (!str_index.empty())
 		index = atoi(str_index.c_str());
+	if (index > 3)
+		index = 0;
 
 	int i=0;
 	for (auto it = splashmode.cbegin(); it != splashmode.cend(); it++) {
@@ -365,12 +366,13 @@ std::shared_ptr<OptionListComponent<std::string>> GuiMenu::createSplashExitOptio
 	std::vector<std::string> splashmode;
 	splashmode.push_back(_("SHOW DEFAULT SPLASH")); // 0
 	splashmode.push_back(_("PLAY CUSTOM SPLASH")); // 1
-	splashmode.push_back(_("DO NOT SHOW SPLASH")); // 2
 
 	std::string str_index = SystemConf::getInstance()->get("ee_splashexit");
 	int index = 0;
 	if (!str_index.empty())
 		index = atoi(str_index.c_str());
+	if (index > 1)
+		index = 0;
 
 	int i=0;
 	for (auto it = splashmode.cbegin(); it != splashmode.cend(); it++) {
@@ -542,32 +544,12 @@ void GuiMenu::openEmuELECSettings()
                 Utils::Platform::ProcessStartInfo("/usr/bin/emuelec-utils setauddev " +selectedaudio).run();
             });
 #endif
-        auto bluetoothd_enabled = std::make_shared<SwitchComponent>(mWindow);
-		bool btbaseEnabled = SystemConf::getInstance()->get("ee_bluetooth.enabled") == "1";
-		bluetoothd_enabled->setState(btbaseEnabled);
-		s->addWithLabel(_("ENABLE BLUETOOTH"), bluetoothd_enabled);
-		s->addSaveFunc([bluetoothd_enabled] {
-			if (bluetoothd_enabled->changed()) {
-			if (bluetoothd_enabled->getState() == false) {
-				Utils::Platform::ProcessStartInfo("systemctl stop bluetooth").run();
-				Utils::Platform::ProcessStartInfo("rm /storage/.cache/services/bluez.conf").run();
-			} else { 
-				Utils::Platform::ProcessStartInfo("mkdir -p /storage/.cache/services/").run();
-				Utils::Platform::ProcessStartInfo("touch /storage/.cache/services/bluez.conf").run();
-				Utils::Platform::ProcessStartInfo("systemctl start bluetooth").run();
-			}
-                bool bluetoothenabled = bluetoothd_enabled->getState();
-                SystemConf::getInstance()->set("ee_bluetooth.enabled", bluetoothenabled ? "1" : "0");
-				SystemConf::getInstance()->saveSystemConf();
-			}
-		});
-
-		auto emuelec_boot_def = std::make_shared< OptionListComponent<std::string> >(mWindow, "START AT BOOT", false);
+		auto emuelec_boot_def = std::make_shared< OptionListComponent<std::string> >(mWindow, _("START AT BOOT"), false);
 		std::vector<std::string> devices;
 		devices.push_back("Emulationstation");
 		devices.push_back("Retroarch");
 		for (auto it = devices.cbegin(); it != devices.cend(); it++)
-		emuelec_boot_def->add(*it, *it, SystemConf::getInstance()->get("ee_boot") == *it);
+		emuelec_boot_def->add(_(it->c_str()), *it, SystemConf::getInstance()->get("ee_boot") == *it);
 		s->addWithLabel(_("START AT BOOT"), emuelec_boot_def);
 		s->addSaveFunc([emuelec_boot_def] {
 			if (emuelec_boot_def->changed()) {
@@ -649,7 +631,6 @@ void GuiMenu::openEmuELECSettings()
 		createConfigureSplash(mWindow);
 	});
 
-	s->addInputTextRow(_("DEFAULT YOUTUBE SEARCH WORD"), "youtube.searchword", false);
 
 	auto theme = ThemeData::getMenuTheme();
 
@@ -711,8 +692,32 @@ void GuiMenu::createConfigureSplash(Window* mWindow, int menuIndex)
 	s->addSaveFunc([enable_splashscreen] {
 		Settings::getInstance()->setBool("SplashScreen", enable_splashscreen->getState());
 	});
+	enable_splashscreen->setOnChangedCallback([s, mWindow, enable_splashscreen]()
+	{
+		Settings::getInstance()->setBool("SplashScreen", enable_splashscreen->getState());
+		int index = s->getMenu().getList()->getCursorIndex();
+		delete s;
+		createConfigureSplash(mWindow, index);
+	});
+
+	auto splashLoadingPlatformRoms = std::make_shared<SwitchComponent>(mWindow);
+	splashLoadingPlatformRoms->setState(SystemConf::getInstance()->get("ee_splash_loading_platform_roms") != "0");
+
+	auto splashLoadingTime = std::make_shared<SliderComponent>(mWindow, 0.f, 100.f, 1.f, "seconds");
+
+	auto splashDuration = SystemConf::getInstance()->get("ee_splash_loading_duration");
+	float fDuration = 0.f;
+	if (!splashDuration.empty())
+		fDuration = (float) atof(splashDuration.c_str());
+	splashLoadingTime->setValue(fDuration);
+
+	splashLoadingTime->setOnValueChanged([](const float &newVal) {
+		auto val = std::to_string((int)Math::round(newVal));
+		SystemConf::getInstance()->set("ee_splash_loading_duration", val);
+	});
 
 	auto splashLoadingOptionList = createSplashLoadingOptionList(mWindow);
+	if (Settings::getInstance()->getBool("SplashScreen")) {
 	s->addWithLabel(_("SPLASH LOADING OPTION"), splashLoadingOptionList);
 	splashLoadingOptionList->setSelectedChangedCallback([=](std::string name) {
 		SystemConf::getInstance()->set("ee_splashloading", name);
@@ -752,24 +757,9 @@ void GuiMenu::createConfigureSplash(Window* mWindow, int menuIndex)
 			}
 		});
 	}
-
-	auto splashLoadingPlatformRoms = std::make_shared<SwitchComponent>(mWindow);
-	splashLoadingPlatformRoms->setState(SystemConf::getInstance()->get("ee_splash_loading_platform_roms") != "0");
 	s->addWithLabel(_("SPLASH LOAD PLATFORMS AND ROMS"), splashLoadingPlatformRoms);
-	
-	auto splashLoadingTime = std::make_shared<SliderComponent>(mWindow, 0.f, 100.f, 1.f, "seconds");
-
-	auto splashDuration = SystemConf::getInstance()->get("ee_splash_loading_duration");
-	float fDuration = 0.f;
-	if (!splashDuration.empty())
-		fDuration = (float) atof(splashDuration.c_str());
-	splashLoadingTime->setValue(fDuration);
-
-	splashLoadingTime->setOnValueChanged([](const float &newVal) {
-		auto val = std::to_string((int)Math::round(newVal));
-		SystemConf::getInstance()->set("ee_splash_loading_duration", val);
-	});
 	s->addWithLabel(_("SPLASH LOADING DURATION"), splashLoadingTime);
+	} // end if (SplashScreen)
 
 	auto enable_splashscreen_exit = std::make_shared<SwitchComponent>(mWindow);
 	enable_splashscreen_exit->setState(Settings::getInstance()->getBool("SplashScreenExit"));
@@ -777,20 +767,13 @@ void GuiMenu::createConfigureSplash(Window* mWindow, int menuIndex)
 	s->addSaveFunc([enable_splashscreen_exit] {
 		Settings::getInstance()->setBool("SplashScreenExit", enable_splashscreen_exit->getState());
 	});
-
-	auto splashExitOptionList = createSplashExitOptionList(mWindow);
-	s->addWithLabel(_("SPLASH EXIT OPTION"), splashExitOptionList);
-	splashExitOptionList->setSelectedChangedCallback([=](std::string name) {
-		SystemConf::getInstance()->set("ee_splashexit", name);
+	enable_splashscreen_exit->setOnChangedCallback([s, mWindow, enable_splashscreen_exit]()
+	{
+		Settings::getInstance()->setBool("SplashScreenExit", enable_splashscreen_exit->getState());
 		int index = s->getMenu().getList()->getCursorIndex();
 		delete s;
 		createConfigureSplash(mWindow, index);
 	});
-
-	if (SystemConf::getInstance()->get("ee_splashexit") == "1") {
-		// File picker for custom splash image/video
-		s->addFileBrowser(_("SET CUSTOM SPLASH EXIT MEDIA FILE"), "ee_customexitsplash", (GuiFileBrowser::FileTypes) (GuiFileBrowser::FileTypes::IMAGES | GuiFileBrowser::FileTypes::VIDEO));
-	}
 
 	auto splashExitTime = std::make_shared<SliderComponent>(mWindow, 0.f, 100.f, 1.f, "seconds");
 
@@ -804,14 +787,39 @@ void GuiMenu::createConfigureSplash(Window* mWindow, int menuIndex)
 		auto val = std::to_string((int)Math::round(newVal));
 		SystemConf::getInstance()->set("ee_splash_exit_duration", val);
 	});
+
+	auto splashExitOptionList = createSplashExitOptionList(mWindow);
+	if (Settings::getInstance()->getBool("SplashScreenExit")) {
+	s->addWithLabel(_("SPLASH EXIT OPTION"), splashExitOptionList);
+	splashExitOptionList->setSelectedChangedCallback([=](std::string name) {
+		SystemConf::getInstance()->set("ee_splashexit", name);
+		int index = s->getMenu().getList()->getCursorIndex();
+		delete s;
+		createConfigureSplash(mWindow, index);
+	});
+
+	if (SystemConf::getInstance()->get("ee_splashexit") == "1") {
+		// File picker for custom splash image/video
+		s->addFileBrowser(_("SET CUSTOM SPLASH EXIT MEDIA FILE"), "ee_customexitsplash", (GuiFileBrowser::FileTypes) (GuiFileBrowser::FileTypes::IMAGES | GuiFileBrowser::FileTypes::VIDEO));
+	}
 	s->addWithLabel(_("SPLASH EXIT DURATION"), splashExitTime);
+	} // end if (SplashScreenExit)
 
 	s->addSaveFunc([=] {
-		if (splashLoadingOptionList->getSelected() == "2") {
-			mWindow->displayNotificationMessage(_U("\uF011  ") + _("PUT RANDOM MEDIA IN '/storage/roms/splash/random'."));
+		if (Settings::getInstance()->getBool("SplashScreen")) {
+			if (splashLoadingOptionList->getSelected() == "2") {
+				mWindow->displayNotificationMessage(_U("\uF011  ") + _("PUT RANDOM MEDIA IN '/storage/roms/splash/random'."));
+			}
+			SystemConf::getInstance()->set("ee_splashloading", splashLoadingOptionList->getSelected());
+		} else {
+			SystemConf::getInstance()->set("ee_splashloading", "4");
 		}
-		SystemConf::getInstance()->set("ee_splashloading", splashLoadingOptionList->getSelected());
-		SystemConf::getInstance()->set("ee_splashexit", splashExitOptionList->getSelected());
+
+		if (Settings::getInstance()->getBool("SplashScreenExit")) {
+			SystemConf::getInstance()->set("ee_splashexit", splashExitOptionList->getSelected());
+		} else {
+			SystemConf::getInstance()->set("ee_splashexit", "2");
+		}
 
 		if (splashLoadingTime->getValue() == 0.f || splashExitTime->getValue() == 0.f) {
 			mWindow->displayNotificationMessage(_U("\uF011  ") + _("SETTING DURATION 0 WILL MAKE VIDEOS DEFAULT TO PLAY 3 SECONDS."));
@@ -1924,11 +1932,9 @@ void GuiMenu::openDeveloperSettings()
 #endif
 
 	// WEB ACCESS
-	auto hostName = Utils::String::toLower(ApiSystem::getInstance()->getHostsName());
-
 	auto webAccess = std::make_shared<SwitchComponent>(mWindow);
 	webAccess->setState(Settings::getInstance()->getBool("PublicWebAccess"));
-	s->addWithDescription(_("ENABLE PUBLIC WEB API ACCESS"), Utils::String::format(_("Allow public web access API using %s").c_str(), std::string("http://" + hostName + ":1234").c_str()), webAccess);
+	s->addWithDescription(_("ENABLE PUBLIC WEB API ACCESS"), Utils::String::format(_("Allow public web access API using %s").c_str(), "http://IP:1234"), webAccess);
 	s->addSaveFunc([webAccess, window, s]
 	{ 
 	  if (Settings::getInstance()->setBool("PublicWebAccess", webAccess->getState())) 
@@ -5161,7 +5167,7 @@ void GuiMenu::openUISettings()
 
 		if (s->getVariable("reloadAll"))
 		{
-			ViewController::get()->reloadAll(window);
+			ViewController::get()->reloadAll(nullptr);
 			window->closeSplashScreen();
 		}
 
@@ -5346,6 +5352,10 @@ void GuiMenu::openNetworkSettings(bool selectWifiEnable)
 	{
 		s->addInputTextRow(_("WIFI SSID"), "wifi.ssid", false, false, &openWifiSettings);
 		s->addInputTextRow(_("WIFI KEY"), "wifi.key", true);
+
+		std::string wifiIpStr = ApiSystem::getInstance()->getWifiIpAddress();
+		auto wifiIp = std::make_shared<TextComponent>(mWindow, wifiIpStr.empty() ? _("NOT CONNECTED") : wifiIpStr, font, color);
+		s->addWithLabel(_("WIFI IP ADDRESS"), wifiIp);
 	}
 	
 	s->addSaveFunc([baseWifiEnabled, baseSSID, baseKEY, enable_wifi, window]
@@ -5543,16 +5553,6 @@ void GuiMenu::openQuitMenu_static(Window *window, bool quickAccessMenu, bool ani
 	bool isFullUI = UIModeController::getInstance()->isUIModeFull();
 	if (isFullUI)
 	{
-		s->addEntry(_("START RETROARCH"), false, [window] {
-			window->pushGui(new GuiMsgBox(window, _("REALLY START RETROARCH?"), _("YES"),
-				[] {
-				remove("/var/lock/start.games");
-				Utils::Platform::ProcessStartInfo("touch /var/lock/start.retro").run();
-				Utils::Platform::ProcessStartInfo("systemctl start retroarch.service").run();
-				Scripting::fireEvent("quit", "retroarch");
-				Utils::Platform::quitES(Utils::Platform::QuitMode::QUIT);
-			}, _("NO"), nullptr));
-		}, "iconControllers");
 		if (SystemConf::getInstance()->getBool("extra_quit_menu.enabled", true))
 		{
 			// detect boot media (eMMC vs SD/USB) and show matching reboot entry
@@ -5629,7 +5629,7 @@ void GuiMenu::openQuitMenu_static(Window *window, bool quickAccessMenu, bool ani
 		SystemConf::getInstance()->saveSystemConf();
 	});
 
-	s->addSwitch(_("Persistent Autoshutdown"), "ee_auto_shutdown_persistent", false);
+	s->addSwitch(_("Persistent Autoshutdown"), _("When enabled, the inactivity timer keeps counting in all menus, not just during gameplay."), "ee_auto_shutdown_persistent", false, nullptr);
 #endif
 
 	if (quickAccessMenu)

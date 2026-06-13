@@ -1918,9 +1918,6 @@ msgstr ""
 msgid "USE SCRAPED MEDIA"
 msgstr ""
 
-msgid "DO NOT SHOW SPLASH"
-msgstr ""
-
 msgid "EXIT SPLASH OPTION"
 msgstr ""
 
@@ -1970,9 +1967,6 @@ msgid "RANDOMIZE BOOT VIDEO"
 msgstr ""
 
 msgid "CONFIGURE SPLASH OPTIONS"
-msgstr ""
-
-msgid "DEFAULT YOUTUBE SEARCH WORD"
 msgstr ""
 
 msgid "GAMEPAD CONFIG"
@@ -3204,6 +3198,9 @@ msgstr "ІМ'Я МЕРЕЖІ WI-FI"
 msgid "WIFI KEY"
 msgstr "ПАРОЛЬ МЕРЕЖІ WI-FI"
 
+msgid "WIFI IP ADDRESS"
+msgstr ""
+
 msgid "WIFI ENABLED"
 msgstr "WI-FI УВІМКНУТО"
 
@@ -3243,12 +3240,6 @@ msgstr "ПЕРЕЗАВАНТАЖИТИ EMULATIONSTATION"
 msgid "REALLY RESTART EMULATIONSTATION?"
 msgstr ""
 
-msgid "START RETROARCH"
-msgstr "ЗАПУСТИТИ RETROARCH"
-
-msgid "REALLY START RETROARCH?"
-msgstr ""
-
 msgid "REBOOT TO USB/SD"
 msgstr ""
 
@@ -3269,6 +3260,11 @@ msgid ""
 msgstr ""
 
 msgid "Persistent Autoshutdown"
+msgstr ""
+
+msgid ""
+"When enabled, the inactivity timer keeps counting in all menus, not just "
+"during gameplay."
 msgstr ""
 
 msgid "RESTART SYSTEM"
@@ -4181,6 +4177,9 @@ msgstr "НАТИСНІТЬ БУДЬ-ЯКУ КНОПКУ"
 
 msgid "ALREADY TAKEN"
 msgstr "ВЖЕ ЗАЙНЯТО"
+
+#~ msgid "START RETROARCH"
+#~ msgstr "ЗАПУСТИТИ RETROARCH"
 
 #~ msgid "REBOOT FROM NAND"
 #~ msgstr "ПЕРЕЙТИ В ANDROID"

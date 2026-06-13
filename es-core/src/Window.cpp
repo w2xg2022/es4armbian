@@ -149,8 +149,8 @@ bool Window::init(bool initRenderer, bool initInputManager)
 		mClock->setFont(Font::get(FONT_SIZE_SMALL));
 		mClock->setHorizontalAlignment(ALIGN_RIGHT);
 		mClock->setVerticalAlignment(ALIGN_TOP);
-		mClock->setPosition(Renderer::getScreenWidth()*0.94, Renderer::getScreenHeight()*0.9965 - Font::get(FONT_SIZE_SMALL)->getHeight());
-		mClock->setSize(Renderer::getScreenWidth()*0.05, 0);
+		mClock->setPosition(Renderer::getScreenWidth()*0.90, Renderer::getScreenHeight()*0.9965 - Font::get(FONT_SIZE_SMALL)->getHeight());
+		mClock->setSize(Renderer::getScreenWidth()*0.09, 0);
 		mClock->setColor(0x777777FF);
 	}
 
@@ -951,7 +951,10 @@ void Window::setCustomSplashScreen(std::string imagePath, std::string customText
 void Window::renderSplashScreen(std::string text, float percent, float opacity)
 {
 	if (mSplash == NULL)
-		mSplash = std::make_shared<Splash>(this, getCustomSplashScreenImage());
+	{
+		std::string splashImage = Settings::getInstance()->getBool("SplashScreen") ? getCustomSplashScreenImage() : "";
+		mSplash = std::make_shared<Splash>(this, splashImage);
+	}
 
 	mSplash->update(text, percent);
 	mSplash->render(opacity);	
@@ -1285,8 +1288,8 @@ void Window::onThemeChanged(const std::shared_ptr<ThemeData>& theme)
 				mClock->setFont(Font::getFromTheme(elem, ThemeFlags::ALL, Font::get(FONT_SIZE_MEDIUM)));
 		}
 		
-		mClock->setPosition(Renderer::getScreenWidth()*0.94, Renderer::getScreenHeight()*0.9965 - mClock->getFont()->getHeight());
-		mClock->setSize(Renderer::getScreenWidth()*0.05, 0);
+		mClock->setPosition(Renderer::getScreenWidth()*0.90, Renderer::getScreenHeight()*0.9965 - mClock->getFont()->getHeight());
+		mClock->setSize(Renderer::getScreenWidth()*0.09, 0);
 
 		mClock->applyTheme(theme, "screen", "clock", ThemeFlags::ALL ^ (ThemeFlags::TEXT));
 	}

@@ -1940,9 +1940,6 @@ msgstr ""
 msgid "USE SCRAPED MEDIA"
 msgstr ""
 
-msgid "DO NOT SHOW SPLASH"
-msgstr ""
-
 msgid "EXIT SPLASH OPTION"
 msgstr ""
 
@@ -1993,9 +1990,6 @@ msgstr "MODE ALÉATOIRE POUR LA VIDÉO DE BOOT"
 
 msgid "CONFIGURE SPLASH OPTIONS"
 msgstr ""
-
-msgid "DEFAULT YOUTUBE SEARCH WORD"
-msgstr "MOT DE RECHERCHE YOUTUBE PAR DÉFAUT"
 
 msgid "GAMEPAD CONFIG"
 msgstr "CONFIGURATION DE LA MANETTE"
@@ -3316,6 +3310,9 @@ msgstr "NOM DU RÉSEAU WIFI"
 msgid "WIFI KEY"
 msgstr "CLÉ WIFI"
 
+msgid "WIFI IP ADDRESS"
+msgstr ""
+
 msgid "WIFI ENABLED"
 msgstr "WIFI ACTIVÉ"
 
@@ -3355,12 +3352,6 @@ msgstr ""
 msgid "REALLY RESTART EMULATIONSTATION?"
 msgstr ""
 
-msgid "START RETROARCH"
-msgstr ""
-
-msgid "REALLY START RETROARCH?"
-msgstr ""
-
 msgid "REBOOT TO USB/SD"
 msgstr ""
 
@@ -3381,6 +3372,11 @@ msgid ""
 msgstr ""
 
 msgid "Persistent Autoshutdown"
+msgstr ""
+
+msgid ""
+"When enabled, the inactivity timer keeps counting in all menus, not just "
+"during gameplay."
 msgstr ""
 
 msgid "RESTART SYSTEM"
@@ -4290,6 +4286,9 @@ msgstr "APPUYEZ SUR UN BOUTON"
 
 msgid "ALREADY TAKEN"
 msgstr "DÉJA UTILISÉ"
+
+#~ msgid "DEFAULT YOUTUBE SEARCH WORD"
+#~ msgstr "MOT DE RECHERCHE YOUTUBE PAR DÉFAUT"
 
 #~ msgid "AN ERROR OCCURED"
 #~ msgstr "UNE ERREUR EST SURVENUE"

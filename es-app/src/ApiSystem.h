@@ -173,6 +173,7 @@ public:
     bool disableWifi();
 
 	virtual std::string getIpAddress();
+	virtual std::string getWifiIpAddress();
 
 	// BlueTooth methods
 	virtual bool enableBluetooth();

@@ -448,7 +448,7 @@ msgid "Full"
 msgstr "完整"
 
 msgid "Kiosk"
-msgstr "信息亭"
+msgstr "展示模式"
 
 msgid "Kid"
 msgstr "儿童"
@@ -505,7 +505,7 @@ msgid "SYSTEM"
 msgstr "系统"
 
 msgid "CHOOSE"
-msgstr "选择"
+msgstr "浏览"
 
 msgid "BACK"
 msgstr "返回"
@@ -961,7 +961,7 @@ msgid "ENABLE BLUETOOTH"
 msgstr "启用蓝牙"
 
 msgid "PAIR BLUETOOTH PADS AUTOMATICALLY"
-msgstr "自动配对蓝牙键盘"
+msgstr "自动配对蓝牙设备"
 
 msgid "ENABLE BLUETOOTH LEGACY SEARCH"
 msgstr "启用蓝牙旧版搜索"
@@ -1919,9 +1919,6 @@ msgstr "显示随机启动画面"
 msgid "USE SCRAPED MEDIA"
 msgstr "使用刮削媒体"
 
-msgid "DO NOT SHOW SPLASH"
-msgstr "不显示画面"
-
 msgid "EXIT SPLASH OPTION"
 msgstr "退出画面选项"
 
@@ -1972,9 +1969,6 @@ msgstr "随机开机动画"
 
 msgid "CONFIGURE SPLASH OPTIONS"
 msgstr "配置启动画面选项"
-
-msgid "DEFAULT YOUTUBE SEARCH WORD"
-msgstr "默认YouTube搜索词"
 
 msgid "GAMEPAD CONFIG"
 msgstr "手柄配置"
@@ -2393,7 +2387,7 @@ msgstr "启用公共WEB API访问"
 
 #, c-format
 msgid "Allow public web access API using %s"
-msgstr "允许使用%s访问公共页面 API（内网登陆操作）"
+msgstr "允许使用%s访问公共页面 API（内网登陆操作）。"
 
 msgid "LOG LEVEL"
 msgstr "日志级别"
@@ -2426,7 +2420,7 @@ msgid "RESET GAMELISTS USAGE DATA"
 msgstr "重置游戏列表使用数据"
 
 msgid "Reset values of GameTime, PlayCount and LastPlayed metadata."
-msgstr "重置GameTime、PlayCount和LastPlayed元数据值."
+msgstr "重置GameTime、PlayCount和LastPlayed元数据值。"
 
 msgid "RESET FILE EXTENSIONS"
 msgstr "重置文件扩展名"
@@ -2525,7 +2519,7 @@ msgid "SWITCH CONFIRM & CANCEL BUTTONS IN EMULATIONSTATION"
 msgstr "在EmulationStation中互换确认键和取消键"
 
 msgid "Switches the South and East buttons' functionality"
-msgstr "切换南按键和东按键的功能"
+msgstr "切换南按键和东按键的功能。"
 
 msgid "ACCESS GAME OPTIONS WITH NORTH BUTTON"
 msgstr "使用北按键访问游戏设置选项"
@@ -2533,7 +2527,7 @@ msgstr "使用北按键访问游戏设置选项"
 msgid ""
 "Switches to short-press North for Savestates & long-press South button for "
 "Game Options"
-msgstr "切换为短按北按键呼出存档，长按南按键呼出游戏选项"
+msgstr "切换为短按北按键呼出存档，长按南按键呼出游戏选项。"
 
 msgid "CONTROL EMULATIONSTATION WITH FIRST JOYSTICK ONLY"
 msgstr "仅使用第一个手柄控制主界面"
@@ -2561,7 +2555,7 @@ msgstr "在启动时预加载UI元素"
 
 msgid ""
 "Reduces lag when entering gamelists from the system menu, increases boot time"
-msgstr "减少从系统菜单输入游戏列表时的延迟，增加启动时间"
+msgstr "减少从系统菜单输入游戏列表时的延迟，增加启动时间。"
 
 msgid "PRELOAD METADATA MEDIA ON BOOT"
 msgstr "启动时预加载元数据媒体"
@@ -2569,7 +2563,7 @@ msgstr "启动时预加载元数据媒体"
 msgid ""
 "Reduces lag when scrolling through a fully scraped gamelist, increases boot "
 "time"
-msgstr "减少扫描完整的游戏列表时的延迟，增加启动时间"
+msgstr "减少扫描完整的游戏列表时的延迟，增加启动时间。"
 
 msgid "THREADED LOADING"
 msgstr "线程载入中"
@@ -3209,6 +3203,9 @@ msgstr "WiFi 名称"
 msgid "WIFI KEY"
 msgstr "WiFi 密码"
 
+msgid "WIFI IP ADDRESS"
+msgstr "WiFi IP地址"
+
 msgid "WIFI ENABLED"
 msgstr "WiFi 已启用"
 
@@ -3248,12 +3245,6 @@ msgstr "重启EmulationStation"
 msgid "REALLY RESTART EMULATIONSTATION?"
 msgstr "确定要重启EmulationStation吗？"
 
-msgid "START RETROARCH"
-msgstr "启动RetroArch"
-
-msgid "REALLY START RETROARCH?"
-msgstr "确定要启动RetroArch吗？"
-
 msgid "REBOOT TO USB/SD"
 msgstr "重启到USB/SD"
 
@@ -3271,10 +3262,15 @@ msgstr "闲置后自动关机"
 
 msgid ""
 "Shuts down the system if no controller activity occurs within the timer."
-msgstr ""
+msgstr "在设定时间内无控制器活动时关闭系统。"
 
 msgid "Persistent Autoshutdown"
 msgstr "持续自动关机"
+
+msgid ""
+"When enabled, the inactivity timer keeps counting in all menus, not just "
+"during gameplay."
+msgstr "启用后，闲置计时器在所有菜单中持续计时，不仅限于游戏中。"
 
 msgid "RESTART SYSTEM"
 msgstr "重启"
@@ -4174,6 +4170,18 @@ msgstr "按任意键"
 
 msgid "ALREADY TAKEN"
 msgstr "按键已被占用"
+
+#~ msgid "START RETROARCH"
+#~ msgstr "启动RetroArch"
+
+#~ msgid "REALLY START RETROARCH?"
+#~ msgstr "确定要启动RetroArch吗？"
+
+#~ msgid "DO NOT SHOW SPLASH"
+#~ msgstr "不显示画面"
+
+#~ msgid "DEFAULT YOUTUBE SEARCH WORD"
+#~ msgstr "默认YouTube搜索词"
 
 #~ msgid "ENABLE SPLASH SCREEN"
 #~ msgstr "启用启动画面"
@@ -7532,3 +7540,9 @@ msgstr "按键已被占用"
 #~ msgctxt "game_options"
 #~ msgid "Joystick"
 #~ msgstr "摇杆"
+
+#~ msgid "Emulationstation"
+#~ msgstr "EmulationStation"
+
+#~ msgid "Retroarch"
+#~ msgstr "RetroArch"

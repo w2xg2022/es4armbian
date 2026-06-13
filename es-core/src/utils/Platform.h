@@ -66,6 +66,7 @@ namespace Utils
 		BatteryInformation queryBatteryInformation();
 
 		std::string queryIPAddress();
+		std::string queryWifiIPAddress();
 		std::string getArchString();
 
 #if WIN32

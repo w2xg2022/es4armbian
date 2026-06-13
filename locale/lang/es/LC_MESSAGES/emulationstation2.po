@@ -1943,9 +1943,6 @@ msgstr ""
 msgid "USE SCRAPED MEDIA"
 msgstr ""
 
-msgid "DO NOT SHOW SPLASH"
-msgstr ""
-
 msgid "EXIT SPLASH OPTION"
 msgstr ""
 
@@ -1995,9 +1992,6 @@ msgid "RANDOMIZE BOOT VIDEO"
 msgstr ""
 
 msgid "CONFIGURE SPLASH OPTIONS"
-msgstr ""
-
-msgid "DEFAULT YOUTUBE SEARCH WORD"
 msgstr ""
 
 msgid "GAMEPAD CONFIG"
@@ -3269,6 +3263,9 @@ msgstr "SSID O NOMBRE DE LA RED WIFI"
 msgid "WIFI KEY"
 msgstr "CLAVE WIFI"
 
+msgid "WIFI IP ADDRESS"
+msgstr ""
+
 msgid "WIFI ENABLED"
 msgstr "WIFI ACTIVADO"
 
@@ -3308,12 +3305,6 @@ msgstr ""
 msgid "REALLY RESTART EMULATIONSTATION?"
 msgstr ""
 
-msgid "START RETROARCH"
-msgstr ""
-
-msgid "REALLY START RETROARCH?"
-msgstr ""
-
 msgid "REBOOT TO USB/SD"
 msgstr ""
 
@@ -3334,6 +3325,11 @@ msgid ""
 msgstr ""
 
 msgid "Persistent Autoshutdown"
+msgstr ""
+
+msgid ""
+"When enabled, the inactivity timer keeps counting in all menus, not just "
+"during gameplay."
 msgstr ""
 
 msgid "RESTART SYSTEM"

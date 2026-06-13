@@ -449,7 +449,7 @@ msgid "Full"
 msgstr "全部"
 
 msgid "Kiosk"
-msgstr "遊戲大廳"
+msgstr "展示模式"
 
 msgid "Kid"
 msgstr "兒童"
@@ -962,7 +962,7 @@ msgid "ENABLE BLUETOOTH"
 msgstr "啟用藍牙"
 
 msgid "PAIR BLUETOOTH PADS AUTOMATICALLY"
-msgstr "自動配對藍牙控制器"
+msgstr "自動配對藍牙裝置"
 
 msgid "ENABLE BLUETOOTH LEGACY SEARCH"
 msgstr "啟用藍牙舊版搜尋"
@@ -1920,9 +1920,6 @@ msgstr "顯示隨機啟動畫面"
 msgid "USE SCRAPED MEDIA"
 msgstr "使用刮削媒體"
 
-msgid "DO NOT SHOW SPLASH"
-msgstr "不顯示畫面"
-
 msgid "EXIT SPLASH OPTION"
 msgstr "退出畫面選項"
 
@@ -1973,9 +1970,6 @@ msgstr "隨機開機動畫"
 
 msgid "CONFIGURE SPLASH OPTIONS"
 msgstr "設定啟動畫面選項"
-
-msgid "DEFAULT YOUTUBE SEARCH WORD"
-msgstr "預設YouTube搜尋字詞"
 
 msgid "GAMEPAD CONFIG"
 msgstr "控制器設定"
@@ -2394,7 +2388,7 @@ msgstr "啟用公開的網站 API 存取"
 
 #, c-format
 msgid "Allow public web access API using %s"
-msgstr "允許公開網站透過 %s 存取 API"
+msgstr "允許公開網站透過 %s 存取 API。"
 
 msgid "LOG LEVEL"
 msgstr "日誌等級"
@@ -2526,7 +2520,7 @@ msgid "SWITCH CONFIRM & CANCEL BUTTONS IN EMULATIONSTATION"
 msgstr "在 EMULATIONSTATION 中調換確認鍵與取消鍵"
 
 msgid "Switches the South and East buttons' functionality"
-msgstr "調換南功能鍵與東功能鍵的按鍵功能"
+msgstr "調換南功能鍵與東功能鍵的按鍵功能。"
 
 msgid "ACCESS GAME OPTIONS WITH NORTH BUTTON"
 msgstr "透過北功能鍵存取遊戲選項"
@@ -2534,7 +2528,7 @@ msgstr "透過北功能鍵存取遊戲選項"
 msgid ""
 "Switches to short-press North for Savestates & long-press South button for "
 "Game Options"
-msgstr "調換北功能鍵（即時存檔）與長按南功能鍵（遊戲選項）的按鍵功能"
+msgstr "調換北功能鍵（即時存檔）與長按南功能鍵（遊戲選項）的按鍵功能。"
 
 msgid "CONTROL EMULATIONSTATION WITH FIRST JOYSTICK ONLY"
 msgstr "僅透過第一支遊戲搖桿操作 EMULATIONSTATION"
@@ -2562,7 +2556,7 @@ msgstr "於啟動期間預先載入 UI 元素"
 
 msgid ""
 "Reduces lag when entering gamelists from the system menu, increases boot time"
-msgstr "減少從遊戲平台選單進入遊戲清單時的卡頓，會增加啟動時間"
+msgstr "減少從遊戲平台選單進入遊戲清單時的卡頓，會增加啟動時間。"
 
 msgid "PRELOAD METADATA MEDIA ON BOOT"
 msgstr "於啟動期間預先載入中繼媒體"
@@ -2570,7 +2564,7 @@ msgstr "於啟動期間預先載入中繼媒體"
 msgid ""
 "Reduces lag when scrolling through a fully scraped gamelist, increases boot "
 "time"
-msgstr "藉由完全擷取遊戲清單來減少捲動時的卡頓，會增加啟動時間"
+msgstr "藉由完全擷取遊戲清單來減少捲動時的卡頓，會增加啟動時間。"
 
 msgid "THREADED LOADING"
 msgstr "多執行緒載入"
@@ -3209,6 +3203,9 @@ msgstr "WIFI 連線名稱"
 msgid "WIFI KEY"
 msgstr "WIFI 連線金鑰"
 
+msgid "WIFI IP ADDRESS"
+msgstr "WIFI IP 位址"
+
 msgid "WIFI ENABLED"
 msgstr "已啟用 WIFI 無線網路"
 
@@ -3248,12 +3245,6 @@ msgstr "重新啟動EmulationStation"
 msgid "REALLY RESTART EMULATIONSTATION?"
 msgstr "確定要重新啟動EmulationStation嗎？"
 
-msgid "START RETROARCH"
-msgstr "啟動RetroArch"
-
-msgid "REALLY START RETROARCH?"
-msgstr "確定要啟動RetroArch嗎？"
-
 msgid "REBOOT TO USB/SD"
 msgstr "重新啟動至USB/SD"
 
@@ -3275,6 +3266,11 @@ msgstr ""
 
 msgid "Persistent Autoshutdown"
 msgstr "持續自動關機"
+
+msgid ""
+"When enabled, the inactivity timer keeps counting in all menus, not just "
+"during gameplay."
+msgstr "啟用後，閒置計時器在所有選單中持續計時，不僅限於遊戲中。"
 
 msgid "RESTART SYSTEM"
 msgstr "重新啟動系統"
@@ -4175,6 +4171,18 @@ msgstr "按下對應的按鈕"
 msgid "ALREADY TAKEN"
 msgstr "已經被指派了"
 
+#~ msgid "START RETROARCH"
+#~ msgstr "啟動RetroArch"
+
+#~ msgid "REALLY START RETROARCH?"
+#~ msgstr "確定要啟動RetroArch嗎？"
+
+#~ msgid "DO NOT SHOW SPLASH"
+#~ msgstr "不顯示畫面"
+
+#~ msgid "DEFAULT YOUTUBE SEARCH WORD"
+#~ msgstr "預設YouTube搜尋字詞"
+
 #~ msgid "ENABLE SPLASH SCREEN"
 #~ msgstr "啟用啟動畫面"
 
@@ -4210,3 +4218,9 @@ msgstr "已經被指派了"
 
 #~ msgid "HAS MEDIAS"
 #~ msgstr "含有媒體"
+
+#~ msgid "Emulationstation"
+#~ msgstr "EmulationStation"
+
+#~ msgid "Retroarch"
+#~ msgstr "RetroArch"
