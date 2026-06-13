@@ -1,6 +1,7 @@
 # es4armbian: EmulationStation for Armbian v1.0
 
 基于 [EmuELEC EmulationStation](https://github.com/EmuELEC/emuelec-emulationstation) 的二次开发版本，目标是让 EmulationStation 前端可以在 Armbian 系统上独立运行，且简体中文/繁体中文翻译基本可读。
+
 <img src="screenshot.png" width=720  />
 
 
