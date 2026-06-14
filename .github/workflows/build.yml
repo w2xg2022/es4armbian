@@ -59,6 +59,11 @@ jobs:
           VERSION=$(grep -oP '#define PROGRAM_VERSION_STRING\s+"\K[^"]+' es-app/src/EmulationStation.h)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
+      - name: Delete previous release
+        run: gh release delete latest --yes || true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Publish Release
         uses: softprops/action-gh-release@v2
         with:
