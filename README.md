@@ -1,4 +1,4 @@
-# es4armbian: EmulationStation for Armbian v1.0
+# es4armbian: EmulationStation for Armbian
 
 基于 [EmuELEC EmulationStation](https://github.com/EmuELEC/emuelec-emulationstation) 的二次开发版本，目标是让 EmulationStation 前端可以在 Armbian 系统上独立运行，且简体中文/繁体中文翻译基本可读。
 
@@ -10,6 +10,7 @@
 - 代码来源：EmuELEC 项目中的 `emulationstation` 子模块（`es-core` / `es-app` / `locale` 等），版本基于 EmuELEC 当前主线。
 - 修改目的：EmuELEC 原版 EmulationStation 假设运行在完整的 EmuELEC 系统镜像之上（依赖 `/emulationstation`、`/emuelec/configs/emuelec.conf` 等 EmuELEC 专属路径和服务）。本项目将其移植到标准的Armbian aarch64环境中，作为独立的游戏前端使用，并逐步替换为 es4armbian / EmulationStation for Armbian。
 - 设备测试环境：RK3566 MD1000 一体机主板，运行 Armbian（**Debian 13 / trixie**），内核 `6.18.33-ophub`（aarch64）。
+- 版本号：以 [`es-app/src/EmulationStation.h`](es-app/src/EmulationStation.h) 中的 `PROGRAM_VERSION_STRING` 为唯一版本来源，会显示在 ES「用户界面设置」菜单（"ES4Armbian Vx.x"），GitHub Release 名称也会自动带上该版本号。
 
 ## 2. 主要修改内容
 
@@ -61,7 +62,14 @@ make -j$(nproc)
 
 ### 4.3 部署到设备
 
-将以下文件复制到设备的 `/opt/emulationstation/` 目录：
+Release 中的 `emulationstation-armbian-aarch64.zip` 解压后会**多一层 `emulationstation/` 目录**（即 `emulationstation/emulationstation`、`emulationstation/resources/`、`emulationstation/locale/`），不要直接整个目录覆盖过去，需要复制其**内容**：
+
+```bash
+unzip emulationstation-armbian-aarch64.zip
+cp -a emulationstation/. /opt/emulationstation/
+```
+
+确保 `/opt/emulationstation/` 下有以下结构：
 
 ```bash
 /opt/emulationstation/emulationstation        # 可执行文件

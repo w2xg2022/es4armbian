@@ -53,11 +53,17 @@ jobs:
           name: emulationstation-armbian-aarch64
           path: dist/emulationstation/
 
+      - name: Read version
+        id: version
+        run: |
+          VERSION=$(grep -oP '#define PROGRAM_VERSION_STRING\s+"\K[^"]+' es-app/src/EmulationStation.h)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
       - name: Publish Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
-          name: es4armbian 最新构建
+          name: es4armbian v${{ steps.version.outputs.version }}
           make_latest: true
           files: dist/emulationstation-armbian-aarch64.zip
           body: |
