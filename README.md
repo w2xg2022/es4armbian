@@ -24,6 +24,8 @@
 - **系统层面适配（部署必需，非代码改动）**：非 root 用户重启/关机依赖 `polkitd` + `pkexec`；需安装 `libsdl2-mixer-2.0-0` 等运行依赖。
 - **退出『用户界面设置』泛白闪烁修复**（`Window.cpp`）：菜单关闭瞬间（`bottom == top`）若上一帧仍有 `mMenuBackgroundShaderTextureCache` 缓存未清空，会导致本帧错误跳过 `bottom->render()`，背景画面残留叠加特效闪现一帧。修复为关闭瞬间先调用 `resetMenuBackgroundShader()` 清空缓存。
 - **退出画面（Exit Splash）单独启用失效修复**（`Window.cpp`）：原逻辑仅在 `SplashScreen`（开机画面开关）为真时才取得自定图片路径，导致只启用 `SplashScreenExit` 时找不到图档而不显示。修复为 `SplashScreen || SplashScreenExit` 任一开启即可取得共用的 `AlternateSplashScreen` 图片。
+- **KMSDRM 模式下游戏无法启动修复**（`FileData.cpp`）：原 `_ENABLEEMUELEC` 分支固定将 `hideWindow` 设为 `false`，导致 ES 在启动游戏时不释放 DRM master，RetroArch 初始化 KMS 时报 `[ERROR] [KMS]: Error when switching mode` 而无法进入游戏。修复为仅在非 KMSDRM 视频驱动下才固定为 `false`，KMSDRM 模式下沿用 `HideWindow` 设定，使 `Window::deinit()` 能正确释放 DRM master。
+- **「网络设置」主机名称显示为空修复**（`ApiSystem.cpp`）：`getHostsName()` 原本仅读取 `SystemConf`（在 Armbian 上始终为空），且兜底值为无意义的 `127.0.0.1`。修复为优先用 `gethostname()` 读取系统实际设置的主机名，读不到才回退 `SystemConf`，最终兜底显示 `ARMBIAN`。
 
 ## 3. 运行环境（可无需 X11）
 

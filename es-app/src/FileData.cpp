@@ -16,10 +16,12 @@
 #include "Window.h"
 #include "views/UIModeController.h"
 #include <assert.h>
+#include <cstring>
 #include "SystemConf.h"
 #include "InputManager.h"
 #include "scrapers/ThreadedScraper.h"
-#include "Gamelist.h" 
+#include "Gamelist.h"
+#include <SDL.h> 
 #include "ApiSystem.h"
 #include <time.h>
 #include <algorithm>
@@ -746,8 +748,13 @@ bool FileData::launchGame(Window* window, LaunchGameOptions options)
 
 	bool hideWindow = Settings::getInstance()->getBool("HideWindow");
 #ifdef _ENABLEEMUELEC
-	// attempts to fix screen tearing issue, we always need hideWindow to false
-	hideWindow = false;
+	// EmuELEC 在 X11/Framebuffer 下用 hideWindow=false 避免画面撕裂，
+	// 但在 KMSDRM 模式下 ES 必须释放 DRM master（hideWindow=true 触发
+	// Renderer::deinit()），否则 RetroArch 的 KMS 初始化会因 DRM master
+	// 仍被 ES 占用而失败（"[ERROR] [KMS]: Error when switching mode"）。
+	const char* videoDriver = SDL_GetCurrentVideoDriver();
+	if (videoDriver == nullptr || strcmp(videoDriver, "kmsdrm") != 0)
+		hideWindow = false;
 #endif
 	window->deinit(hideWindow);
 	

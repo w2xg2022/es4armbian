@@ -19,6 +19,7 @@
 #include "LocaleES.h"
 
 #include <stdlib.h>
+#include <unistd.h>
 #include <sstream>
 #include <iostream>
 #include <fstream>
@@ -2354,11 +2355,17 @@ std::string ApiSystem::getRunningBoard()
 
 std::string ApiSystem::getHostsName()
 {
+	// 优先读取系统实际设置的主机名（/etc/hostname），
+	// 没有才回退到 SystemConf 记录的值，最后才显示 "ARMBIAN"
+	char buf[256] = { 0 };
+	if (gethostname(buf, sizeof(buf) - 1) == 0 && buf[0] != '\0')
+		return std::string(buf);
+
 	auto hostName = SystemConf::getInstance()->get("system.hostname");
 	if (!hostName.empty())
 		return hostName;
 
-	return "127.0.0.1";
+	return "ARMBIAN";
 }
 
 bool ApiSystem::emuKill()
