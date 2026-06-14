@@ -392,23 +392,23 @@ bool ApiSystem::ping()
     if (Settings::getInstance()->getString("Language") == "zh_CN")
     {
         // AliDNS
-        if (!executeScript("ping -c 1 -W 2 -t 255 223.5.5.5"))
+        if (!executeScript("ping -c 1 -W 2 -t 255 223.5.5.5 > /dev/null 2>&1"))
         {
             // DNSPod
-            return executeScript("ping -c 1 -W 2 -t 255 119.29.29.29");
+            return executeScript("ping -c 1 -W 2 -t 255 119.29.29.29 > /dev/null 2>&1");
         }
 
         return true;
     }
 
     // Google DNS
-    if (!executeScript("ping -c 1 -W 2 -t 255 8.8.8.8"))
+    if (!executeScript("ping -c 1 -W 2 -t 255 8.8.8.8 > /dev/null 2>&1"))
     {
         // Cloudflare DNS
-        if (!executeScript("ping -c 1 -W 2 -t 255 1.1.1.1"))
+        if (!executeScript("ping -c 1 -W 2 -t 255 1.1.1.1 > /dev/null 2>&1"))
         {
             // Quad9 DNS
-            return executeScript("ping -c 1 -W 2 -t 255 9.9.9.9");
+            return executeScript("ping -c 1 -W 2 -t 255 9.9.9.9 > /dev/null 2>&1");
         }
     }
 
