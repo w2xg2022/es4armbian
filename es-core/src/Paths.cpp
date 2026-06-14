@@ -95,7 +95,10 @@ Paths::Paths()
 	mRootPath = "/storage";
 	mEmulationStationPath = getExePath();
 	mUserEmulationStationPath = Utils::FileSystem::getCanonicalPath(getHomePath() + "/.emulationstation");
-	mLogPath = "/emuelec/logs";
+	// /emuelec/logs 在 Armbian 上不存在，fopen() 会失败导致 mFile 为 NULL，
+	// 进而 Log::enabled() 返回 false，所有 LOG() 调用被完全跳过（包括 --debug 的 stderr 输出）。
+	// 改为使用一定存在的 ~/.emulationstation 目录。
+	mLogPath = mUserEmulationStationPath;
 	mThemesPath = mEmulationStationPath + "/themes";
 	mUserThemesPath = "/emuelec/themes";
 	mMusicPath = "/storage/roms/BGM";

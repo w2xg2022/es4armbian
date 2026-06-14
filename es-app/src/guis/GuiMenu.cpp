@@ -106,6 +106,7 @@
 #define fake_gettext_flatten_glow			pgettext("game_options", "FLATTEN-GLOW")
 #define fake_gettext_rgascaling				pgettext("game_options", "RGA SCALING")
 
+#define fake_gettext_glapi			_("GRAPHICS API")
 #define fake_gettext_glvendor		_("VENDOR")
 #define fake_gettext_glvrenderer	_("RENDERER")
 #define fake_gettext_glversion		_("VERSION")
@@ -644,7 +645,7 @@ void GuiMenu::openEmuELECSettings()
 	});
 	s->addRow(row);
 
-		auto emuelec_retroarch_menu_def = std::make_shared< OptionListComponent<std::string> >(mWindow, "RETROARCH MENU", false);
+		auto emuelec_retroarch_menu_def = std::make_shared< OptionListComponent<std::string> >(mWindow, _("RETROARCH MENU"), false);
 		std::vector<std::string> ramenuoptions;
 		ramenuoptions.push_back("auto");
 		ramenuoptions.push_back("ozone");
@@ -671,9 +672,6 @@ if (UIModeController::getInstance()->isUIModeFull())
 	{
         //External Mount Options
         s->addEntry(_("EXTERNAL MOUNT OPTIONS"), true, [this] { openExternalMounts(mWindow, "global"); });
-
-        //Danger zone options
-        s->addEntry(_("DANGER ZONE"), true, [this] { openDangerZone(mWindow, "global"); });
     }
 
     mWindow->pushGui(s);
@@ -1246,150 +1244,6 @@ void GuiMenu::addFrameBufferOptions(Window* mWindow, GuiSettings* guiSettings, s
 		mWindow->pushGui(bordersConfig);
 	});
 
-}
-
-
-void GuiMenu::openDangerZone(Window* mWindow, std::string configName)
-{
-
-	GuiSettings* dangerZone = new GuiSettings(mWindow, _("DANGER ZONE").c_str());
-
-#if defined(_ENABLEGAMEFORCE) || defined(ODROIDGOA)
-	// OG OC
-	auto emuelec_oga_overclock = std::make_shared<OptionListComponent<std::string>>(mWindow, _("OVERCLOCK"));
-    emuelec_oga_overclock->addRange({ { _("Off"), "Off" }, { _("1.4ghz"), "1.4ghz" }, { "1.5ghz", "1.5ghz" } }, SystemConf::getInstance()->get("ee_oga_oc"));
-    dangerZone->addWithLabel(_("OVERCLOCK"), emuelec_oga_overclock);
-    dangerZone->addSaveFunc([configName, emuelec_oga_overclock, mWindow] { 
-        
- auto setOverclock = [emuelec_oga_overclock](const std::string& value)
-        {
-            LOG(LogInfo) << "Setting OGA_OC to " + value;
-            Utils::Platform::ProcessStartInfo("/usr/bin/odroidgoa_utils.sh oga_oc " + value).run();
-            SystemConf::getInstance()->set("ee_oga_oc", value);
-            SystemConf::getInstance()->saveSystemConf();
-        };
-
-        std::string selectedoc = emuelec_oga_overclock->getSelected();
-        if (emuelec_oga_overclock && emuelec_oga_overclock->changed())
-        {
-            if (selectedoc != "Off")
-            {
-                std::string msg = _("OGA OC is HIGHLY experimental, you may encounter random lockups or your device might not boot anymore. \n");
-                msg += _("In case you cannot boot anymore, create an empty file called \"no_oc.oga\" on the boot (EMUELEC) partition.\n\n");
-                msg += _("There is also the posibility of SD card file corruption!!! Only enable OC if you agree to the risks!\n\n");
-                msg += _("Do you want to proceed ?");
-
-                mWindow->pushGui(new GuiMsgBox(mWindow, msg, _("YES"), [selectedoc, setOverclock]() { setOverclock(selectedoc); }, _("NO"), nullptr));
-            }
-            else
-                setOverclock(selectedoc);
-        }
-        
-
-         });
-#endif
-
-		dangerZone->addEntry(_("INTERNAL VIDEO OPTIONS"), true, [=] {
-			GuiSettings* videoOptions = new GuiSettings(mWindow, _("INTERNAL VIDEO OPTIONS").c_str());
-			addFrameBufferOptions(mWindow, videoOptions, "ee_es", "ES ", "");
-			addFrameBufferOptions(mWindow, videoOptions, "", "EMU ", "");
-			mWindow->pushGui(videoOptions);
-		});
-
-		dangerZone->addGroup("CLOUD SAVES");
-    dangerZone->addEntry(_("CLOUD BACKUP SETTINGS AND GAME SAVES"), true, [mWindow] {
-    mWindow->pushGui(new GuiMsgBox(mWindow, _("WARNING THIS WILL RESTART EMULATIONSTATION!\n\nThis will backup your game saves, savestates and emuelec configs to the cloud service configured on rclone.conf\n\nBACKUP TO CLOUD AND RESTART?"), _("YES"),
-				[] { 
-				Utils::Platform::ProcessStartInfo("systemd-run /usr/bin/emuelec-utils ee_cloud_backup backup").run();
-				}, _("NO"), nullptr));
-     });
-
-    dangerZone->addEntry(_("CLOUD RESTORE SETTINGS AND GAME SAVES"), true, [mWindow] { 
-    mWindow->pushGui(new GuiMsgBox(mWindow, _("WARNING THIS WILL RESTART EMULATIONSTATION!\n\nThis will restore your game saves, savestates and emuelec configs from the cloud service configured on rclone.conf, it will overwrite any existing file!!\n\nRESTORE FROM CLOUD AND RESTART?"), _("YES"),
-				[] { 
-				Utils::Platform::ProcessStartInfo("systemd-run /usr/bin/emuelec-utils ee_cloud_backup restore").run();
-				}, _("NO"), nullptr));
-     });
-
-		dangerZone->addEntry(_("ADD EMUSTATION ARGUMENTS"), true, [mWindow] {
-			std::string argsFilename = "/emuelec/configs/ES_ARGS";
-			auto updateVal = [argsFilename](const std::string& newVal)
-			{
-				if (Utils::FileSystem::exists(argsFilename))
-					Utils::FileSystem::removeFile(argsFilename);
-
-				if (!newVal.empty())
-					Utils::FileSystem::writeAllText(argsFilename, newVal);
-			};
-
-			std::string fileText = Utils::FileSystem::readAllText(argsFilename);
-			if (Settings::getInstance()->getBool("UseOSK"))
-				mWindow->pushGui(new GuiTextEditPopupKeyboard(mWindow, _("ADD EMUSTATION ARGUMENTS"), fileText, updateVal, false));
-			else
-				mWindow->pushGui(new GuiTextEditPopup(mWindow, _("ADD EMUSTATION ARGUMENTS"), fileText, updateVal, false));
-		 });
-
-		dangerZone->addEntry(_("ADD RETROARCH ARGUMENTS"), true, [mWindow] {
-			std::string argsFilename = "/emuelec/configs/RA_ARGS";
-			auto updateVal = [argsFilename](const std::string& newVal)
-			{
-				if (Utils::FileSystem::exists(argsFilename))
-					Utils::FileSystem::removeFile(argsFilename);
-
-				if (!newVal.empty())
-					Utils::FileSystem::writeAllText(argsFilename, newVal);
-			};
-
-			std::string fileText = Utils::FileSystem::readAllText(argsFilename);
-			if (Settings::getInstance()->getBool("UseOSK"))
-				mWindow->pushGui(new GuiTextEditPopupKeyboard(mWindow, _("ADD RETROARCH ARGUMENTS"), fileText, updateVal, false));
-			else
-				mWindow->pushGui(new GuiTextEditPopup(mWindow, _("ADD RETROARCH ARGUMENTS"), fileText, updateVal, false));
-		 });
-
-	dangerZone->addGroup("CONFIG RELATED");
-    dangerZone->addEntry(_("LOCAL BACKUP EMUELEC CONFIGS"), true, [mWindow] { 
-    mWindow->pushGui(new GuiMsgBox(mWindow, _("WARNING THIS WILL RESTART EMULATIONSTATION!\n\nAFTER THE SCRIPT IS DONE REMEMBER TO COPY THE FILE /storage/roms/backup/ee_backup_config.tar.gz TO SOME PLACE!\n\nBACKUP CURRENT CONFIG AND RESTART?"), _("YES"),
-				[] { 
-				Utils::Platform::ProcessStartInfo("systemd-run /usr/bin/emuelec-utils ee_backup backup").run();
-				}, _("NO"), nullptr));
-     });
-
-    dangerZone->addEntry(_("RESET EMUELEC SCRIPTS AND BINARIES TO DEFAULT"), true, [mWindow] { 
-    mWindow->pushGui(new GuiMsgBox(mWindow, _("WARNING: SYSTEM WILL RESET SCRIPTS AND BINARIES !\nUPDATE, DOWNLOADS, THEMES, BLUETOOTH PAIRINGS AND ROMS FOLDER WILL NOT BE AFFECTED.\n\nRESET SCRIPTS AND BINARIES TO DEFAULT AND RESTART?"), _("YES"),
-				[] { 
-				Utils::Platform::ProcessStartInfo("systemd-run /usr/bin/emuelec-utils clearconfig EMUS").run();
-				}, _("NO"), nullptr));
-     });
-     
-    dangerZone->addEntry(_("RESET RETROARCH CONFIG TO DEFAULT"), true, [mWindow] { 
-    mWindow->pushGui(new GuiMsgBox(mWindow, _("WARNING: RETROARCH CONFIG WILL RESET TO DEFAULT\n\nPER-CORE CONFIGURATIONS WILL NOT BE AFFECTED BUT NO BACKUP WILL BE CREATED!\n\nRESET RETROARCH CONFIG TO DEFAULT?"), _("YES"),
-				[] { 
-				Utils::Platform::ProcessStartInfo("systemd-run /usr/bin/emuelec-utils clearconfig retroarch").run();
-				}, _("NO"), nullptr));
-     });
-     
-    dangerZone->addEntry(_("RESET SYSTEM TO DEFAULT CONFIG"), true, [mWindow] { 
-    mWindow->pushGui(new GuiMsgBox(mWindow, _("WARNING: ALL CONFIGURATIONS WILL BE RESET AND NO BACKUP WILL BE CREATED!\n\nIF YOU WANT TO KEEP YOUR SETTINGS MAKE A BACKUP AND SAVE IT ON AN EXTERNAL DRIVE BEFORE RUNING THIS OPTION!\n\nRESET SYSTEM TO DEFAULT CONFIG AND RESTART?"), _("YES"),
-				[] { 
-				Utils::Platform::ProcessStartInfo("systemd-run /usr/bin/emuelec-utils clearconfig ALL").run();
-				}, _("NO"), nullptr));
-     });
-    dangerZone->addEntry(_("FORCE UPDATE"), true, [mWindow] { 
-                 
-    				if (ApiSystem::getInstance()->getIpAddress() == "NOT CONNECTED")
-					{
-						mWindow->pushGui(new GuiMsgBox(mWindow, _("YOU ARE NOT CONNECTED TO A NETWORK"), _("OK"), nullptr));
-						return;
-					}
-        
-    mWindow->pushGui(new GuiMsgBox(mWindow, _("WARNING: A FORCE UPDATE WILL DOWNLOAD WHATEVER VERSION IS AVAILABLE FOR UPDATE REGARDLESS OF VERSION BASED ON THE TYPE YOU HAVE SELECTED IN THE UPDATE & DOWNLOADS (beta or stable)\n\nSYSTEM WILL RESET SCRIPTS AND BINARIES !\nDOWNLOADS, THEMES, BLUETOOTH PAIRINGS AND ROMS FOLDER WILL NOT BE AFFECTED.\n\nCONTINUE WITH FORCE UPDATE?"), _("YES"),
-				[] { 
-				Utils::Platform::ProcessStartInfo("systemd-run /usr/bin/updatecheck.sh forceupdate").run();
-				}, _("NO"), nullptr));
-     });
-
-mWindow->pushGui(dangerZone);
 }
 
 
@@ -5326,6 +5180,11 @@ void GuiMenu::openNetworkSettings(bool selectWifiEnable)
 	auto status = std::make_shared<TextComponent>(mWindow, ApiSystem::getInstance()->ping() ? _("CONNECTED") : _("NOT CONNECTED"), font, color);
 	s->addWithLabel(_("INTERNET STATUS"), status);
 
+#if !WIN32
+	auto hostname = std::make_shared<TextComponent>(mWindow, ApiSystem::getInstance()->getHostsName(), font, color);
+	s->addWithLabel(_("HOSTNAME"), hostname);
+#endif
+
 	// Network Indicator
 	auto networkIndicator = std::make_shared<SwitchComponent>(mWindow);
 	networkIndicator->setState(Settings::getInstance()->getBool("ShowNetworkIndicator"));
@@ -5333,11 +5192,6 @@ void GuiMenu::openNetworkSettings(bool selectWifiEnable)
 	s->addSaveFunc([networkIndicator] { Settings::getInstance()->setBool("ShowNetworkIndicator", networkIndicator->getState()); });
 
 	s->addGroup(_("SETTINGS"));
-
-#if !WIN32
-	// Hostname
-	s->addInputTextRow(_("HOSTNAME"), "system.hostname", false);
-#endif
 
 	// Wifi enable
 	auto enable_wifi = std::make_shared<SwitchComponent>(mWindow);	

@@ -17,6 +17,10 @@
 #include "views/UIModeController.h"
 #include <assert.h>
 #include <cstring>
+#include <cstdio>
+#include <cstdlib>
+#include <unistd.h>
+#include <dirent.h>
 #include "SystemConf.h"
 #include "InputManager.h"
 #include "scrapers/ThreadedScraper.h"
@@ -753,10 +757,37 @@ bool FileData::launchGame(Window* window, LaunchGameOptions options)
 	// Renderer::deinit()），否则 RetroArch 的 KMS 初始化会因 DRM master
 	// 仍被 ES 占用而失败（"[ERROR] [KMS]: Error when switching mode"）。
 	const char* videoDriver = SDL_GetCurrentVideoDriver();
-	if (videoDriver == nullptr || strcmp(videoDriver, "kmsdrm") != 0)
+	if (videoDriver == nullptr || strcasecmp(videoDriver, "kmsdrm") != 0)
 		hideWindow = false;
 #endif
 	window->deinit(hideWindow);
+#ifdef _ENABLEEMUELEC
+	// SDL_Quit() 在 KMSDRM 模式下不会释放 /dev/dri 的 DRM master，
+	// 导致 RetroArch 的 KMS 初始化报 "[ERROR] [KMS]: Error when switching mode"。
+	// 手动扫描并关闭 ES 自身残留的 /dev/dri fd，让内核释放 DRM master 给 RetroArch。
+	if (videoDriver != nullptr && strcasecmp(videoDriver, "kmsdrm") == 0)
+	{
+		DIR* fdDir = opendir("/proc/self/fd");
+		if (fdDir != nullptr)
+		{
+			struct dirent* entry;
+			while ((entry = readdir(fdDir)) != nullptr)
+			{
+				char linkPath[64];
+				char target[256];
+				snprintf(linkPath, sizeof(linkPath), "/proc/self/fd/%s", entry->d_name);
+				ssize_t len = readlink(linkPath, target, sizeof(target) - 1);
+				if (len > 0)
+				{
+					target[len] = '\0';
+					if (strncmp(target, "/dev/dri/", 9) == 0)
+						close(atoi(entry->d_name));
+				}
+			}
+			closedir(fdDir);
+		}
+	}
+#endif
 	
 	const std::string rom = Utils::FileSystem::getEscapedPath(getPath());
 	const std::string basename = Utils::FileSystem::getStem(getPath());

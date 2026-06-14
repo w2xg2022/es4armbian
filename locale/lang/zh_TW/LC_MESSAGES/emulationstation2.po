@@ -1839,6 +1839,9 @@ msgctxt "game_options"
 msgid "RGA SCALING"
 msgstr "RGA SCALING"
 
+msgid "GRAPHICS API"
+msgstr "圖形程式介面"
+
 msgid "VENDOR"
 msgstr "提供者"
 

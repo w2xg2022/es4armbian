@@ -16,16 +16,14 @@
 
 - **编译适配**：必须使用 `-DGLES=OFF -DGLES2=ON -DENABLE_EMUELEC=1 -DCEC=OFF` 编译，否则因头文件/渲染相关宏不匹配导致编译错误。
 - **语言切换修复**：`Paths.cpp`/`main.cpp` 改为通过 `Settings`（`~/.emulationstation/es_settings.cfg`）持久化和读取语言设置，使中文等语言可正常切换并在重启后保留。
-- **菜单大小写统一**：`MenuComponent::addEntry` 也调用 `toUpper`，使主菜单、退出菜单等图标项与其他菜单的大写风格保持一致。
-- **中文翻译补全与术语统一**：补全简体/繁体中文数百条缺失词条，统一同一英文术语（如 `SETTINGS`）在不同菜单中的译法，避免“设定/设置/配置”混用。
-- **启动/退出画面（Splash）**：实现独立的启动画面、退出画面开关并支持渲染退出画面；修复两个开关在“平台设置”中无法保存、重启后被重置为默认值的问题（`Settings.cpp` 的 `settings_dont_save` 误排除了相关字段）。
-- **Logo重做**：将实际生效的启动画面 `resources/logo.png` 重绘为 es4armbian / ARMBIAN 风格（1920x1080，白到灰渐层背景，灰色 EMULATIONSTATION 字样，沿用原版排版位置）。
-- **菜单与功能调整**：移除 SSH 开关、修正 PLATFORM SETTINGS 图标、将网络/蓝牙设定迁移并改用 `batocera-wifi`/`batocera-bluetooth`，支持手动配对蓝牙设备。
+- **菜单大小写/翻译统一**：`MenuComponent::addEntry` 统一调用 `toUpper`；补全简体/繁体中文数百条缺失词条，统一同一英文术语在不同菜单中的译法。
+- **启动/退出画面（Splash）**：实现独立的启动/退出画面开关并支持渲染退出画面，修复两者在「平台设置」中无法保存的问题；Logo 重绘为 es4armbian / ARMBIAN 风格。
+- **菜单精简与功能调整**：移除 SSH 开关与 emuelec 专属的「DANGER ZONE」（云备份/强制更新等危险操作）；修正 PLATFORM SETTINGS 图标；网络/蓝牙设定改用 `batocera-wifi`/`batocera-bluetooth`。
 - **系统层面适配（部署必需，非代码改动）**：非 root 用户重启/关机依赖 `polkitd` + `pkexec`；需安装 `libsdl2-mixer-2.0-0` 等运行依赖。
-- **退出『用户界面设置』泛白闪烁修复**（`Window.cpp`）：菜单关闭瞬间（`bottom == top`）若上一帧仍有 `mMenuBackgroundShaderTextureCache` 缓存未清空，会导致本帧错误跳过 `bottom->render()`，背景画面残留叠加特效闪现一帧。修复为关闭瞬间先调用 `resetMenuBackgroundShader()` 清空缓存。
-- **退出画面（Exit Splash）单独启用失效修复**（`Window.cpp`）：原逻辑仅在 `SplashScreen`（开机画面开关）为真时才取得自定图片路径，导致只启用 `SplashScreenExit` 时找不到图档而不显示。修复为 `SplashScreen || SplashScreenExit` 任一开启即可取得共用的 `AlternateSplashScreen` 图片。
-- **KMSDRM 模式下游戏无法启动修复**（`FileData.cpp`）：原 `_ENABLEEMUELEC` 分支固定将 `hideWindow` 设为 `false`，导致 ES 在启动游戏时不释放 DRM master，RetroArch 初始化 KMS 时报 `[ERROR] [KMS]: Error when switching mode` 而无法进入游戏。修复为仅在非 KMSDRM 视频驱动下才固定为 `false`，KMSDRM 模式下沿用 `HideWindow` 设定，使 `Window::deinit()` 能正确释放 DRM master。
-- **「网络设置」主机名称显示为空修复**（`ApiSystem.cpp`）：`getHostsName()` 原本仅读取 `SystemConf`（在 Armbian 上始终为空），且兜底值为无意义的 `127.0.0.1`。修复为优先用 `gethostname()` 读取系统实际设置的主机名，读不到才回退 `SystemConf`，最终兜底显示 `ARMBIAN`。
+- **UI Settings 退出闪烁/退出画面修复**（`Window.cpp`）：菜单关闭瞬间先清空 `mMenuBackgroundShaderTextureCache` 避免残留特效闪现一帧；修复仅启用 `SplashScreenExit` 时找不到自定图档而不显示的问题。
+- **KMSDRM 模式下游戏无法启动修复**（`FileData.cpp`）：`hideWindow` 在 KMSDRM 模式下沿用 `HideWindow` 设定以释放 DRM master；并在启动游戏前主动扫描关闭 ES 残留的 `/dev/dri` fd，避免 RetroArch 报 `[ERROR] [KMS]: Error when switching mode`。
+- **「网络设置」主机名称显示修复**（`ApiSystem.cpp`/`GuiMenu.cpp`）：改用 `gethostname()` 读取系统实际主机名并以只读方式显示（兜底 `ARMBIAN`），不再提供可编辑的 `system.hostname` 输入框。
+- **日志路径修复**（`Paths.cpp`）：`mLogPath` 由不存在的 `/emuelec/logs` 改为 `~/.emulationstation`，修复 `LOG()`/`--debug` 输出因 `fopen()` 失败而被完全跳过的问题。
 
 ## 3. 运行环境（可无需 X11）
 
@@ -94,7 +92,13 @@ apt-get install -y libsdl2-mixer-2.0-0 polkitd pkexec
 - 自动安装编译依赖并以 4.2 所述的 `-DGLES=OFF -DGLES2=ON -DCEC=OFF -DENABLE_EMUELEC=1` 参数构建。
 - 构建完成后将 `emulationstation`、`resources/`、`locale/` 打包为 `emulationstation-armbian-aarch64.zip`，并发布到 [Releases](../../releases) 的 `latest` 标签，按 4.3 说明覆盖部署即可，无需重新编译。
 
-## 6. 授权 License
+## 6. 遗留问题
+
+1. **用户界面首次退出时的闪烁问题**：怀疑是菜单关闭瞬间背景特效叠加导致的双重绘制，尚未定位根因并修复。
+2. **简体中文、繁体中文翻译精校**：部分词条术语/语序在两种译文间不一致，需要逐项校对统一。
+3. **自动下载安装更新版**：目前更新需手动下载 Release 并按 4.3 步骤覆盖部署，尚未实现应用内自动检测与安装更新。
+
+## 7. 授权 License
 
 本项目沿用上游 EmulationStation / EmuELEC 的 **MIT License**（见 [LICENSE.md](LICENSE.md)，原始版权声明 `Copyright (c) 2014 Alec Lofquist`）。
 
