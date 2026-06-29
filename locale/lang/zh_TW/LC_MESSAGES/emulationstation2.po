@@ -4174,23 +4174,23 @@ msgstr "按下對應的按鈕"
 msgid "ALREADY TAKEN"
 msgstr "已經被指派了"
 
-#~ msgid "START RETROARCH"
-#~ msgstr "啟動RetroArch"
+msgid "START RETROARCH"
+msgstr "啟動RetroArch"
 
-#~ msgid "REALLY START RETROARCH?"
-#~ msgstr "確定要啟動RetroArch嗎？"
+msgid "REALLY START RETROARCH?"
+msgstr "確定要啟動RetroArch嗎？"
 
 #~ msgid "DO NOT SHOW SPLASH"
 #~ msgstr "不顯示畫面"
 
-#~ msgid "DEFAULT YOUTUBE SEARCH WORD"
-#~ msgstr "預設YouTube搜尋字詞"
+msgid "DEFAULT YOUTUBE SEARCH WORD"
+msgstr "預設YouTube搜尋字詞"
 
 #~ msgid "ENABLE SPLASH SCREEN"
 #~ msgstr "啟用啟動畫面"
 
-#~ msgid "ENABLE SSH"
-#~ msgstr "啟用SSH"
+msgid "ENABLE SSH"
+msgstr "啟用SSH"
 
 #~ msgid "SCRAPER SETTINGS"
 #~ msgstr "搜刮器設定"
@@ -4227,3 +4227,24 @@ msgstr "已經被指派了"
 
 #~ msgid "Retroarch"
 #~ msgstr "RetroArch"
+
+msgid "EMUELEC SETTINGS"
+msgstr "EMUELEC設定"
+
+msgid "REALLY REBOOT FROM NAND?"
+msgstr "確定要從NAND重新啟動嗎？"
+
+msgid "REALLY REBOOT TO USB?"
+msgstr "確定要重新啟動至USB嗎？"
+
+msgid "REBOOT FROM NAND"
+msgstr "從NAND重新啟動"
+
+msgid "REBOOT TO COREELEC?"
+msgstr "重新啟動至COREELEC？"
+
+msgid "REBOOT TO USB"
+msgstr "重新啟動至USB"
+
+msgid "Reboot to CoreELEC"
+msgstr "重新啟動至CoreELEC"

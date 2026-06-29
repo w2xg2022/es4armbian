@@ -4174,23 +4174,23 @@ msgstr "按任意键"
 msgid "ALREADY TAKEN"
 msgstr "按键已被占用"
 
-#~ msgid "START RETROARCH"
-#~ msgstr "启动RetroArch"
+msgid "START RETROARCH"
+msgstr "启动RetroArch"
 
-#~ msgid "REALLY START RETROARCH?"
-#~ msgstr "确定要启动RetroArch吗？"
+msgid "REALLY START RETROARCH?"
+msgstr "确定要启动RetroArch吗？"
 
 #~ msgid "DO NOT SHOW SPLASH"
 #~ msgstr "不显示画面"
 
-#~ msgid "DEFAULT YOUTUBE SEARCH WORD"
-#~ msgstr "默认YouTube搜索词"
+msgid "DEFAULT YOUTUBE SEARCH WORD"
+msgstr "默认YouTube搜索词"
 
 #~ msgid "ENABLE SPLASH SCREEN"
 #~ msgstr "启用启动画面"
 
-#~ msgid "ENABLE SSH"
-#~ msgstr "启用SSH"
+msgid "ENABLE SSH"
+msgstr "启用SSH"
 
 #~ msgid "SCRAPER SETTINGS"
 #~ msgstr "抓取设置"
@@ -7549,3 +7549,24 @@ msgstr "按键已被占用"
 
 #~ msgid "Retroarch"
 #~ msgstr "RetroArch"
+
+msgid "EMUELEC SETTINGS"
+msgstr "EMUELEC设置"
+
+msgid "REALLY REBOOT FROM NAND?"
+msgstr "确定要从NAND重新启动吗？"
+
+msgid "REALLY REBOOT TO USB?"
+msgstr "确定要重启到USB吗？"
+
+msgid "REBOOT FROM NAND"
+msgstr "从NAND重新启动"
+
+msgid "REBOOT TO COREELEC?"
+msgstr "重启到COREELEC？"
+
+msgid "REBOOT TO USB"
+msgstr "重启到USB"
+
+msgid "Reboot to CoreELEC"
+msgstr "重启到CoreELEC"
