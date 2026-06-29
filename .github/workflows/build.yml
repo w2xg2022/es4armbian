@@ -96,3 +96,7 @@ jobs:
           files: dist/emulationstation-armbian-aarch64.zip
           body: |
             压缩包内含三部分：emulationstation（主程序）、resources（图标、启动画面等资源文件）、locale（多语言翻译文件）。部署时将这三者分别复制覆盖到设备 /opt/emulationstation/ 对应目录，无需重新编译，重启 EmulationStation 即可生效。
+
+            ## v1.1 更新内容
+            - 修复 Release 压缩包多一层 `emulationstation/` 目录的问题：解压后 `emulationstation`、`resources/`、`locale/` 直接位于压缩包根目录，无需再手动复制内容
+            - 补齐与 EmuELEC 基准对比缺漏的简体/繁体中文翻译
