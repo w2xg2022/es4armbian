@@ -44,8 +44,8 @@ jobs:
           cp emulationstation dist/emulationstation/emulationstation
           cp -r resources dist/emulationstation/
           cp -r locale dist/emulationstation/
-          cd dist
-          zip -r emulationstation-armbian-aarch64.zip emulationstation
+          cd dist/emulationstation
+          zip -r ../emulationstation-armbian-aarch64.zip .
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4

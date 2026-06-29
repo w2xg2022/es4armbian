@@ -22,6 +22,7 @@
 - **KMSDRM 模式下游戏无法启动修复**（`FileData.cpp`）：`hideWindow` 在 KMSDRM 模式下沿用 `HideWindow` 设定以释放 DRM master；并在启动游戏前主动扫描关闭 ES 残留的 `/dev/dri` fd，避免 RetroArch 报 `[ERROR] [KMS]: Error when switching mode`。
 - **「网络设置」主机名称显示修复**（`ApiSystem.cpp`/`GuiMenu.cpp`）：改用 `gethostname()` 读取系统实际主机名并以只读方式显示，不再提供可编辑的 `system.hostname` 输入框。
 - **日志路径修复**（`Paths.cpp`）：`mLogPath` 由不存在的 `/emuelec/logs` 改为 `~/.emulationstation`，修复 `LOG()`/`--debug` 输出因 `fopen()` 失败而被完全跳过的问题。
+- **v1.1**：Release 打包脚本（`.github/workflows/build.yml`）修正压缩流程，`emulationstation-armbian-aarch64.zip` 解压后不再多出一层 `emulationstation/` 目录。
 
 ## 3. 运行环境（可无需 X11）
 
@@ -60,11 +61,10 @@ make -j$(nproc)
 
 ### 4.3 部署到设备
 
-Release 中的 `emulationstation-armbian-aarch64.zip` 解压后会**多一层 `emulationstation/` 目录**（即 `emulationstation/emulationstation`、`emulationstation/resources/`、`emulationstation/locale/`），不要直接整个目录覆盖过去，需要复制其**内容**：
+Release 中的 `emulationstation-armbian-aarch64.zip` 解压后即为 `emulationstation`、`resources/`、`locale/`（v1.1 起打包脚本已修正，不会再多出一层 `emulationstation/` 目录）：
 
 ```bash
-unzip emulationstation-armbian-aarch64.zip
-cp -a emulationstation/. /opt/emulationstation/
+unzip emulationstation-armbian-aarch64.zip -d /opt/emulationstation
 ```
 
 确保 `/opt/emulationstation/` 下有以下结构：
