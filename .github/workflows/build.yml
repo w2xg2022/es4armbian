@@ -59,44 +59,18 @@ jobs:
           VERSION=$(grep -oP '#define PROGRAM_VERSION_STRING\s+"\K[^"]+' es-app/src/EmulationStation.h)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
-      - name: Delete previous release
-        uses: actions/github-script@v7
-        with:
-          script: |
-            try {
-              const release = await github.rest.repos.getReleaseByTag({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                tag: 'latest',
-              });
-              await github.rest.repos.deleteRelease({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                release_id: release.data.id,
-              });
-            } catch (e) {
-              core.info(`No previous release to delete: ${e.message}`);
-            }
-            try {
-              await github.rest.git.deleteRef({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                ref: 'tags/latest',
-              });
-            } catch (e) {
-              core.info(`No previous tag to delete: ${e.message}`);
-            }
-
       - name: Publish Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: latest
+          tag_name: v${{ steps.version.outputs.version }}
           name: es4armbian v${{ steps.version.outputs.version }}
           make_latest: true
           files: dist/emulationstation-armbian-aarch64.zip
           body: |
-            压缩包内含三部分：emulationstation（主程序）、resources（图标、启动画面等资源文件）、locale（多语言翻译文件）。部署时将这三者分别复制覆盖到设备 /opt/emulationstation/ 对应目录，无需重新编译，重启 EmulationStation 即可生效。
+            压缩包内含三部分：emulationstation（主程序）、resources（图标、启动画面等资源文件）、locale（多语言翻译文件）。解压后三者直接位于压缩包根目录，分别复制覆盖到设备 /opt/emulationstation/ 对应目录，无需重新编译，重启 EmulationStation 即可生效。
 
-            ## v1.1 更新内容
-            - 修复 Release 压缩包多一层 `emulationstation/` 目录的问题：解压后 `emulationstation`、`resources/`、`locale/` 直接位于压缩包根目录，无需再手动复制内容
+            ## 本版内容
             - 补齐与 EmuELEC 基准对比缺漏的简体/繁体中文翻译
+            - Release 打包脚本修正：解压后不再多出一层 `emulationstation/` 目录
+            - 「平台设置」菜单图标改用 Emuelec 单色图标（配合主题风格）
+            - 手柄配置界面 ABXY 方位改为比照实体手柄印刷布局（A=下 / B=右 / X=左 / Y=上）

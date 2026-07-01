@@ -234,7 +234,7 @@ GuiMenu::GuiMenu(Window *window, bool animate) : GuiComponent(window), mMenu(win
 #ifdef _ENABLEEMUELEC
 	if (isFullUI)
 	{
-		addEntry(_("PLATFORM SETTINGS").c_str(), true, [this] { openEmuELECSettings(); }, "iconAdvanced"); /* < emuelec */
+		addEntry(_("PLATFORM SETTINGS").c_str(), true, [this] { openEmuELECSettings(); }, "iconEmuelec"); /* < emuelec */
 	}
 #endif
 
