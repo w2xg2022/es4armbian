@@ -2524,6 +2524,12 @@ msgstr "在EmulationStation中互换确认键和取消键"
 msgid "Switches the South and East buttons' functionality"
 msgstr "切换南按键和东按键的功能。"
 
+msgid "SWITCH A/B, X/Y BUTTONS IN GAMES"
+msgstr "游戏内互换A/B、X/Y按键"
+
+msgid "Swaps A/B and X/Y RetroPad bindings during gameplay (position-aligned for PlayStation/PSP style symbol layouts)"
+msgstr "游戏进行中互换A/B与X/Y的RetroPad按键绑定（位置对齐，符合PlayStation/PSP等几何符号布局的手感）。"
+
 msgid "ACCESS GAME OPTIONS WITH NORTH BUTTON"
 msgstr "使用北按键访问游戏设置选项"
 
